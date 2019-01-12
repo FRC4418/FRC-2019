@@ -8,12 +8,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.*;
+import frc.robot.commands.AutonomousCommands;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,12 +20,14 @@ import frc.robot.subsystems.ExampleSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
 
-  Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
+  // Make new subsystems
+  public static DriveSubsystem driveSubsystem = new DriveSubsystem(RobotMap.leftDriveMotor1ID, RobotMap.leftDriveMotor2ID, RobotMap.rightDriveMotor1ID, RobotMap.rightDriveMotor2ID, RobotMap.gyroID);
+  public static TurnToAnglePIDSubsystem turnToAnglePIDSubsystem = new TurnToAnglePIDSubsystem(0);
 
+  // Create new commands
+  public static AutonomousCommands autoCommand = new AutonomousCommands();
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -36,9 +35,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
   }
 
   /**
@@ -80,7 +77,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -90,13 +86,11 @@ public class Robot extends TimedRobot {
      */
 
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
-    }
-  }
 
-  /**
-   * This function is called periodically during autonomous.
+    autoCommand.start();
+  }
+   /* 
+   This function is called periodically during autonomous.
    */
   @Override
   public void autonomousPeriodic() {
@@ -109,9 +103,6 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
   }
 
   /**
