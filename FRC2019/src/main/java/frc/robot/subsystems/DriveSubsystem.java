@@ -163,6 +163,11 @@ public class DriveSubsystem extends Subsystem {
     backDriveDistance.setEnabled(enable);
   }
 
+  //read which side is front
+  public boolean isFrontSide(){
+    return frontSide;
+  }
+
   //swap the front and back of the robot
   public void swapFront(){
     frontSide = !frontSide;
