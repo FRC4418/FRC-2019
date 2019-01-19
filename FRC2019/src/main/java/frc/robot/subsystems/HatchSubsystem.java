@@ -21,10 +21,10 @@ public class HatchSubsystem extends Subsystem {
 private TalonSRX hatchArmJointMotor;
 private Encoder hatchArmJointEncoder;
 
-public HatchSubsystem(int hatchArmJointMotorID, int hatchArmJointEncoderID) {
+public HatchSubsystem(int hatchArmJointMotorID, int hatchArmJointEncoderChannelAID, int hatchArmJointEncoderChannelBID) {
 
   hatchArmJointMotor = new TalonSRX(hatchArmJointMotorID);
-  hatchArmJointEncoder = new Encoder(hatchArmJointEncoderID,hatchArmJointEncoderID);
+  hatchArmJointEncoder = new Encoder(hatchArmJointEncoderChannelAID,hatchArmJointEncoderChannelBID);
   
 }
 
