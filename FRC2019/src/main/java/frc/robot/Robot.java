@@ -27,7 +27,7 @@ public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
 
-  ClimbSubsystem climbsubsystem = new ClimbSubsystem(RobotMap.backClimbMotorID, RobotMap.frontClimbMotorID, RobotMap.backClimbEncoderID, RobotMap.frontClimbEncoderID);
+  ClimbSubsystem climbsubsystem = new ClimbSubsystem(RobotMap.backClimbMotorID, RobotMap.frontClimbMotorID, RobotMap.frontClimbEncoderChannelAID, RobotMap.frontClimbEncoderChannelBID, RobotMap.backClimbEncoderChannelAID, RobotMap.backClimbEncoderChannelBID);
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();

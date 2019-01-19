@@ -23,8 +23,10 @@ public class RobotMap {
   // number and the module. For example you with a rangefinder:
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
-  public static int frontClimbEncoderID = 0;
-  public static int backClimbEncoderID = 0;
+  public static int frontClimbEncoderChannelAID = 2;
+  public static int frontClimbEncoderChannelBID = 3;
+  public static int backClimbEncoderChannelAID = 4;
+  public static int backClimbEncoderChannelBID = 5;
   public static int frontClimbMotorID = 30; 
   public static int backClimbMotorID = 31;
 }
