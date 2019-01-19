@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 /**
  * Add your docs here.
  */
@@ -21,10 +22,10 @@ public class HatchSubsystem extends Subsystem {
 private TalonSRX hatchArmJointMotor;
 private Encoder hatchArmJointEncoder;
 
-public HatchSubsystem(int hatchArmJointMotorID, int hatchArmJointEncoderChannelAID, int hatchArmJointEncoderChannelBID) {
+public HatchSubsystem() {
 
-  hatchArmJointMotor = new TalonSRX(hatchArmJointMotorID);
-  hatchArmJointEncoder = new Encoder(hatchArmJointEncoderChannelAID,hatchArmJointEncoderChannelBID);
+  hatchArmJointMotor = new TalonSRX(RobotMap.hatchArmJointMotorID);
+  hatchArmJointEncoder = new Encoder(RobotMap.hatchArmJointEncoderChannelAID, RobotMap.hatchArmJointEncoderChannelBID);
   
 }
 

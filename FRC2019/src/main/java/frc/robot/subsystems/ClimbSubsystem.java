@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.*;
@@ -28,11 +29,11 @@ public class ClimbSubsystem extends Subsystem {
 
   // Constructor.
 
-  public ClimbSubsystem(int backClimbMotorID, int frontClimbMotorID, int frontClimbEncoderChannelAID, int frontClimbEncoderChannelBID, int backClimbEncoderChannelAID,  int backClimbEncoderChannelBID) {
-    frontClimbEncoder = new Encoder(frontClimbEncoderChannelAID, frontClimbEncoderChannelBID);
-    backClimbEncoder = new Encoder(backClimbEncoderChannelAID, backClimbEncoderChannelBID);
-    frontClimbMotor = new TalonSRX(frontClimbMotorID);
-    backClimbMotor = new TalonSRX(backClimbMotorID);
+  public ClimbSubsystem() {
+    frontClimbEncoder = new Encoder(RobotMap.frontClimbEncoderChannelAID, RobotMap.frontClimbEncoderChannelBID);
+    backClimbEncoder = new Encoder(RobotMap.backClimbEncoderChannelAID, RobotMap.backClimbEncoderChannelBID);
+    frontClimbMotor = new TalonSRX(RobotMap.frontClimbMotorID);
+    backClimbMotor = new TalonSRX(RobotMap.backClimbMotorID);
     setClimbLegsBack(0);
     setClimbLegsFront(0);
     resetBothClimbEncoders();
