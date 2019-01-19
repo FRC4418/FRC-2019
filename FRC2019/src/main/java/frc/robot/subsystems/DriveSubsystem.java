@@ -37,6 +37,8 @@ public class DriveSubsystem extends Subsystem {
   private Ultrasonic frontDriveDistance;
   private Ultrasonic backDriveDistance;
 
+  private boolean frontSide = true;
+
   //Instantiate the subsystem
   public DriveSubsystem(){
     leftDriveMotor1 = new TalonSRX(RobotMap.leftDriveMotor1ID);
@@ -79,8 +81,13 @@ public class DriveSubsystem extends Subsystem {
 
   //drive both motors at once
   public void tankDrive(double leftValue, double rightValue){
-    leftDriveMotor1.set(ControlMode.PercentOutput, leftValue);
-    rightDriveMotor1.set(ControlMode.PercentOutput, rightValue);
+    if(frontSide){
+      leftDriveMotor1.set(ControlMode.PercentOutput, leftValue);
+      rightDriveMotor1.set(ControlMode.PercentOutput, rightValue);
+    }else{
+      leftDriveMotor1.set(ControlMode.PercentOutput, -rightValue);
+      rightDriveMotor1.set(ControlMode.PercentOutput, -leftValue);
+    }
   }
 
   //read left motor
@@ -154,6 +161,11 @@ public class DriveSubsystem extends Subsystem {
   //enable/disable back distance
   public void setBackDriveDistanceEnable(boolean enable){
     backDriveDistance.setEnabled(enable);
+  }
+
+  //swap the front and back of the robot
+  public void swapFront(){
+    frontSide = !frontSide;
   }
 
   @Override
