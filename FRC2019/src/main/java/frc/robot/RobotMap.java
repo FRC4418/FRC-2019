@@ -23,13 +23,33 @@ public class RobotMap {
   // number and the module. For example you with a rangefinder:
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
-  public static int frontClimbEncoderChannelAID = 2;
-  public static int frontClimbEncoderChannelBID = 3;
-  public static int backClimbEncoderChannelAID = 4;
-  public static int backClimbEncoderChannelBID = 5;
-  public static int frontClimbMotorID = 30; 
-  public static int backClimbMotorID = 31;
-  public static int hatchArmJointMotorID = 40;
-  public static int hatchArmJointEncoderChannelAID = 0;
-  public static int hatchArmJointEncoderChannelBID = 1;
+  
+  // Climb Subsystem IDs
+  public static int frontClimbEncoderChannelAID = 2, 
+                    frontClimbEncoderChannelBID = 3, 
+                    backClimbEncoderChannelAID = 4, 
+                    backClimbEncoderChannelBID = 5, 
+                    frontClimbMotorID = 30, 
+                    backClimbMotorID = 31;
+
+  // Hatch Subsystem IDs
+  public static int hatchArmJointMotorID = 40, 
+                    hatchArmJointEncoderChannelAID = 0, 
+                    hatchArmJointEncoderChannelBID = 1;
+
+  // Drive Subsystem IDs
+  public static int leftDriveMotor1ID = 10, 
+                    leftDriveMotor2ID = 11, 
+                    rightDriveMotor1ID = 20, 
+                    rightDriveMotor2ID = 21, 
+                    leftDriveEncoderChannelAID = 6, 
+                    leftDriveEncoderChannelBID = 7, 
+                    rightDriveEncoderChannelAID = 8, 
+                    rightDriveEncoderChannelBID = 9, 
+                    gyroID = 0,
+                    frontDriveDistancePing = 10, 
+                    frontDriveDistanceEcho = 11, 
+                    backDriveDistancePing = 12, 
+                    backDriveDistanceEcho = 13;
+  public static double distancePerPulse  = 7.5 * Math.PI;
 }
