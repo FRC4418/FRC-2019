@@ -26,7 +26,7 @@ public class Robot extends TimedRobot {
    HatchSubsystem hatchSubsystem = new HatchSubsystem(RobotMap.hatchArmJointMotorID, RobotMap.hatchArmJointEncoderID); //Creates Hatch Subsystem
    ClimbSubsystem climbsubsystem = new ClimbSubsystem(RobotMap.backClimbMotorID, RobotMap.frontClimbMotorID, 
                                                       RobotMap.frontClimbEncoderChannelAID, RobotMap.frontClimbEncoderChannelBID, 
-                                                      RobotMap.backClimbEncoderChannelAID, RobotMap.backClimbEncoderChannelBID);
+                                                      RobotMap.backClimbEncoderChannelAID, RobotMap.backClimbEncoderChannelBID); //Create Climb Subsystem
 
   @Override
   public void robotInit() {
