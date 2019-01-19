@@ -24,5 +24,6 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
   public static int hatchArmJointMotorID = 40;
-  public static int hatchArmJointEncoderID = 0;
+  public static int hatchArmJointEncoderChannelAID = 0;
+  public static int hatchArmJointEncoderChannelBID = 1;
 }

@@ -27,7 +27,7 @@ public class Robot extends TimedRobot {
    */
 
    //Subsystem instantiation
-   HatchSubsystem hatchSubsystem = new HatchSubsystem(RobotMap.hatchArmJointMotorID, RobotMap.hatchArmJointEncoderID); //Creates Hatch Subsystem
+   HatchSubsystem hatchSubsystem = new HatchSubsystem(RobotMap.hatchArmJointMotorID, RobotMap.hatchArmJointEncoderChannelAID, RobotMap.hatchArmJointEncoderChannelBID); //Creates Hatch Subsystem
 
   @Override
   public void robotInit() {
