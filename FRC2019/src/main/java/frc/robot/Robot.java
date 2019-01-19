@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.HatchSubsystem;
 
 /**
@@ -21,13 +22,11 @@ import frc.robot.subsystems.HatchSubsystem;
  */
 public class Robot extends TimedRobot {
   public static OI m_oi;
-  /**
-   * This function is run when the robot is first started up and should be
-   * used for any initialization code.
-   */
-
    //Subsystem instantiation
-   HatchSubsystem hatchSubsystem = new HatchSubsystem(RobotMap.hatchArmJointMotorID, RobotMap.hatchArmJointEncoderChannelAID, RobotMap.hatchArmJointEncoderChannelBID); //Creates Hatch Subsystem
+   HatchSubsystem hatchSubsystem = new HatchSubsystem(RobotMap.hatchArmJointMotorID, RobotMap.hatchArmJointEncoderID); //Creates Hatch Subsystem
+   ClimbSubsystem climbsubsystem = new ClimbSubsystem(RobotMap.backClimbMotorID, RobotMap.frontClimbMotorID, 
+                                                      RobotMap.frontClimbEncoderChannelAID, RobotMap.frontClimbEncoderChannelBID, 
+                                                      RobotMap.backClimbEncoderChannelAID, RobotMap.backClimbEncoderChannelBID);
 
   @Override
   public void robotInit() {
