@@ -28,11 +28,11 @@ public class ClimbSubsystem extends Subsystem {
 
   // Constructor.
 
-  public ClimbSubsystem() {
-    frontClimbEncoder = new Encoder(channelA, channelB);
-    backClimbEncoder = new Encoder(channelA, channelB);
-    frontClimbMotor = new TalonSRX(deviceNumber);
-    backClimbMotor = new TalonSRX(deviceNumber);
+  public ClimbSubsystem(int backClimbMotorID, int frontClimbMotorID, int backClimbEncoderID, int frontClimbEncoderID) {
+    frontClimbEncoder = new Encoder(frontClimbEncoderID, frontClimbEncoderID);
+    backClimbEncoder = new Encoder(backClimbEncoderID, backClimbEncoderID);
+    frontClimbMotor = new TalonSRX(frontClimbMotorID);
+    backClimbMotor = new TalonSRX(backClimbMotorID);
     setClimbLegsBack(0);
     setClimbLegsFront(0);
     resetBothClimbEncoders();
