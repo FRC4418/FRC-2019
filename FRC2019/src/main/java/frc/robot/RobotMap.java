@@ -29,4 +29,6 @@ public class RobotMap {
   public static int backClimbEncoderChannelBID = 5;
   public static int frontClimbMotorID = 30; 
   public static int backClimbMotorID = 31;
+  public static int hatchArmJointMotorID = 40;
+  public static int hatchArmJointEncoderID = 0;
 }
