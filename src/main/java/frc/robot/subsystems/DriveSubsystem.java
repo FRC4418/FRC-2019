@@ -173,6 +173,10 @@ public class DriveSubsystem extends Subsystem {
     frontSide = !frontSide;
   }
 
+  public void stopDrive(){
+    leftDriveMotor1.set(ControlMode.PercentOutput, 0);
+    rightDriveMotor1.set(ControlMode.PercentOutput, 0);
+  }
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
