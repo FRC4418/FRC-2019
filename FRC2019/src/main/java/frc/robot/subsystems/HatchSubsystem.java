@@ -12,7 +12,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.RobotMap;
 /**
  * Add your docs here.
  */
@@ -22,10 +21,9 @@ public class HatchSubsystem extends Subsystem {
 private TalonSRX hatchArmJointMotor;
 private Encoder hatchArmJointEncoder;
 
-public HatchSubsystem() {
-
-  hatchArmJointMotor = new TalonSRX(RobotMap.hatchArmJointMotorID);
-  hatchArmJointEncoder = new Encoder(RobotMap.hatchArmJointEncoderChannelAID, RobotMap.hatchArmJointEncoderChannelBID);
+public HatchSubsystem(int hatchArmJointMotorID, int hatchArmJointEncoderID) {
+  hatchArmJointMotor = new TalonSRX(hatchArmJointMotorID);
+  hatchArmJointEncoder = new Encoder(hatchArmJointEncoderID,hatchArmJointEncoderID);
   
 }
 
@@ -33,15 +31,13 @@ public void setHatchMotorValue(double motorValue){
   hatchArmJointMotor.set(ControlMode.PercentOutput, motorValue);
 }
 
-public double getHatchEncoderValue(){
-  return hatchArmJointEncoder.getDistance();
+public void getHatchEncoderValue(){
+  hatchArmJointEncoder.getDistance();
 }
 
 public void resetHatchEncoderValue(){
   hatchArmJointEncoder.reset();
 }
-
-  
 
   @Override
   public void initDefaultCommand() {

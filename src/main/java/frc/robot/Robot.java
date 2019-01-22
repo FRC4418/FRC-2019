@@ -10,8 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.ClimbSubsystem;
-import frc.robot.subsystems.HatchSubsystem;
+import frc.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -20,14 +19,16 @@ import frc.robot.subsystems.HatchSubsystem;
  * creating this project, you must also update the build.gradle file in the
  * project.
  */
+
 public class Robot extends TimedRobot {
   public static OI m_oi;
    // Subsystem instantiation
    // Creates Hatch Subsystem
-   HatchSubsystem hatchSubsystem = new HatchSubsystem();
+   public static HatchSubsystem hatchSubsystem = new HatchSubsystem();
    // Creates Climb Subsystem
-   ClimbSubsystem climbsubsystem = new ClimbSubsystem();
-
+   public static ClimbSubsystem climbsubsystem = new ClimbSubsystem();
+   // Create Drive Subsystem
+   public static DriveSubsystem drivesubsystem = new DriveSubsystem();
   @Override
   public void robotInit() {
     m_oi = new OI();
