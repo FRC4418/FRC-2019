@@ -28,17 +28,17 @@ public class OutputAllDataCommand extends Command {
     SmartDashboard.putNumber("Hatch Encoder", Robot.hatchSubsystem.getHatchEncoderValue());
     SmartDashboard.putNumber("Climb Back Encoder", Robot.climbsubsystem.getBackEncoderDistanceValue());
     SmartDashboard.putNumber("Climb Front Encoder", Robot.climbsubsystem.getFrontEncoderDistanceValue());
-    SmartDashboard.putNumber("Drive Left Drive Value", Robot.drivesubsystem.getLeftDriveValue());
-    SmartDashboard.putNumber("Drive Right Drive Value", Robot.drivesubsystem.getRightDriveValue());
-    SmartDashboard.putNumber("Drive Gyro Value", Robot.drivesubsystem.getGyroValue());
-    SmartDashboard.putNumber("Drive Left Encoder", Robot.drivesubsystem.getLeftDriveEncoder());
-    SmartDashboard.putNumber("Drive Right Encoder", Robot.drivesubsystem.getRightDriveEncoder());
-    SmartDashboard.putNumber("Drive Accel X", Robot.drivesubsystem.getDriveAccelX());
-    SmartDashboard.putNumber("Drive Accel Y", Robot.drivesubsystem.getDriveAccelY());
-    SmartDashboard.putNumber("Drive Accel Z", Robot.drivesubsystem.getDriveAccelZ());
-    SmartDashboard.putNumber("Drive Front Distance",Robot.drivesubsystem.getFrontDriveDistance());
-    SmartDashboard.putNumber("Drive Back Distance", Robot.drivesubsystem.getBackDriveDistance());
-    SmartDashboard.putBoolean("Drive Front", Robot.drivesubsystem.isFrontSide());
+    SmartDashboard.putNumber("Drive Left Drive Value", Robot.driveSubsystem.getLeftDriveValue());
+    SmartDashboard.putNumber("Drive Right Drive Value", Robot.driveSubsystem.getRightDriveValue());
+    SmartDashboard.putNumber("Drive Gyro Value", Robot.driveSubsystem.getGyroValue());
+    SmartDashboard.putNumber("Drive Left Encoder", Robot.driveSubsystem.getLeftDriveEncoder());
+    SmartDashboard.putNumber("Drive Right Encoder", Robot.driveSubsystem.getRightDriveEncoder());
+    SmartDashboard.putNumber("Drive Accel X", Robot.driveSubsystem.getDriveAccelX());
+    SmartDashboard.putNumber("Drive Accel Y", Robot.driveSubsystem.getDriveAccelY());
+    SmartDashboard.putNumber("Drive Accel Z", Robot.driveSubsystem.getDriveAccelZ());
+    SmartDashboard.putNumber("Drive Front Distance",Robot.driveSubsystem.getFrontDriveDistance());
+    SmartDashboard.putNumber("Drive Back Distance", Robot.driveSubsystem.getBackDriveDistance());
+    SmartDashboard.putBoolean("Drive Front", Robot.driveSubsystem.isFrontSide());
   }
 
   // Make this return true when this Command no longer needs to run execute()
