@@ -21,7 +21,7 @@ public class DrivePIDSubsystem extends PIDSubsystem {
    */
   public DrivePIDSubsystem() {
     // Intert a subsystem name and PID values here
-    super("SubsystemName", 1, 0, 1);
+    super("SubsystemName", 0.5, 0, 1);
     setAbsoluteTolerance(0.05);
     getPIDController().setContinuous(false);
     
@@ -43,7 +43,7 @@ public class DrivePIDSubsystem extends PIDSubsystem {
     // e.g. a sensor, like a potentiometer:
     // yourPot.getAverageVoltage() / kYourMaxVoltage;
 
-    return Robot.driveSubsystem.getDistance();
+    return -Robot.driveSubsystem.getDistance();
   }
 
   @Override
@@ -56,14 +56,16 @@ public class DrivePIDSubsystem extends PIDSubsystem {
     double errorPercentage = GyroAngle / 90.0;
 
     SmartDashboard.putNumber("Enocder Value: ", Robot.driveSubsystem.getDistance());
+    SmartDashboard.putNumber("left enc: ", Robot.driveSubsystem.getLeftDriveEncoder());
+    SmartDashboard.putNumber("right enc: ", Robot.driveSubsystem.getRightDriveEncoder());
     SmartDashboard.putNumber("Current PID Value: ", Robot.drivepidsubsystem.getPosition());
 
     if (errorPercentage < 2.0 && errorPercentage > -2.0) {
       Robot.driveSubsystem.tankDrive(output, output); 
     } else if (errorPercentage > 0) {
-      Robot.driveSubsystem.tankDrive(-output * errorPercentage, -output); 
+      Robot.driveSubsystem.tankDrive(output * errorPercentage, output); 
     } else {
-      Robot.driveSubsystem.tankDrive(-output, -output * -errorPercentage); 
+      Robot.driveSubsystem.tankDrive(output, output * -errorPercentage); 
     }
   }
 }

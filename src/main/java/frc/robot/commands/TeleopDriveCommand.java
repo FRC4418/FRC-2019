@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.OI;
 
@@ -27,6 +28,13 @@ public class TeleopDriveCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+
+    SmartDashboard.putNumber("Enocder Value: ", Robot.driveSubsystem.getDistance());
+    SmartDashboard.putNumber("left enc: ", Robot.driveSubsystem.getLeftDriveEncoder());
+    SmartDashboard.putNumber("right enc: ", Robot.driveSubsystem.getRightDriveEncoder());
+    SmartDashboard.putNumber("Current PID Value: ", Robot.drivepidsubsystem.getPosition());
+    SmartDashboard.putNumber("climb enc: ", Robot.climbsubsystem.getFrontEncoderDistanceValue());
+
     Robot.driveSubsystem.tankDrive(OI.getDriverJoystick().getRawAxis(1), OI.getDriverJoystick().getRawAxis(5));
   }
 
