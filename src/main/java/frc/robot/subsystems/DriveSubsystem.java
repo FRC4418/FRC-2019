@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.TeleopDriveCommand;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Encoder;
@@ -56,6 +57,7 @@ public class DriveSubsystem extends Subsystem {
     rightDriveMotor2.follow(rightDriveMotor1);
 
     rightDriveMotor1.setInverted(true);
+    rightDriveMotor2.setInverted(true);
 
     driveGyro.initGyro();
     driveGyro.calibrate();
@@ -82,11 +84,11 @@ public class DriveSubsystem extends Subsystem {
   //drive both motors at once
   public void tankDrive(double leftValue, double rightValue){
     if(frontSide){
-      leftDriveMotor1.set(ControlMode.PercentOutput, leftValue);
-      rightDriveMotor1.set(ControlMode.PercentOutput, rightValue);
+      leftDriveMotor1.set(ControlMode.PercentOutput, -leftValue);
+      rightDriveMotor1.set(ControlMode.PercentOutput, -rightValue);
     }else{
-      leftDriveMotor1.set(ControlMode.PercentOutput, -rightValue);
-      rightDriveMotor1.set(ControlMode.PercentOutput, -leftValue);
+      leftDriveMotor1.set(ControlMode.PercentOutput, rightValue);
+      rightDriveMotor1.set(ControlMode.PercentOutput, leftValue);
     }
   }
 
@@ -117,7 +119,15 @@ public class DriveSubsystem extends Subsystem {
 
   //read right encoder
   public double getRightDriveEncoder(){
-    return rightDriveEncoder.getDistance();
+    return -rightDriveEncoder.getDistance();
+  }
+
+  public double getDistance(){
+    if(frontSide){
+      return (getRightDriveEncoder() + getLeftDriveEncoder()) / 2.0;
+    }else{
+      return (getRightDriveEncoder() + getLeftDriveEncoder()) / -2.0;
+    }
   }
 
   //reset left encoder
@@ -128,6 +138,11 @@ public class DriveSubsystem extends Subsystem {
   //reset right encoder
   public void resetRightDriveEncoder(){
     rightDriveEncoder.reset();
+  }
+
+  public void resetEncoders(){
+    resetLeftDriveEncoder();
+    resetRightDriveEncoder();
   }
 
   //read acceleromter
@@ -171,6 +186,7 @@ public class DriveSubsystem extends Subsystem {
   //swap the front and back of the robot
   public void swapFront(){
     frontSide = !frontSide;
+    resetEncoders();
   }
 
   public void stopDrive(){
@@ -181,5 +197,6 @@ public class DriveSubsystem extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new TeleopDriveCommand());
   }
 }

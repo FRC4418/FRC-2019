@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
+import frc.robot.OI;
 
 
 /**
@@ -54,6 +55,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    Scheduler.getInstance().removeAll();
   }
 
   @Override

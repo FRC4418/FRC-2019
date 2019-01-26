@@ -51,5 +51,5 @@ public class RobotMap {
                     frontDriveDistanceEcho = 11, 
                     backDriveDistancePing = 12, 
                     backDriveDistanceEcho = 13;
-  public static double distancePerPulse  = 7.5 * Math.PI;
+  public static double distancePerPulse  = (15.24 * Math.PI) / 256; // diameter * pi = circumference. circumference / 256 = distance per pulse
 }
