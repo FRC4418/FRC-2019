@@ -52,4 +52,9 @@ public class RobotMap {
                     backDriveDistancePing = 12, 
                     backDriveDistanceEcho = 13;
   public static double distancePerPulse  = (15.24 * Math.PI) / 256; // diameter * pi = circumference. circumference / 256 = distance per pulse
+
+  // RIO Post Info
+  public static int[] expectedTalonIDs = {leftDriveMotor1ID, leftDriveMotor2ID, rightDriveMotor1ID, 
+                                        rightDriveMotor2ID, frontClimbMotorID, backClimbMotorID, 
+                                        hatchArmJointMotorID};
 }
