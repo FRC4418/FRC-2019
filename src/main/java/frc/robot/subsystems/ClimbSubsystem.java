@@ -42,7 +42,6 @@ public class ClimbSubsystem extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new ClimbControlCommand());
 }
 
   // The following methods are getters.
