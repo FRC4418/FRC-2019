@@ -42,23 +42,24 @@ public class DrivePIDSubsystem extends PIDSubsystem {
     // e.g. a sensor, like a potentiometer:
     // yourPot.getAverageVoltage() / kYourMaxVoltage;
 
-    return Robot.driveSubsystem.getLeftDriveEncoder();
+    return Robot.driveSubsystem.getDistance();
   }
 
   @Override
   protected void usePIDOutput(double output) {
-    // Use output to drive your system, like a motor
-    // e.g. yourMotor.set(output);
     double GyroAngle = Robot.driveSubsystem.getGyroValue();
+
     if (GyroAngle > 90.0)
       GyroAngle = 90.0;
-    double ErrorPercentage = GyroAngle / 90.0;
-    if (ErrorPercentage < 2.0) {
+
+    double errorPercentage = GyroAngle / 90.0;
+
+    if (errorPercentage < 2.0 && errorPercentage > -2.0) {
       Robot.driveSubsystem.tankDrive(output, output); 
-    } else if (ErrorPercentage > 0) {
-      Robot.driveSubsystem.tankDrive(output, output * ErrorPercentage); 
+    } else if (errorPercentage > 0) {
+      Robot.driveSubsystem.tankDrive(output * errorPercentage, output); 
     } else {
-      Robot.driveSubsystem.tankDrive(output * ErrorPercentage, output); 
+      Robot.driveSubsystem.tankDrive(output, output * -errorPercentage); 
     }
   }
 }

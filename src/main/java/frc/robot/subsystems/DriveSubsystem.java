@@ -47,7 +47,7 @@ public class DriveSubsystem extends Subsystem {
     rightDriveMotor2 = new TalonSRX(RobotMap.rightDriveMotor2ID);
     leftDriveEncoder = new Encoder(RobotMap.leftDriveEncoderChannelAID, RobotMap.leftDriveEncoderChannelBID);
     rightDriveEncoder = new Encoder(RobotMap.rightDriveEncoderChannelAID, RobotMap.rightDriveEncoderChannelBID);
-    driveGyro = new AnalogGyro(RobotMap.gyroID);
+    //driveGyro = new AnalogGyro(RobotMap.gyroID);
     driveAccel = new BuiltInAccelerometer();
     frontDriveDistance = new Ultrasonic(RobotMap.frontDriveDistancePing, RobotMap.frontDriveDistanceEcho);
     backDriveDistance = new Ultrasonic(RobotMap.backDriveDistancePing, RobotMap.backDriveDistanceEcho);
@@ -102,12 +102,12 @@ public class DriveSubsystem extends Subsystem {
 
   //read gyro angle
   public double getGyroValue(){
-    return driveGyro.getAngle();
+    return 0.0;//driveGyro.getAngle();
   }
 
   //reset gyro
   public void resetGyro(){
-    driveGyro.calibrate();
+    //driveGyro.calibrate();
   }
 
   //read left encoder

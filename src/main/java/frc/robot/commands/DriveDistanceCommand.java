@@ -18,6 +18,8 @@ public class DriveDistanceCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.driveSubsystem.resetEncoders(); 
+    Robot.driveSubsystem.resetGyro();
     Robot.drivepidsubsystem.enable();
   }
 
