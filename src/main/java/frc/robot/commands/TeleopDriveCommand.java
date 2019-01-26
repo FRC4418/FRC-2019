@@ -14,11 +14,12 @@ import frc.robot.OI;
 public class TeleopDriveCommand extends Command {
   public TeleopDriveCommand() {
     // Use requires() here to declare subsystem dependencies
-    super("TelopDrive");
+    super("TeleopDrive");
     // eg. requires(chassis);
     requires(Robot.driveSubsystem);
   }
-
+  
+ 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
@@ -27,7 +28,7 @@ public class TeleopDriveCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveSubsystem.tankDrive(OI.getDriverJoystick().getRawAxis(1), OI.getDriverJoystick().getRawAxis(5));
+    Robot.driveSubsystem.teleopTankDrive(OI.getDriverJoystick().getRawAxis(1), OI.getDriverJoystick().getRawAxis(5));
   }
 
   // Make this return true when this Command no longer needs to run execute()
