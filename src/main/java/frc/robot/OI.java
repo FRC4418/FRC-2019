@@ -19,7 +19,7 @@ public class OI {
   public static Joystick getDriverJoystick() {
     return joystick0;
   }
-  public static JoystickButton swapFrontButton = new JoystickButton(joystick0, 0);
+  public static JoystickButton swapFrontButton = new JoystickButton(joystick0, 1);
 
   public OI(){
     swapFrontButton.whenPressed(new TeleopSwitchCommand());
