@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.*;
 //import frc.robot.subsystems.DriveSubsystem;
@@ -54,12 +55,15 @@ public class DrivePIDSubsystem extends PIDSubsystem {
 
     double errorPercentage = GyroAngle / 90.0;
 
+    SmartDashboard.putNumber("Enocder Value: ", Robot.driveSubsystem.getDistance());
+    SmartDashboard.putNumber("Current PID Value: ", Robot.drivepidsubsystem.getPosition());
+
     if (errorPercentage < 2.0 && errorPercentage > -2.0) {
       Robot.driveSubsystem.tankDrive(output, output); 
     } else if (errorPercentage > 0) {
-      Robot.driveSubsystem.tankDrive(output * errorPercentage, output); 
+      Robot.driveSubsystem.tankDrive(-output * errorPercentage, -output); 
     } else {
-      Robot.driveSubsystem.tankDrive(output, output * -errorPercentage); 
+      Robot.driveSubsystem.tankDrive(-output, -output * -errorPercentage); 
     }
   }
 }

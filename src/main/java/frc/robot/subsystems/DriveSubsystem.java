@@ -59,8 +59,8 @@ public class DriveSubsystem extends Subsystem {
     rightDriveMotor1.setInverted(true);
     rightDriveMotor2.setInverted(true);
 
-    driveGyro.initGyro();
-    driveGyro.calibrate();
+    //driveGyro.initGyro();
+    //driveGyro.calibrate();
 
     leftDriveEncoder.setDistancePerPulse(RobotMap.distancePerPulse);
     rightDriveEncoder.setDistancePerPulse(RobotMap.distancePerPulse);
