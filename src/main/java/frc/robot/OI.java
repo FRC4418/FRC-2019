@@ -19,12 +19,18 @@ public class OI {
   public static Joystick getDriverJoystick() {
     return joystick0;
   }
+  private static Joystick joystick3 = new Joystick(3);
+  public static Joystick getRightBumperAxis() {
+    return joystick3;
+  }
+  private static Joystick joystick2 = new Joystick(2);
+  public static Joystick getLeftBumperAxis() {
+    return joystick2;
+  }
   public static JoystickButton frontClimbButton = new JoystickButton(joystick0, 3);
   public static JoystickButton backClimbButton = new JoystickButton(joystick0, 2);
 
   public OI() {
-    frontClimbButton.whileHeld(new ClimbControlCommand());
-    backClimbButton.whileHeld(new ClimbControlCommand());
   }
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
