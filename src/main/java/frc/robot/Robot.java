@@ -24,10 +24,11 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
    // Subsystem instantiation
    // Creates Hatch Subsystem
-   HatchSubsystem hatchSubsystem = new HatchSubsystem();
+  public static HatchSubsystem hatchSubsystem = new HatchSubsystem();
    // Creates Climb Subsystem
-   ClimbSubsystem climbsubsystem = new ClimbSubsystem();
-   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
+  public static ClimbSubsystem climbsubsystem = new ClimbSubsystem();
+  // Creates Drive Subsystem 
+  public static DriveSubsystem driveSubsystem = new DriveSubsystem();
 
   @Override
   public void robotInit() {
