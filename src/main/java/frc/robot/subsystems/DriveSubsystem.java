@@ -117,7 +117,15 @@ public class DriveSubsystem extends Subsystem {
 
   //read right encoder
   public double getRightDriveEncoder(){
-    return rightDriveEncoder.getDistance();
+    return -rightDriveEncoder.getDistance();
+  }
+
+  public double getDistance(){
+    if(frontSide){
+      return (getRightDriveEncoder() + getLeftDriveEncoder()) / 2.0;
+    }else{
+      return (getRightDriveEncoder() + getLeftDriveEncoder()) / -2.0;
+    }
   }
 
   //reset left encoder
@@ -128,6 +136,11 @@ public class DriveSubsystem extends Subsystem {
   //reset right encoder
   public void resetRightDriveEncoder(){
     rightDriveEncoder.reset();
+  }
+
+  public void resetEncoders(){
+    resetLeftDriveEncoder();
+    resetRightDriveEncoder();
   }
 
   //read acceleromter
@@ -171,8 +184,13 @@ public class DriveSubsystem extends Subsystem {
   //swap the front and back of the robot
   public void swapFront(){
     frontSide = !frontSide;
+    resetEncoders();
   }
 
+  public void stopDrive(){
+    leftDriveMotor1.set(ControlMode.PercentOutput, 0);
+    rightDriveMotor1.set(ControlMode.PercentOutput, 0);
+  }
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
