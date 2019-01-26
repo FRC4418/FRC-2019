@@ -8,8 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import frc.robot.commands.ClimbControlCommandFront;
-import frc.robot.commands.ClimbControlCommandBack;
+import frc.robot.commands.ClimbControlCommand;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -20,12 +19,12 @@ public class OI {
   public static Joystick getDriverJoystick() {
     return joystick0;
   }
-  public static JoystickButton frontClimbButton = new JoystickButton(joystick0, 5);
-  public static JoystickButton backClimbButton = new JoystickButton(joystick0, 4);
+  public static JoystickButton frontClimbButton = new JoystickButton(joystick0, 3);
+  public static JoystickButton backClimbButton = new JoystickButton(joystick0, 2);
 
   public OI() {
-    frontClimbButton.whileHeld(new ClimbControlCommandFront());
-    backClimbButton.whileHeld(new ClimbControlCommandBack());
+    frontClimbButton.whileHeld(new ClimbControlCommand());
+    backClimbButton.whileHeld(new ClimbControlCommand());
   }
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
