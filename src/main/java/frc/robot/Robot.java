@@ -10,8 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.ClimbSubsystem;
-import frc.robot.subsystems.HatchSubsystem;
+import frc.robot.subsystems.*;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,11 +22,13 @@ import frc.robot.subsystems.HatchSubsystem;
  */
 public class Robot extends TimedRobot {
   public static OI m_oi;
-   //Subsystem instantiation
-   HatchSubsystem hatchSubsystem = new HatchSubsystem(RobotMap.hatchArmJointMotorID, RobotMap.hatchArmJointEncoderID); //Creates Hatch Subsystem
-   ClimbSubsystem climbsubsystem = new ClimbSubsystem(RobotMap.backClimbMotorID, RobotMap.frontClimbMotorID, 
-                                                      RobotMap.frontClimbEncoderChannelAID, RobotMap.frontClimbEncoderChannelBID, 
-                                                      RobotMap.backClimbEncoderChannelAID, RobotMap.backClimbEncoderChannelBID); //Create Climb Subsystem
+   // Subsystem instantiation
+   // Creates Hatch Subsystem
+  public static HatchSubsystem hatchSubsystem = new HatchSubsystem();
+   // Creates Climb Subsystem
+  public static ClimbSubsystem climbsubsystem = new ClimbSubsystem();
+  // Creates Drive Subsystem 
+  public static DriveSubsystem driveSubsystem = new DriveSubsystem();
 
   @Override
   public void robotInit() {
