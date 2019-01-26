@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.commands.OutputAllDataCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
+import frc.robot.OI;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,11 +26,11 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
    // Subsystem instantiation
    // Creates Hatch Subsystem
-   public static HatchSubsystem hatchSubsystem = new HatchSubsystem();
+  public static HatchSubsystem hatchSubsystem = new HatchSubsystem();
    // Creates Climb Subsystem
-   public static ClimbSubsystem climbsubsystem = new ClimbSubsystem();
-   // Create Drive Subsystem
-   public static DriveSubsystem drivesubsystem = new DriveSubsystem();
+  public static ClimbSubsystem climbsubsystem = new ClimbSubsystem();
+  // Creates Drive Subsystem 
+  public static DriveSubsystem driveSubsystem = new DriveSubsystem();
 
    public static OutputAllDataCommand dataCom = new OutputAllDataCommand();
   @Override
