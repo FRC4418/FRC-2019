@@ -29,7 +29,7 @@ public class ClimbControlCommand extends Command {
   @Override
   protected void execute() {
     Robot.climbsubsystem.setClimbLegsBack(OI.getRightTriggerAxis());
-    Robot.climbsubsystem.setClimbLegsFront(OI.getLeftTriggerAxis());
+    Robot.climbsubsystem.setClimbLegsFront(-OI.getLeftTriggerAxis());
   }
 
   // Make this return true when this Command no longer needs to run execute()
