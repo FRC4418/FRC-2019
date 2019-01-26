@@ -30,6 +30,8 @@ public class Robot extends TimedRobot {
   public static ClimbSubsystem climbsubsystem = new ClimbSubsystem();
   // Creates Drive Subsystem 
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
+  // Creates Camera Subsystem
+  public static CameraSubsystem cameraSubsystem = new CameraSubsystem();
 
   @Override
   public void robotInit() {
