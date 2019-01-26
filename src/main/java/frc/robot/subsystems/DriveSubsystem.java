@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.TeleopDriveCommand;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Encoder;
@@ -56,6 +57,7 @@ public class DriveSubsystem extends Subsystem {
     rightDriveMotor2.follow(rightDriveMotor1);
 
     rightDriveMotor1.setInverted(true);
+    rightDriveMotor2.setInverted(true);
 
     driveGyro.initGyro();
     driveGyro.calibrate();
@@ -82,11 +84,11 @@ public class DriveSubsystem extends Subsystem {
   //drive both motors at once
   public void tankDrive(double leftValue, double rightValue){
     if(frontSide){
-      leftDriveMotor1.set(ControlMode.PercentOutput, leftValue);
-      rightDriveMotor1.set(ControlMode.PercentOutput, rightValue);
+      leftDriveMotor1.set(ControlMode.PercentOutput, -leftValue);
+      rightDriveMotor1.set(ControlMode.PercentOutput, -rightValue);
     }else{
-      leftDriveMotor1.set(ControlMode.PercentOutput, -rightValue);
-      rightDriveMotor1.set(ControlMode.PercentOutput, -leftValue);
+      leftDriveMotor1.set(ControlMode.PercentOutput, rightValue);
+      rightDriveMotor1.set(ControlMode.PercentOutput, leftValue);
     }
   }
 
@@ -181,5 +183,6 @@ public class DriveSubsystem extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new TeleopDriveCommand());
   }
 }
