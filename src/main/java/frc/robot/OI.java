@@ -19,17 +19,12 @@ public class OI {
   public static Joystick getDriverJoystick() {
     return joystick0;
   }
-  private static Joystick joystick3 = new Joystick(3);
-  public static Joystick getRightBumperAxis() {
-    return joystick3;
+  public static double getRightTriggerAxis() {
+    return joystick0.getRawAxis(3);
   }
-  private static Joystick joystick2 = new Joystick(2);
-  public static Joystick getLeftBumperAxis() {
-    return joystick2;
+  public static double getLeftTriggerAxis() {
+    return joystick0.getRawAxis(2);
   }
-  public static JoystickButton frontClimbButton = new JoystickButton(joystick0, 3);
-  public static JoystickButton backClimbButton = new JoystickButton(joystick0, 2);
-
   public OI() {
   }
   //// CREATING BUTTONS

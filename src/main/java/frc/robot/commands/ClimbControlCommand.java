@@ -28,8 +28,8 @@ public class ClimbControlCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.climbsubsystem.setClimbLegsBack(OI.getRightBumperAxis().getRawAxis(3));
-    Robot.climbsubsystem.setClimbLegsFront(OI.getLeftBumperAxis().getRawAxis(2));
+    Robot.climbsubsystem.setClimbLegsBack(OI.getRightTriggerAxis());
+    Robot.climbsubsystem.setClimbLegsFront(OI.getLeftTriggerAxis());
   }
 
   // Make this return true when this Command no longer needs to run execute()
