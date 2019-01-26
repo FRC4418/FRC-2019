@@ -40,7 +40,7 @@ public class DriveSubsystem extends Subsystem {
   private boolean frontSide = true;
 
   //Instantiate the subsystem
-  public DriveSubsystem(){
+  public DriveSubsystem() {
     leftDriveMotor1 = new TalonSRX(RobotMap.leftDriveMotor1ID);
     leftDriveMotor2 = new TalonSRX(RobotMap.leftDriveMotor2ID);
     rightDriveMotor1 = new TalonSRX(RobotMap.rightDriveMotor1ID);
