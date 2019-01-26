@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.commands.OutputAllDataCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
 
@@ -29,9 +30,14 @@ public class Robot extends TimedRobot {
    public static ClimbSubsystem climbsubsystem = new ClimbSubsystem();
    // Create Drive Subsystem
    public static DriveSubsystem drivesubsystem = new DriveSubsystem();
+
+   public static OutputAllDataCommand dataCom = new OutputAllDataCommand();
   @Override
   public void robotInit() {
     m_oi = new OI();
+    if(!dataCom.isRunning()){
+      dataCom.start();
+    }
   }
 
   /**
@@ -44,6 +50,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    if(!dataCom.isRunning()){
+      dataCom.start();
+    }
   }
 
   /**
@@ -53,6 +62,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    if(!dataCom.isRunning()){
+      dataCom.start();
+    }
   }
 
   @Override
@@ -73,13 +85,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-
-    /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
-     * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-     * = new MyAutoCommand(); break; case "Default Auto": default:
-     * autonomousCommand = new ExampleCommand(); break; }
-     */
+    if(!dataCom.isRunning()){
+      dataCom.start();
+    }
   }
 
   /**
@@ -92,7 +100,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    
+    if(!dataCom.isRunning()){
+      dataCom.start();
+    }
   }
 
   /**
