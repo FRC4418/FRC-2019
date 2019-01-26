@@ -10,8 +10,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.commands.ClimbControlCommand;
-
+import frc.robot.commands.ClimbControlCommandFront;
+import frc.robot.commands.ClimbControlCommandBack;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.*;
 
@@ -43,7 +43,7 @@ public class ClimbSubsystem extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new ClimbControlCommand());
+    setDefaultCommand(new ClimbControlCommandFront());
 }
 
   // The following methods are getters.

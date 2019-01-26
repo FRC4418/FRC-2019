@@ -12,8 +12,8 @@ import frc.robot.Robot;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.OI;
 
-public class ClimbControlCommand extends Command {
-  public ClimbControlCommand() {
+public class ClimbControlCommandFront extends Command {
+  public ClimbControlCommandFront() {
     // Use requires() here to declare subsystem dependencies
     super ("ClimbControl");
     // eg. requires(chassis);
@@ -29,7 +29,6 @@ public class ClimbControlCommand extends Command {
   @Override
   protected void execute() {
     Robot.climbsubsystem.setClimbLegsFront(OI.getDriverJoystick().getRawAxis(1));
-    Robot.climbsubsystem.setClimbLegsBack(OI.getDriverJoystick().getRawAxis(1));
   }
 
   // Make this return true when this Command no longer needs to run execute()
