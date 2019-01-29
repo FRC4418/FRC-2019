@@ -93,15 +93,11 @@ public class DriveSubsystem extends Subsystem {
   }
 
   public void teleopTankDrive(double leftValue, double rightValue){
-    double leftOutput = ((Math.pow(leftValue, 2)/100)*(Math.abs(leftValue)/leftValue));
-    double rightOutput = ((Math.pow(rightValue,2)/100)*(Math.abs(rightValue)/rightValue));
-    if(frontSide){
-      leftDriveMotor1.set(ControlMode.PercentOutput, -leftOutput);
-      rightDriveMotor1.set(ControlMode.PercentOutput, -rightOutput);
-    }else{
-      leftDriveMotor1.set(ControlMode.PercentOutput, rightOutput);
-      rightDriveMotor1.set(ControlMode.PercentOutput, leftOutput);
-    }
+    //double leftOutput = ((Math.pow(leftValue, 2)/100)*(Math.abs(leftValue)/leftValue));
+    //double rightOutput = ((Math.pow(rightValue,2)/100)*(Math.abs(rightValue)/rightValue));
+    double leftOutput = (Math.pow(leftValue, 3)/100000);
+    double rightOutput = (Math.pow(rightValue, 3)/100000);
+    tankDrive(leftOutput, rightOutput);
   }
 
   //read left motor
