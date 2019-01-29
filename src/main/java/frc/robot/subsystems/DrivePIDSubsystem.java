@@ -13,7 +13,7 @@ import frc.robot.Robot;
 import edu.wpi.first.wpilibj.*;
 //import frc.robot.subsystems.DriveSubsystem;
 /**
- * Add your docs here.
+ * Add your docs here
  */
 public class DrivePIDSubsystem extends PIDSubsystem {
   /**
@@ -21,10 +21,10 @@ public class DrivePIDSubsystem extends PIDSubsystem {
    */
   public DrivePIDSubsystem() {
     // Intert a subsystem name and PID values here
-    super("SubsystemName", 0.5, 0, 1);
-    setAbsoluteTolerance(0.05);
+    super("SubsystemName", 0.2, 0, 0);
+    setAbsoluteTolerance(0.5);
     getPIDController().setContinuous(false);
-    
+    setOutputRange(-33, 33);
     // Use these to get going:
     // setSetpoint() - Sets where the PID controller should move the system
     // to 
@@ -43,7 +43,7 @@ public class DrivePIDSubsystem extends PIDSubsystem {
     // e.g. a sensor, like a potentiometer:
     // yourPot.getAverageVoltage() / kYourMaxVoltage;
 
-    return -Robot.driveSubsystem.getDistance();
+    return Robot.driveSubsystem.getDistance();
   }
 
   @Override
@@ -60,12 +60,16 @@ public class DrivePIDSubsystem extends PIDSubsystem {
     SmartDashboard.putNumber("right enc: ", Robot.driveSubsystem.getRightDriveEncoder());
     SmartDashboard.putNumber("Current PID Value: ", Robot.drivepidsubsystem.getPosition());
 
+    Robot.driveSubsystem.tankDrive(output, output);
+
+    /*
     if (errorPercentage < 2.0 && errorPercentage > -2.0) {
-      Robot.driveSubsystem.tankDrive(output, output); 
+      Robot.driveSubsystem.tankDrive(-output, -output); 
     } else if (errorPercentage > 0) {
-      Robot.driveSubsystem.tankDrive(output * errorPercentage, output); 
+      Robot.driveSubsystem.tankDrive(-output * errorPercentage, -output); 
     } else {
-      Robot.driveSubsystem.tankDrive(output, output * -errorPercentage); 
+      Robot.driveSubsystem.tankDrive(-output, -output * -errorPercentage); 
     }
+    */
   }
 }

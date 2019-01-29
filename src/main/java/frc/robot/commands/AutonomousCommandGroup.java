@@ -15,6 +15,6 @@ public class AutonomousCommandGroup extends CommandGroup {
    * Add your docs here.
    */
   public AutonomousCommandGroup() {
-    addSequential(new DriveDistanceCommand(50));
+    addSequential(new DriveDistanceCommand(100));
   }
 }
