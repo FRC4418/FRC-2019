@@ -28,7 +28,7 @@ public class TeleopDriveCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveSubsystem.tankDrive(OI.getDriverJoystick().getRawAxis(1), OI.getDriverJoystick().getRawAxis(5));
+    Robot.driveSubsystem.tankDrive(OI.getLeftDriverJoystick().getRawAxis(1), OI.getRightDriverJoystick().getRawAxis(1));
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -15,15 +15,22 @@ import frc.robot.commands.TeleopSwitchCommand;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  private static Joystick joystick0 = new Joystick(0);
-  public static Joystick getDriverJoystick() {
-    return joystick0;
+
+  private static Joystick rightx3d = new Joystick(0);
+  public static Joystick getRightDriverJoystick(){
+    return rightx3d;
   }
-  public static JoystickButton swapFrontButton = new JoystickButton(joystick0, 1);
+  public static JoystickButton swapFrontButton = new JoystickButton(rightx3d, 3);
+
+  private static Joystick leftx3d = new Joystick(1);
+  public static Joystick getLeftDriverJoystick(){
+    return leftx3d;
+  }
 
   public OI(){
     swapFrontButton.whenPressed(new TeleopSwitchCommand());
   }
+
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.
