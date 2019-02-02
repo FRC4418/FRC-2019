@@ -21,10 +21,8 @@ public class DrivePIDSubsystem extends PIDSubsystem {
    */
   public DrivePIDSubsystem() {
     // Intert a subsystem name and PID values here
-    super("SubsystemName", 0.2, 0, 0);
-    setAbsoluteTolerance(0.5);
-    getPIDController().setContinuous(false);
-    setOutputRange(-33, 33);
+    super("SubsystemName", 0.5, 0, 1);
+    setOutputRange(-1d, 1d);
     // Use these to get going:
     // setSetpoint() - Sets where the PID controller should move the system
     // to 
@@ -48,19 +46,21 @@ public class DrivePIDSubsystem extends PIDSubsystem {
 
   @Override
   protected void usePIDOutput(double output) {
-    double GyroAngle = Robot.driveSubsystem.getGyroValue();
+   /* double GyroAngle = Robot.driveSubsystem.getGyroValue();
 
     if (GyroAngle > 90.0)
       GyroAngle = 90.0;
 
     double errorPercentage = GyroAngle / 90.0;
+    */
 
     SmartDashboard.putNumber("Enocder Value: ", Robot.driveSubsystem.getDistance());
     SmartDashboard.putNumber("left enc: ", Robot.driveSubsystem.getLeftDriveEncoder());
     SmartDashboard.putNumber("right enc: ", Robot.driveSubsystem.getRightDriveEncoder());
     SmartDashboard.putNumber("Current PID Value: ", Robot.drivepidsubsystem.getPosition());
+    SmartDashboard.putNumber("output: ", output);
 
-    Robot.driveSubsystem.tankDrive(output, output);
+    Robot.driveSubsystem.tankDrive(Math.abs(output)/1d, Math.abs(output)/1d);
 
     /*
     if (errorPercentage < 2.0 && errorPercentage > -2.0) {
