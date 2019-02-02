@@ -16,9 +16,16 @@ import frc.robot.commands.*;
  */
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
-  private static Joystick joystick0 = new Joystick(0);
-  public static Joystick getDriverJoystick() {
-    return joystick0;
+
+  private static Joystick rightx3d = new Joystick(0);
+  public static Joystick getRightDriverJoystick(){
+    return rightx3d;
+  }
+  public static JoystickButton swapFrontButton = new JoystickButton(rightx3d, 3);
+
+  private static Joystick leftx3d = new Joystick(1);
+  public static Joystick getLeftDriverJoystick(){
+    return leftx3d;
   }
   public static double getRightTriggerAxis() {
     return joystick0.getRawAxis(3);
@@ -31,6 +38,7 @@ public class OI {
   public OI(){
     swapFrontButton.whenPressed(new TeleopSwitchCommand());
   }
+
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.
