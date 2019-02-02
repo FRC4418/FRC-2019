@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -196,6 +197,18 @@ public class DriveSubsystem extends Subsystem {
     resetEncoders();
   }
 
+  public void brake(){
+    leftDriveMotor1.setNeutralMode(NeutralMode.Brake);
+    leftDriveMotor2.setNeutralMode(NeutralMode.Brake);
+    rightDriveMotor1.setNeutralMode(NeutralMode.Brake);
+    rightDriveMotor2.setNeutralMode(NeutralMode.Brake);
+  }
+  public void coast(){
+    leftDriveMotor1.setNeutralMode(NeutralMode.Coast);
+    leftDriveMotor2.setNeutralMode(NeutralMode.Coast);
+    rightDriveMotor1.setNeutralMode(NeutralMode.Coast);
+    rightDriveMotor2.setNeutralMode(NeutralMode.Coast);
+  }
   public void stopDrive(){
     leftDriveMotor1.set(ControlMode.PercentOutput, 0);
     rightDriveMotor1.set(ControlMode.PercentOutput, 0);

@@ -9,48 +9,47 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.OI;
 
-public class TeleopDriveCommand extends Command {
-
-  public TeleopDriveCommand() {
+public class TeleopBrakeCommand extends Command {
+  boolean onBrake2;
+  public TeleopBrakeCommand(boolean onBrake) {
+    super ("TeleopBrake");
+    onBrake2 = onBrake;
     // Use requires() here to declare subsystem dependencies
-    super("TeleopDrive");
     // eg. requires(chassis);
-    requires(Robot.driveSubsystem);
+    //requires(Robot.driveSubsystem);
   }
-  
- 
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    if(onBrake2) {
+      Robot.driveSubsystem.brake();
+    }
+    else{
+      Robot.driveSubsystem.coast();
+    }
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveSubsystem.tankDrive(OI.getGamepadJoystick().getRawAxis(1), OI.getGamepadJoystick().getRawAxis(5));
-    //gamepad
-    //Robot.driveSubsystem.tankDrive(OI.getLeftDriverJoystick().getRawAxis(1), OI.getRightDriverJoystick().getRawAxis(1));
-    //yokes
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveSubsystem.stopDrive();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }
