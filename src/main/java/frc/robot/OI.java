@@ -9,15 +9,22 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.TeleopSwitchCommand;
+import frc.robot.commands.*;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
   private static Joystick joystick0 = new Joystick(0);
   public static Joystick getDriverJoystick() {
     return joystick0;
+  }
+  public static double getRightTriggerAxis() {
+    return joystick0.getRawAxis(3);
+  }
+  public static double getLeftTriggerAxis() {
+    return joystick0.getRawAxis(2);
   }
   public static JoystickButton swapFrontButton = new JoystickButton(joystick0, 1);
 
