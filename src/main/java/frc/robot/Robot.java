@@ -25,7 +25,7 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
    // Subsystem instantiation
    // Creates Hatch Subsystem
-  public static HatchSubsystem hatchSubsystem = new HatchSubsystem();
+  public static HatchArmSubsystem hatchSubsystem = new HatchArmSubsystem();
    // Creates Climb Subsystem
   public static ClimbSubsystem climbsubsystem = new ClimbSubsystem();
   // Creates Drive Subsystem 
