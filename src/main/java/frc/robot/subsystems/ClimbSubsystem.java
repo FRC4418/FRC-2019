@@ -34,6 +34,8 @@ public class ClimbSubsystem extends Subsystem {
     backClimbEncoder = new Encoder(RobotMap.backClimbEncoderChannelAID, RobotMap.backClimbEncoderChannelBID);
     frontClimbMotor = new TalonSRX(RobotMap.frontClimbMotorID);
     backClimbMotor = new TalonSRX(RobotMap.backClimbMotorID);
+    frontClimbEncoder.setDistancePerPulse(RobotMap.climbEncoderDistancePerPulse);
+    backClimbEncoder.setDistancePerPulse(RobotMap.climbEncoderDistancePerPulse);
     setClimbLegsBack(0);
     setClimbLegsFront(0);
     resetBothClimbEncoders();
