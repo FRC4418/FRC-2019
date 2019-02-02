@@ -16,13 +16,13 @@ import frc.robot.RobotMap;
 /**
  * Add your docs here.
  */
-public class HatchSubsystem extends Subsystem {
+public class HatchArmSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 private TalonSRX hatchArmJointMotor;
 private Encoder hatchArmJointEncoder;
 
-public HatchSubsystem() {
+public HatchArmSubsystem() {
 
   hatchArmJointMotor = new TalonSRX(RobotMap.hatchArmJointMotorID);
   hatchArmJointEncoder = new Encoder(RobotMap.hatchArmJointEncoderChannelAID, RobotMap.hatchArmJointEncoderChannelBID);
@@ -33,8 +33,8 @@ public void setHatchMotorValue(double motorValue){
   hatchArmJointMotor.set(ControlMode.PercentOutput, motorValue);
 }
 
-public void getHatchEncoderValue(){
-  hatchArmJointEncoder.getDistance();
+public double getHatchEncoderValue(){
+  return hatchArmJointEncoder.getDistance();
 }
 
 public void resetHatchEncoderValue(){
