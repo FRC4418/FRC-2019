@@ -32,7 +32,6 @@ public class TeleopDriveCommand extends Command {
     SmartDashboard.putNumber("Enocder Value: ", Robot.driveSubsystem.getDistance());
     SmartDashboard.putNumber("left enc: ", Robot.driveSubsystem.getLeftDriveEncoder());
     SmartDashboard.putNumber("right enc: ", Robot.driveSubsystem.getRightDriveEncoder());
-    SmartDashboard.putNumber("Current PID Value: ", Robot.drivepidsubsystem.getPosition());
     SmartDashboard.putNumber("climb enc: ", Robot.climbsubsystem.getFrontEncoderDistanceValue());
 
     Robot.driveSubsystem.tankDrive(OI.getDriverJoystick().getRawAxis(1), OI.getDriverJoystick().getRawAxis(5));

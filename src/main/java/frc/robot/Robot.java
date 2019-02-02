@@ -28,8 +28,6 @@ public class Robot extends TimedRobot {
    public static HatchSubsystem hatchSubsystem = new HatchSubsystem();
    // Creates Climb Subsystem
    public static ClimbSubsystem climbsubsystem = new ClimbSubsystem();
-   // Creates PID Subsystem
-   public static DrivePIDSubsystem drivepidsubsystem = new DrivePIDSubsystem();
    // Creates Drive Subsystem
    public static DriveSubsystem driveSubsystem = new DriveSubsystem();
 
