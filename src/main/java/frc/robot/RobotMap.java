@@ -57,6 +57,10 @@ public class RobotMap {
   public static int[] expectedTalonIDs = {leftDriveMotor1ID, leftDriveMotor2ID, rightDriveMotor1ID, 
                                         rightDriveMotor2ID, frontClimbMotorID, backClimbMotorID, 
                                         hatchArmJointMotorID};
-  // Use encoder A Channels as the device
-  public static int[] expectedDIOSensors = {2,6,8};
+  public static int[] expectedDIOEncoders = {hatchArmJointEncoderChannelAID,hatchArmJointEncoderChannelBID,
+                                            frontClimbEncoderChannelAID,frontClimbEncoderChannelBID,backClimbEncoderChannelAID,
+                                            backClimbEncoderChannelBID,leftDriveEncoderChannelAID,
+                                            leftDriveEncoderChannelBID,rightDriveEncoderChannelAID,rightDriveEncoderChannelAID};
+  public static int expectedGyro = gyroID;
+  public static int[] expectedDIOUltrasonic = {frontDriveDistancePing,frontDriveDistanceEcho,backDriveDistancePing,backDriveDistanceEcho};
 }

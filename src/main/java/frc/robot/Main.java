@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotBase;
 import frc.robot.RobotMap;
@@ -36,19 +37,19 @@ public final class Main {
 
     // START RIO POST
 
-    // START CAN TEST
-    System.out.println();
-    System.out.println();
-    System.out.println("******************** Start CAN Test ********************");
-    System.out.println();
-    System.out.println();
-
     // Remind when close to competition dates to check firmware
     LocalDate date = LocalDate.now();
     if(date.getMonth().equals(Month.MARCH)){
       System.out.println("Make sure the firmware is up to date. It's close to competition!");
       DriverStation.reportWarning("Make sure the firmware is up to date. It's close to competition!", false);
     }
+
+    // START CAN TEST
+    System.out.println();
+    System.out.println();
+    System.out.println("******************** Start CAN Test ********************");
+    System.out.println();
+    System.out.println();
 
     // Grab expected Talon IDs, the directory where CAN Data is stored on the RIO, and all the files
     int[] expectedTalonIDs = RobotMap.expectedTalonIDs;
@@ -108,6 +109,9 @@ public final class Main {
       if (filenames.contains("Talon SRX-" + expectedTalonIDs[i] + "-versions.ini")) {
         filenames.remove("Talon SRX-"+expectedTalonIDs[i]+"-versions.ini");
         System.out.println("Found expected TalonSRX on ID " + expectedTalonIDs[i]);
+      }else{
+        System.out.println("Did not find expected TalonSRX on ID " + expectedTalonIDs[i]);
+        DriverStation.reportWarning("Did not find expected TalonSRX on ID " + expectedTalonIDs[i], false);
       }
     }
     // PDP will always be in device range 0-10. Check if it exists. 
@@ -135,6 +139,9 @@ public final class Main {
         + devFileName.substring(devFileName.indexOf('-')+1, devFileName.indexOf('-')+2));
       }
     }
+
+
+
     System.out.println();
     System.out.println();
     System.out.println("******************** End CAN Test ********************");
@@ -143,41 +150,74 @@ public final class Main {
 
     // END CAN TEST
 
-    // START DIO SENSOR TEST
+    // START DIO Encoder TEST
 
-    ArrayList<Integer> expectedDIO = new ArrayList<Integer>();
-    for(int i = 0; i < RobotMap.expectedDIOSensors.length; i++){
-      expectedDIO.add(RobotMap.expectedDIOSensors[i]);
+    System.out.println();
+    System.out.println();
+    System.out.println("******************** Start Encoder Test ********************");
+    System.out.println();
+    System.out.println();
+
+    ArrayList<Integer> expectedEnc = new ArrayList<Integer>();
+    for(int i = 0; i < RobotMap.expectedDIOEncoders.length; i++){
+      expectedEnc.add(RobotMap.expectedDIOEncoders[i]);
     }
 
-    for(int i = 0; i < expectedDIO.size(); i++){
-      DigitalInput dio = new DigitalInput(expectedDIO.get(i));
-      if(!dio.get()){
-        System.out.println("Found expected DIO Sensor on channel " + expectedDIO.get(i));
+    for(int i = 0; i < expectedEnc.size(); i+=2){
+      DigitalInput dioA = new DigitalInput(expectedEnc.get(i));
+      DigitalInput dioB = new DigitalInput(expectedEnc.get(i+1));
+      if(!dioA.get() || !dioB.get()){
+        System.out.println("Found expected DIO Encoder connected to ports " + expectedEnc.get(i) + " and " + expectedEnc.get(i+1));
       }else{
-        System.out.println("Did not find expected DIO Sensor on channel " + expectedDIO.get(i));
-        DriverStation.reportError("Did not find expected DIO Sensor on channel " + expectedDIO.get(i), false);
+        System.out.println("Did not find expected DIO Encoder connected to ports " + expectedEnc.get(i) + " and " + expectedEnc.get(i+1));
+        DriverStation.reportError("Did not find expected DIO Encoder connected to ports " + expectedEnc.get(i) + " and " + expectedEnc.get(i+1), false);
       }
-      dio.close();
+      dioA.close();
+      dioB.close();
     }
 
-    for(int i = 0; i < 16; i++){
-      DigitalInput dio = new DigitalInput(i);
-      if(!dio.get() && !expectedDIO.contains(i)){
-        System.out.println("Found unexpected DIO Sensor on channel " + i);
-        DriverStation.reportWarning("Found unexpected DIO Sensor on channel " + i, false);
-      }
-      dio.close();
-    }
+    System.out.println();
+    System.out.println();
+    System.out.println("******************** End Encoder Test ********************");
+    System.out.println();
+    System.out.println();
 
-    for(int i = 0; i < 16; i++){
-      DigitalInput dio = new DigitalInput(i);
-      System.out.println("Sensor on Channel " + i + " value: " + dio.get());
-      dio.close();
-    }
-
-    // END DIO SENSOR TEST
+    // END DIO ENCODER TEST
     
+    // START DIO ULTRASONIC TEST
+
+    System.out.println();
+    System.out.println();
+    System.out.println("******************** Start Ultrasonic Test ********************");
+    System.out.println();
+    System.out.println();
+
+    ArrayList<Integer> expectedUltrasonic = new ArrayList<Integer>();
+    for(int i = 0; i < RobotMap.expectedDIOUltrasonic.length; i++){
+      expectedUltrasonic.add(RobotMap.expectedDIOUltrasonic[i]);
+    }
+
+    for(int i = 0; i < expectedUltrasonic.size(); i+=2){
+      DigitalOutput dioPing = new DigitalOutput(expectedUltrasonic.get(i));
+      DigitalInput dioEcho = new DigitalInput(expectedUltrasonic.get(i+1));
+      if(!dioPing.get() || !dioEcho.get()){
+        System.out.println("Found expected DIO Ultrasonic connected to ports " + expectedEnc.get(i) + " and " + expectedEnc.get(i+1));
+      }else{
+        System.out.println("Did not find expected DIO Ultrasonic connected to ports " + expectedEnc.get(i) + " and " + expectedEnc.get(i+1));
+        DriverStation.reportError("Did not find expected DIO Ultrasonic connected to ports " + expectedEnc.get(i) + " and " + expectedEnc.get(i+1), false);
+      }
+      dioPing.close();
+      dioEcho.close();
+    }
+
+    System.out.println();
+    System.out.println();
+    System.out.println("******************** End Ultrasonic Test ********************");
+    System.out.println();
+    System.out.println();
+
+    // END DIO ULTRASONIC TEST
+
     // END RIO POST
 
     RobotBase.startRobot(Robot::new);
