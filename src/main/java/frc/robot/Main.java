@@ -14,6 +14,8 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -217,6 +219,31 @@ public final class Main {
     System.out.println();
 
     // END DIO ULTRASONIC TEST
+
+    // START GYRO TEST
+
+    System.out.println();
+    System.out.println();
+    System.out.println("******************** Start Gyro Test ********************");
+    System.out.println();
+    System.out.println();
+
+    AnalogInput gyro = new AnalogInput(RobotMap.expectedGyro);
+    if(gyro.getValue()!=0){
+      System.out.println("Found expected gyro on " + RobotMap.expectedGyro);
+    }else{
+      System.out.println("Did not find expected gyro on " + RobotMap.expectedGyro);
+      DriverStation.reportWarning("Did not find expected gyro on " + RobotMap.expectedGyro, false);
+    }
+    gyro.close();
+
+    System.out.println();
+    System.out.println();
+    System.out.println("******************** End Gyro Test ********************");
+    System.out.println();
+    System.out.println();
+
+    // END GYRO TEST
 
     // END RIO POST
 
