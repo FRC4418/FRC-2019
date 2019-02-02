@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
 import frc.robot.OI;
+import frc.robot.commands.OutputAllDataCommand;
 
 
 /**
@@ -33,9 +34,13 @@ public class Robot extends TimedRobot {
   // Creates Camera Subsystem
   public static CameraSubsystem cameraSubsystem = new CameraSubsystem();
 
+  // Create data command
+  public static OutputAllDataCommand dataComm = new OutputAllDataCommand();
+
   @Override
   public void robotInit() {
     m_oi = new OI();
+    dataComm.start();
   }
 
   /**
@@ -48,6 +53,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    if(!dataComm.isRunning()){
+      dataComm.start();
+    }
   }
 
   /**
@@ -58,11 +66,17 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     Scheduler.getInstance().removeAll();
+    if(!dataComm.isRunning()){
+      dataComm.start();
+    }
   }
 
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+    if(!dataComm.isRunning()){
+      dataComm.start();
+    }
   }
 
   /**
@@ -78,6 +92,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    if(!dataComm.isRunning()){
+      dataComm.start();
+    }
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -93,11 +110,16 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    if(!dataComm.isRunning()){
+      dataComm.start();
+    }
   }
 
   @Override
   public void teleopInit() {
-    
+    if(!dataComm.isRunning()){
+      dataComm.start();
+    }
   }
 
   /**
@@ -106,6 +128,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    if(!dataComm.isRunning()){
+      dataComm.start();
+    }
   }
 
   /**
@@ -113,5 +138,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    if(!dataComm.isRunning()){
+      dataComm.start();
+    }
   }
 }
