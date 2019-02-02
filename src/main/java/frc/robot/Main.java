@@ -245,6 +245,28 @@ public final class Main {
 
     // END GYRO TEST
 
+    // general dio test
+
+    System.out.println();
+    System.out.println();
+    System.out.println("******************** Start general dio Test ********************");
+    System.out.println();
+    System.out.println();
+
+    for(int i = 0; i < 16; i++){
+      DigitalInput dio = new DigitalInput(i);
+      System.out.println("DIO Port " + i + ": " + dio.get());
+      dio.close();
+    }
+
+    System.out.println();
+    System.out.println();
+    System.out.println("******************** end general dio Test ********************");
+    System.out.println();
+    System.out.println();
+
+    // general dio test
+
     // END RIO POST
 
     RobotBase.startRobot(Robot::new);
