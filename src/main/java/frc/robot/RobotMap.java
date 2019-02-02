@@ -57,4 +57,6 @@ public class RobotMap {
   public static int[] expectedTalonIDs = {leftDriveMotor1ID, leftDriveMotor2ID, rightDriveMotor1ID, 
                                         rightDriveMotor2ID, frontClimbMotorID, backClimbMotorID, 
                                         hatchArmJointMotorID};
+  // Use encoder A Channels as the device
+  public static int[] expectedDIOSensors = {2,6,8};
 }

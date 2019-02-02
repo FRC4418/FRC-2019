@@ -14,7 +14,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotBase;
 import frc.robot.RobotMap;
@@ -37,7 +37,11 @@ public final class Main {
     // START RIO POST
 
     // START CAN TEST
-    System.out.println("\n\n\n\n\n\n******************** Start CAN Test ********************\n\n\n\n\n\n");
+    System.out.println();
+    System.out.println();
+    System.out.println("******************** Start CAN Test ********************");
+    System.out.println();
+    System.out.println();
 
     // Remind when close to competition dates to check firmware
     LocalDate date = LocalDate.now();
@@ -131,10 +135,49 @@ public final class Main {
         + devFileName.substring(devFileName.indexOf('-')+1, devFileName.indexOf('-')+2));
       }
     }
-    System.out.println("\n\n\n\n\n\n******************** End CAN Test ********************\n\n\n\n\n\n");
-    
+    System.out.println();
+    System.out.println();
+    System.out.println("******************** End CAN Test ********************");
+    System.out.println();
+    System.out.println();
+
     // END CAN TEST
 
+    // START DIO SENSOR TEST
+
+    ArrayList<Integer> expectedDIO = new ArrayList<Integer>();
+    for(int i = 0; i < RobotMap.expectedDIOSensors.length; i++){
+      expectedDIO.add(RobotMap.expectedDIOSensors[i]);
+    }
+
+    for(int i = 0; i < expectedDIO.size(); i++){
+      DigitalInput dio = new DigitalInput(expectedDIO.get(i));
+      if(!dio.get()){
+        System.out.println("Found expected DIO Sensor on channel " + expectedDIO.get(i));
+      }else{
+        System.out.println("Did not find expected DIO Sensor on channel " + expectedDIO.get(i));
+        DriverStation.reportError("Did not find expected DIO Sensor on channel " + expectedDIO.get(i), false);
+      }
+      dio.close();
+    }
+
+    for(int i = 0; i < 16; i++){
+      DigitalInput dio = new DigitalInput(i);
+      if(!dio.get() && !expectedDIO.contains(i)){
+        System.out.println("Found unexpected DIO Sensor on channel " + i);
+        DriverStation.reportWarning("Found unexpected DIO Sensor on channel " + i, false);
+      }
+      dio.close();
+    }
+
+    for(int i = 0; i < 16; i++){
+      DigitalInput dio = new DigitalInput(i);
+      System.out.println("Sensor on Channel " + i + " value: " + dio.get());
+      dio.close();
+    }
+
+    // END DIO SENSOR TEST
+    
     // END RIO POST
 
     RobotBase.startRobot(Robot::new);
