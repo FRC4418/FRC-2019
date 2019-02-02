@@ -7,12 +7,17 @@
 
 package frc.robot.commands;
 
+import java.util.Arrays;
+
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class DriveDistanceCommand extends Command {
   public DriveDistanceCommand(double distance) {
     Robot.drivepidsubsystem.setSetpoint(distance);
+    Robot.driveSubsystem.resetEncoders();
   }
 
   // Called just before this Command runs the first time
@@ -31,17 +36,27 @@ public class DriveDistanceCommand extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Math.abs(Robot.drivepidsubsystem.getPosition() - Robot.drivepidsubsystem.getSetpoint()) < 0.05;
+    return Math.abs(Robot.drivepidsubsystem.getPosition() - Robot.drivepidsubsystem.getSetpoint()) < 5;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+
+    DriverStation.reportWarning("ended pid", false);
+
+    System.out.println(Arrays.toString(Robot.drivepidsubsystem.getOutputs()));
+
+    SmartDashboard.putNumberArray("outputs", Robot.drivepidsubsystem.getOutputs());
+
+    Robot.drivepidsubsystem.disable();
+    Robot.driveSubsystem.tankDrive(0, 0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }
