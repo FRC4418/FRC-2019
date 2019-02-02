@@ -7,50 +7,66 @@
 
 package frc.robot.commands;
 
-import java.util.Arrays;
-
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class DriveDistanceCommand extends Command {
-  public DriveDistanceCommand(double distance) {
-    Robot.drivepidsubsystem.setSetpoint(distance);
-    Robot.driveSubsystem.resetEncoders();
+
+  private boolean disable = false;
+
+  private double output;
+  private double k = 2, t = 0.1;
+  private double p = 2,//0.45 * k, 
+                 i = 0,//0.54 * k / t, 
+                 d = 0;
+  private double integral, prev_err, setpoint;
+
+  public DriveDistanceCommand(double setpoint) {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    this.setpoint=setpoint;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.driveSubsystem.resetEncoders(); 
-    Robot.driveSubsystem.resetGyro();
-    Robot.drivepidsubsystem.enable();
+  }
+
+  private void PID(){
+    double error = setpoint - Robot.driveSubsystem.getDistance();
+    integral += (error*.02);
+    double derivative = (error-prev_err) / .02;
+    output = p*error + i*integral + d*derivative;
+    output/=setpoint;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  protected void execute(){
+    if(!disable){
+      PID();
+      Robot.driveSubsystem.tankDrive(output, output);
+    }
+  }
+
+  public void disable(){
+    disable = true;
+  }
+
+  public void enable(){
+    disable = false;
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Math.abs(Robot.drivepidsubsystem.getPosition() - Robot.drivepidsubsystem.getSetpoint()) < 5;
+    return Math.abs(setpoint - Robot.driveSubsystem.getDistance()) < 5;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-
-    DriverStation.reportWarning("ended pid", false);
-
-    System.out.println(Arrays.toString(Robot.drivepidsubsystem.getOutputs()));
-
-    SmartDashboard.putNumberArray("outputs", Robot.drivepidsubsystem.getOutputs());
-
-    Robot.drivepidsubsystem.disable();
-    Robot.driveSubsystem.tankDrive(0, 0);
+    disable();
   }
 
   // Called when another command which requires one or more of the same
