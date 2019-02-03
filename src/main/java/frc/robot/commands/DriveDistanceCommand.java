@@ -30,7 +30,8 @@ public class DriveDistanceCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute(){
-    Robot.driveSubsystem.tankDrive(pid.getOutput(Robot.driveSubsystem.getDistance()), pid.getOutput(Robot.driveSubsystem.getDistance()));
+    double output = pid.getOutput(Robot.driveSubsystem.getDistance());
+    Robot.driveSubsystem.tankDrive(output, output);
   }
 
   // Make this return true when this Command no longer needs to run execute()
