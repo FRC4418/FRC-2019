@@ -8,65 +8,41 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.PIDController;
 import frc.robot.Robot;
 
 public class DriveDistanceCommand extends Command {
 
-  private boolean disable = false;
-
-  private double output;
-  private double k = 2, t = 0.1;
-  private double p = 2,//0.45 * k, 
-                 i = 0,//0.54 * k / t, 
-                 d = 0;
-  private double integral, prev_err, setpoint;
+  private PIDController pid;
 
   public DriveDistanceCommand(double setpoint) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    this.setpoint=setpoint;
+    pid = new PIDController(setpoint, 2,0,0);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-  }
-
-  private void PID(){
-    double error = setpoint - Robot.driveSubsystem.getDistance();
-    integral += (error*.02);
-    double derivative = (error-prev_err) / .02;
-    output = p*error + i*integral + d*derivative;
-    output/=setpoint;
+    pid.enable();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute(){
-    if(!disable){
-      PID();
-      Robot.driveSubsystem.tankDrive(output, output);
-    }
-  }
-
-  public void disable(){
-    disable = true;
-  }
-
-  public void enable(){
-    disable = false;
+    Robot.driveSubsystem.tankDrive(pid.getOutput(Robot.driveSubsystem.getDistance()), pid.getOutput(Robot.driveSubsystem.getDistance()));
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Math.abs(setpoint - Robot.driveSubsystem.getDistance()) < 5;
+    return pid.isFinished();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    disable();
+    pid.disable();
   }
 
   // Called when another command which requires one or more of the same
