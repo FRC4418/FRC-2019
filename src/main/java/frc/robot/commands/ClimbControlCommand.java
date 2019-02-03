@@ -8,19 +8,18 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.OI;
+import frc.robot.subsystems.ClimbSubsystem;
 
-public class TeleopDriveCommand extends Command {
-  public TeleopDriveCommand() {
+public class ClimbControlCommand extends Command {
+  public ClimbControlCommand() {
     // Use requires() here to declare subsystem dependencies
-    super("TeleopDrive");
+    super ("ClimbControl");
     // eg. requires(chassis);
-    requires(Robot.driveSubsystem);
+    requires(Robot.climbsubsystem);
   }
-  
- 
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
@@ -29,13 +28,8 @@ public class TeleopDriveCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    SmartDashboard.putNumber("Enocder Value: ", Robot.driveSubsystem.getDistance());
-    SmartDashboard.putNumber("left enc: ", Robot.driveSubsystem.getLeftDriveEncoder());
-    SmartDashboard.putNumber("right enc: ", Robot.driveSubsystem.getRightDriveEncoder());
-    SmartDashboard.putNumber("climb enc: ", Robot.climbsubsystem.getFrontEncoderDistanceValue());
-
-    Robot.driveSubsystem.tankDrive(OI.getLeftDriverJoystick().getRawAxis(1), OI.getRightDriverJoystick().getRawAxis(1));
+    Robot.climbsubsystem.setClimbLegsBack(OI.CHANGETHISMETHODNAMEgetRightTriggerAxis());
+    Robot.climbsubsystem.setClimbLegsFront(-OI.CHANGETHISMETHODNAMEgetLeftTriggerAxis());
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -47,7 +41,8 @@ public class TeleopDriveCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveSubsystem.stopDrive();
+    Robot.climbsubsystem.setClimbLegsFront(0.0);
+    Robot.climbsubsystem.setClimbLegsBack(0.0);
   }
 
   // Called when another command which requires one or more of the same

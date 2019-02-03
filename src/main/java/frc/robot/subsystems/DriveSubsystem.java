@@ -92,6 +92,13 @@ public class DriveSubsystem extends Subsystem {
     }
   }
 
+  public void teleopTankDrive(double leftValue, double rightValue){
+    //function is cubic divided by 100 thousand. Math can be tweaked to tune handling, but it is pretty good now
+    double leftOutput = (Math.pow(leftValue, 3)/100000);
+    double rightOutput = (Math.pow(rightValue, 3)/100000);
+    tankDrive(leftOutput, rightOutput);
+  }
+
   //read left motor
   public double getLeftDriveValue(){
     return leftDriveMotor1.getMotorOutputPercent();

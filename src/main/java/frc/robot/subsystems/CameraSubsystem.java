@@ -7,45 +7,27 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.RobotMap;
+import frc.robot.commands.CameraCommand;
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.IterativeRobot;
+
 /**
  * Add your docs here.
  */
-public class HatchSubsystem extends Subsystem {
+public class CameraSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-private TalonSRX hatchArmJointMotor;
-private Encoder hatchArmJointEncoder;
-
-public HatchSubsystem() {
-
-  hatchArmJointMotor = new TalonSRX(RobotMap.hatchArmJointMotorID);
-  hatchArmJointEncoder = new Encoder(RobotMap.hatchArmJointEncoderChannelAID, RobotMap.hatchArmJointEncoderChannelBID);
-  
-}
-
-public void setHatchMotorValue(double motorValue){
-  hatchArmJointMotor.set(ControlMode.PercentOutput, motorValue);
-}
-
-public void getHatchEncoderValue(){
-  hatchArmJointEncoder.getDistance();
-}
-
-public void resetHatchEncoderValue(){
-  hatchArmJointEncoder.reset();
-}
-
-  
 
   @Override
   public void initDefaultCommand() {
+    
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new CameraCommand());
+  }
+
+  public void startCameraServer(){
+    CameraServer.getInstance().startAutomaticCapture();
   }
 }

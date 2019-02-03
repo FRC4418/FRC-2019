@@ -10,7 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-
+import frc.robot.commands.ClimbControlCommand;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.*;
 
@@ -38,6 +38,11 @@ public class ClimbSubsystem extends Subsystem {
     setClimbLegsFront(0);
     resetBothClimbEncoders();
   }
+  
+  @Override
+  public void initDefaultCommand() {
+   setDefaultCommand(new ClimbControlCommand());
+}
 
   // The following methods are getters.
   public double getFrontEncoderDistanceValue() {
@@ -72,9 +77,4 @@ public class ClimbSubsystem extends Subsystem {
     backClimbMotor.set(ControlMode.PercentOutput, motorValue);
   }
 
-  @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-  }
 }

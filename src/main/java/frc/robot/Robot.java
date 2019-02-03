@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutonomousCommandGroup;
 import frc.robot.subsystems.*;
+import frc.robot.OI;
 
 
 /**
@@ -25,11 +26,13 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
    // Subsystem instantiation
    // Creates Hatch Subsystem
-   public static HatchSubsystem hatchSubsystem = new HatchSubsystem();
+  public static HatchArmSubsystem hatchArmSubsystem = new HatchArmSubsystem();
    // Creates Climb Subsystem
-   public static ClimbSubsystem climbsubsystem = new ClimbSubsystem();
-   // Creates Drive Subsystem
-   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
+  public static ClimbSubsystem climbsubsystem = new ClimbSubsystem();
+  // Creates Drive Subsystem 
+  public static DriveSubsystem driveSubsystem = new DriveSubsystem();
+  // Creates Camera Subsystem
+  public static CameraSubsystem cameraSubsystem = new CameraSubsystem();
 
   public static AutonomousCommandGroup autoGroup = new AutonomousCommandGroup();
    

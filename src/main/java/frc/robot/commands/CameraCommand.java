@@ -8,34 +8,24 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.OI;
 
-public class TeleopDriveCommand extends Command {
-  public TeleopDriveCommand() {
+public class CameraCommand extends Command {
+  public CameraCommand() {
     // Use requires() here to declare subsystem dependencies
-    super("TeleopDrive");
     // eg. requires(chassis);
-    requires(Robot.driveSubsystem);
+    requires(Robot.cameraSubsystem);
   }
-  
- 
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.cameraSubsystem.startCameraServer();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    SmartDashboard.putNumber("Enocder Value: ", Robot.driveSubsystem.getDistance());
-    SmartDashboard.putNumber("left enc: ", Robot.driveSubsystem.getLeftDriveEncoder());
-    SmartDashboard.putNumber("right enc: ", Robot.driveSubsystem.getRightDriveEncoder());
-    SmartDashboard.putNumber("climb enc: ", Robot.climbsubsystem.getFrontEncoderDistanceValue());
-
-    Robot.driveSubsystem.tankDrive(OI.getLeftDriverJoystick().getRawAxis(1), OI.getRightDriverJoystick().getRawAxis(1));
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -47,13 +37,11 @@ public class TeleopDriveCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveSubsystem.stopDrive();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }
