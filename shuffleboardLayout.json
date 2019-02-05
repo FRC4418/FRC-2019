@@ -1,0 +1,364 @@
+{
+  "tabPane": [
+    {
+      "title": "SmartDashboard",
+      "autoPopulate": true,
+      "autoPopulatePrefix": "SmartDashboard/",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {
+          "7,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drive Front Distance",
+              "_title": "Front Dist"
+            }
+          },
+          "0,2": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Graph",
+              "_source0": "network_table:///SmartDashboard/Drive Accel X",
+              "_title": "Drive Accel X",
+              "Graph/Visible time": 30.0,
+              "Visible data/SmartDashboard/Drive Accel X": true
+            }
+          },
+          "2,2": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Graph",
+              "_source0": "network_table:///SmartDashboard/Drive Accel Y",
+              "_title": "Drive Accel Y",
+              "Graph/Visible time": 30.0,
+              "Visible data/SmartDashboard/Drive Accel Y": true
+            }
+          },
+          "0,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drive Right Drive Value",
+              "_title": "Drive Right Drive Value"
+            }
+          },
+          "4,2": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Graph",
+              "_source0": "network_table:///SmartDashboard/Drive Accel Z",
+              "_title": "Drive Accel Z",
+              "Graph/Visible time": 30.0,
+              "Visible data/SmartDashboard/Drive Accel Z": true
+            }
+          },
+          "4,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climb Front Encoder",
+              "_title": "Climb Front Encoder"
+            }
+          },
+          "4,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climb Back Encoder",
+              "_title": "Climb Back Encoder"
+            }
+          },
+          "0,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drive Right Encoder",
+              "_title": "Drive Right Encoder"
+            }
+          },
+          "2,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drive Left Encoder",
+              "_title": "Drive Left Encoder"
+            }
+          },
+          "7,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Drive Front",
+              "_title": "Drive Front",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "6,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drive Back Distance",
+              "_title": "Back Dist"
+            }
+          },
+          "2,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drive Left Drive Value",
+              "_title": "Drive Left Drive Value"
+            }
+          },
+          "6,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Hatch Encoder",
+              "_title": "Hatch Encoder"
+            }
+          },
+          "6,2": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Gyro",
+              "_source0": "network_table:///LiveWindow/Ungrouped/AnalogGyro[0]",
+              "_title": "Drive Gyro",
+              "Visuals/Major tick spacing": 45.0,
+              "Visuals/Starting angle": 180.0,
+              "Visuals/Show tick mark ring": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "LiveWindow",
+      "autoPopulate": true,
+      "autoPopulatePrefix": "LiveWindow/",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {
+          "2,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_source0": "network_table:///LiveWindow/HatchSubsystem",
+              "_title": "HatchSubsystem",
+              "Layout/Label position": "BOTTOM",
+              "_children": []
+            }
+          },
+          "4,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_source0": "network_table:///LiveWindow/DriveSubsystem",
+              "_title": "DriveSubsystem",
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Gyro",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/AnalogGyro[0]",
+                  "_title": "Drive Gyro Value",
+                  "Visuals/Major tick spacing": 45.0,
+                  "Visuals/Starting angle": 180.0,
+                  "Visuals/Show tick mark ring": true
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Ultrasonic[13]/Value",
+                  "_title": "Drive Front Distance"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Ultrasonic[11]/Value",
+                  "_title": "Drive Back Distance"
+                },
+                {
+                  "_type": "3-Axis Accelerometer",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/BuiltInAccel[0]",
+                  "_title": "Drive Accelerometer",
+                  "Accelerometer/Range": "k16G",
+                  "Visuals/Show value": true,
+                  "Visuals/Precision": 2,
+                  "Visuals/Show tick marks": false
+                }
+              ]
+            }
+          },
+          "6,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_source0": "network_table:///LiveWindow/ClimbSubsystem",
+              "_title": "ClimbSubsystem",
+              "Layout/Label position": "BOTTOM",
+              "_children": []
+            }
+          },
+          "0,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "List Layout",
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Subsystem Layout",
+                  "_title": "Subsystem Layout",
+                  "Layout/Label position": "BOTTOM",
+                  "_children": [
+                    {
+                      "_type": "Subsystem Layout",
+                      "_source0": "network_table:///LiveWindow/Ungrouped",
+                      "_title": "Ungrouped",
+                      "Layout/Label position": "BOTTOM",
+                      "_children": [
+                        {
+                          "_type": "Encoder",
+                          "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[1]",
+                          "_title": "Encoder[1]"
+                        },
+                        {
+                          "_type": "Encoder",
+                          "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[2]",
+                          "_title": "Encoder[2]"
+                        },
+                        {
+                          "_type": "Encoder",
+                          "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[4]",
+                          "_title": "Encoder[4]"
+                        },
+                        {
+                          "_type": "Encoder",
+                          "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[3]",
+                          "_title": "Encoder[3]"
+                        },
+                        {
+                          "_type": "Encoder",
+                          "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[0]",
+                          "_title": "Encoder[0]"
+                        },
+                        {
+                          "_type": "3-Axis Accelerometer",
+                          "_source0": "network_table:///LiveWindow/Ungrouped/BuiltInAccel[0]",
+                          "_title": "BuiltInAccel[0]",
+                          "Accelerometer/Range": "k16G",
+                          "Visuals/Show value": true,
+                          "Visuals/Precision": 2,
+                          "Visuals/Show tick marks": false
+                        },
+                        {
+                          "_type": "Text View",
+                          "_source0": "network_table:///LiveWindow/Ungrouped/Ultrasonic[11]/Value",
+                          "_title": "Ultrasonic[11]/Value"
+                        },
+                        {
+                          "_type": "Text View",
+                          "_source0": "network_table:///LiveWindow/Ungrouped/Ultrasonic[13]/Value",
+                          "_title": "Ultrasonic[13]/Value"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "All Data",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 130.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {}
+      }
+    },
+    {
+      "title": "Driver Data",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 130.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {}
+      }
+    }
+  ],
+  "windowGeometry": {
+    "x": -7.333333492279053,
+    "y": -7.333333492279053,
+    "width": 1294.6666259765625,
+    "height": 694.6666870117188
+  }
+}
