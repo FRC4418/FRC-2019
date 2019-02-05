@@ -7,9 +7,7 @@ public class PIDController{
     private double k, t;
     private double p,i,d;
     private double integral, prev_err, setpoint;
-  
-    private Object outActuator;
-    private Object inSensor;
+
 
     public PIDController(double setpoint, double p, double i, double d, double k, double t) {
       this.setpoint=setpoint;

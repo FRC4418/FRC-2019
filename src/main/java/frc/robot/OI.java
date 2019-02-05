@@ -14,12 +14,14 @@ import frc.robot.commands.*;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 
   private static Joystick rightx3d = new Joystick(0);
   public static Joystick getRightDriverJoystick(){
     return rightx3d;
+  }
+  public static double getLeftDriverAxisRight(){
+    return leftx3d.getRawAxis(3);
   }
   public static JoystickButton swapFrontButton = new JoystickButton(rightx3d, 3);
 
@@ -27,10 +29,7 @@ public class OI {
   public static Joystick getLeftDriverJoystick(){
     return leftx3d;
   }
-  public static double CHANGETHISMETHODNAMEgetRightTriggerAxis() {
-    return rightx3d.getRawAxis(3);
-  }
-  public static double CHANGETHISMETHODNAMEgetLeftTriggerAxis() {
+  public static double getLeftDriverAxisLeft(){
     return leftx3d.getRawAxis(2);
   }
 
