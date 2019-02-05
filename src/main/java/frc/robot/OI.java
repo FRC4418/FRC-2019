@@ -21,19 +21,19 @@ public class OI {
   public static Joystick getRightDriverJoystick(){
     return rightx3d;
   }
-  public static JoystickButton swapFrontButton = new JoystickButton(rightx3d, 3);
+  public static JoystickButton swapFrontButton2 = new JoystickButton(rightx3d, 3);
 
   private static Joystick leftx3d = new Joystick(1);
   public static Joystick getLeftDriverJoystick(){
     return leftx3d;
   }
   public static double getRightTriggerAxis() {
-    return joystick0.getRawAxis(3);
+    return rightx3d.getRawAxis(3);
   }
   public static double getLeftTriggerAxis() {
-    return joystick0.getRawAxis(2);
+    return rightx3d.getRawAxis(2);
   }
-  public static JoystickButton swapFrontButton = new JoystickButton(joystick0, 1);
+  public static JoystickButton swapFrontButton = new JoystickButton(rightx3d, 1);
 
   public OI(){
     swapFrontButton.whenPressed(new TeleopSwitchCommand());
