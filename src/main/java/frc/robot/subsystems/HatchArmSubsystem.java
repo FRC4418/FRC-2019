@@ -21,16 +21,43 @@ public class HatchArmSubsystem extends Subsystem {
   // here. Call these from Commands.
 private TalonSRX hatchArmJointMotor;
 private Encoder hatchArmJointEncoder;
+private boolean isForward;
 
 public HatchArmSubsystem() {
 
   hatchArmJointMotor = new TalonSRX(RobotMap.hatchArmJointMotorID);
-  hatchArmJointEncoder = new Encoder(RobotMap.hatchArmJointEncoderChannelAID, RobotMap.hatchArmJointEncoderChannelBID);
+  hatchArmJointEncoder = new Encoder(2, 3/*RobotMap.hatchArmJointEncoderChannelAID, RobotMap.hatchArmJointEncoderChannelBID*/);
   
 }
 
 public void setHatchMotorValue(double motorValue){
   hatchArmJointMotor.set(ControlMode.PercentOutput, motorValue);
+}
+public boolean isIsForward(){
+  return isForward;
+}
+
+public void toggleIsForward(){
+  isForward = !isForward;
+}
+
+public void moveHatchArm(){
+  resetHatchEncoderValue();
+  if (isForward){
+    setHatchMotorValue(-50);
+  }
+  else{
+    setHatchMotorValue(50);
+  }
+}
+
+public boolean isDone(){
+  if(isForward){
+    return getHatchEncoderValue() < -60;
+  }
+  else{
+    return getHatchEncoderValue() > 60;
+  }
 }
 
 public double getHatchEncoderValue(){

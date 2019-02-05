@@ -30,7 +30,7 @@ public class ClimbSubsystem extends Subsystem {
   // Constructor.
 
   public ClimbSubsystem() {
-    frontClimbEncoder = new Encoder(RobotMap.frontClimbEncoderChannelAID, RobotMap.frontClimbEncoderChannelBID);
+    frontClimbEncoder = new Encoder(0, 1/*RobotMap.frontClimbEncoderChannelAID, RobotMap.frontClimbEncoderChannelBID*/);
     backClimbEncoder = new Encoder(RobotMap.backClimbEncoderChannelAID, RobotMap.backClimbEncoderChannelBID);
     frontClimbMotor = new TalonSRX(RobotMap.frontClimbMotorID);
     backClimbMotor = new TalonSRX(RobotMap.backClimbMotorID);
