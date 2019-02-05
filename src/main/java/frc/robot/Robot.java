@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.AutonomousCommandGroup;
 import frc.robot.subsystems.*;
 import frc.robot.OI;
 import frc.robot.commands.OutputAllDataCommand;
@@ -26,14 +27,14 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
    // Subsystem instantiation
    // Creates Hatch Subsystem
-  public static HatchArmSubsystem hatchSubsystem = new HatchArmSubsystem();
+  public static HatchArmSubsystem hatchArmSubsystem = new HatchArmSubsystem();
    // Creates Climb Subsystem
   public static ClimbSubsystem climbsubsystem = new ClimbSubsystem();
   // Creates Drive Subsystem 
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
   // Creates Camera Subsystem
   public static CameraSubsystem cameraSubsystem = new CameraSubsystem();
-
+  public static AutonomousCommandGroup autoGroup = new AutonomousCommandGroup();
   // Create data command
   public static OutputAllDataCommand dataComm = new OutputAllDataCommand();
 
@@ -92,6 +93,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    autoGroup.start();
     if(!dataComm.isRunning()){
       dataComm.start();
     }

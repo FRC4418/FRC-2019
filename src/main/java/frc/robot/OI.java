@@ -27,13 +27,12 @@ public class OI {
   public static Joystick getLeftDriverJoystick(){
     return leftx3d;
   }
-  public static double getRightTriggerAxis() {
+  public static double CHANGETHISMETHODNAMEgetRightTriggerAxis() {
     return rightx3d.getRawAxis(3);
   }
-  public static double getLeftTriggerAxis() {
-    return rightx3d.getRawAxis(2);
+  public static double CHANGETHISMETHODNAMEgetLeftTriggerAxis() {
+    return leftx3d.getRawAxis(2);
   }
-  public static JoystickButton swapFrontButton = new JoystickButton(rightx3d, 1);
 
   public OI(){
     swapFrontButton.whenPressed(new TeleopSwitchCommand());
