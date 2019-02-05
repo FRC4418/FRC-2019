@@ -21,7 +21,7 @@ public class OI {
   public static Joystick getRightDriverJoystick(){
     return rightx3d;
   }
-  public static JoystickButton swapFrontButton2 = new JoystickButton(rightx3d, 3);
+  public static JoystickButton swapFrontButton = new JoystickButton(rightx3d, 3);
 
   private static Joystick leftx3d = new Joystick(1);
   public static Joystick getLeftDriverJoystick(){
