@@ -1,79 +1,87 @@
 package frc.robot;
 
 public class PIDController{
-    private boolean disable = false;
+  private boolean disable = false;
 
-    private double output;
-    private double k, t;
-    private double p,i,d;
-    private double integral, prev_err, setpoint;
-  
-    private Object outActuator;
-    private Object inSensor;
+  private double output;
+  private double k, t;
+  private double p,i,d;
+  private double integral, prev_err, setpoint;
 
-    public PIDController(double setpoint, double p, double i, double d, double k, double t) {
+  private Object outActuator;
+  private Object inSensor;
+
+  public PIDController(double setpoint, double p, double i, double d, double k, double t) {
       this.setpoint=setpoint;
       this.p = p;
       this.i = i;
       this.d = d;
       this.k = k;
       this.t = t;
-    }
-  
-    public PIDController(double setpoint, double p, double i, double d) {
+  }
+
+  public PIDController(double setpoint, double p, double i, double d) {
       this.setpoint=setpoint;
       this.p = p;
       this.i = i;
       this.d = d;
       k=0;
       t=0;
-    }
+  }
 
-    public PIDController(double setpoint, double k, double t, boolean useFullPID) {
+  public PIDController(double setpoint, double k, double t, boolean useFullPID) {
       this.setpoint=setpoint;
       this.k = k;
       this.t = t;
       if(useFullPID){
-        p=0.6*k;
-        i=1.2*k/t;
-        d=3*k*t/40;
+          p=0.6*k;
+          i=1.2*k/t;
+          d=3*k*t/40;
       }else{
-        p=0.45*k;
-        i=0.54*k/t;
+          p=0.45*k;
+          i=0.54*k/t;
       }
-    }
-    
-    public PIDController(double setpoint){
+  }
+
+  public PIDController(double setpoint){
       this.setpoint=setpoint;
       p=1;
       i=0;
       d=0;
       k=0;
       t=0;
-    }
+  }
 
-    public double getOutput(double sensorValue){
+  public double getOutput(double sensorValue){
       if(!disable){
-        double error = setpoint - Robot.driveSubsystem.getDistance();
-        integral += (error*.02);
-        double derivative = (error-prev_err) / .02;
-        output = p*error + i*integral + d*derivative;
-        output/=setpoint;
+          double error = setpoint - sensorValue;
+          integral += (error*.02);
+          double derivative = (error-prev_err) / .02;
+          output = p*error + i*integral + d*derivative;
+          double k = 71501/1875;
+          double v = -38.4048;
+          double voltage = 0;
+          if(output>0){
+              voltage = k*output + v;
+          }
+          if(output<0){
+              voltage = k*output - v;
+          }
+          return voltage/12;
       }else{
-        output=0;
+          return 0;
       }
-      return output;
-    }
+  }
 
-    public void disable(){
+  public void disable(){
       disable = true;
-    }
-  
-    public void enable(){
+  }
+
+  public void enable(){
       disable = false;
-    }
-  
-    public boolean isFinished() {
-      return Math.abs(setpoint - Robot.driveSubsystem.getDistance()) < 5;
-    }
+  }
+
+  public boolean isFinished(double sensorValue) {
+      return Math.abs(setpoint - sensorValue) < 1;
+  }
 }
