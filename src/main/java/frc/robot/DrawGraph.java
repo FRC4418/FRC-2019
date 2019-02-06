@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 public class DrawGraph extends JPanel {
-    private static final int MAX_SCORE = 2600;
+    private static final int MAX_SCORE = 200;
     private static final int PREF_W = 800;
     private static final int PREF_H = 650;
     private static final int BORDER_GAP = 30;
@@ -42,12 +42,11 @@ public class DrawGraph extends JPanel {
         g2.drawLine(BORDER_GAP, getHeight() - BORDER_GAP, BORDER_GAP, BORDER_GAP);
         g2.drawLine(BORDER_GAP, getHeight() - BORDER_GAP, getWidth() - BORDER_GAP, getHeight() - BORDER_GAP);
 
-
-        int x01 = BORDER_GAP;
+        int x10 = BORDER_GAP;
         int x11 = getWidth() - BORDER_GAP;
-        int y01 = getHeight() - (((4 + 1) * (getHeight() - BORDER_GAP * 2)) / Y_HATCH_CNT + BORDER_GAP);
-        int y11 = y01;
-        g2.drawLine(x01, y01, x11, y11);
+        int y10 = getHeight() - (((4 + 1) * (getHeight() - BORDER_GAP * 2)) / Y_HATCH_CNT + BORDER_GAP);
+        int y11 = y10;
+        g2.drawLine(x10, y10, x11, y11);
 
         // create hatch marks for y axis.
         for (int i = 0; i < Y_HATCH_CNT; i++) {

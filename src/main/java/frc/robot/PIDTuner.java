@@ -10,15 +10,21 @@ public class PIDTuner {
     public static void main(String[] args){
         ArrayList<Double> sensorValues = new ArrayList<Double>();
 
-        PIDController pid = new PIDController(1300, 800,0,0);
+        PIDController pid = new PIDController(100, 2, 0, 0);
         EncoderSim encoder = new EncoderSim(0);
 
         while(!pid.isFinished(encoder.getSensorValue())){
             double output = pid.getOutput(encoder.getSensorValue());
             sensorValues.add(encoder.getSensorValue());
-            encoder.move(output);
             System.out.println(encoder.getSensorValue());
+            encoder.move(output);
+            if(sensorValues.size()>20000){
+                break;
+            }
         }
+
+        sensorValues.add(encoder.getSensorValue());
+        System.out.println(encoder.getSensorValue());
 
         DrawGraph.createAndShowGui(sensorValues);
     }
@@ -52,5 +58,6 @@ class EncoderSim{
             velocity=(voltage+v)/k;
         }
         sensorValue+=velocity*0.02;
+        */
     }
 }
