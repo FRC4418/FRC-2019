@@ -34,8 +34,14 @@ public class OI {
     return leftx3d.getRawAxis(2);
   }
 
+
+  public static JoystickButton swapFrontButton = new JoystickButton(joystick0, 1);
+  public static JoystickButton moveHatchArmButton = new JoystickButton(joystick0, 3);
+
   public OI(){
     swapFrontButton.whenPressed(new TeleopSwitchCommand());
+    moveHatchArmButton.whenPressed(new HatchArmSwitchCommand());
+    
   }
 
   //// CREATING BUTTONS
