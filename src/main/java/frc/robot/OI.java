@@ -16,53 +16,36 @@ import frc.robot.commands.*;
  */
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
+  // Create joysticks
+  private static final Joystick X3D_LEFT = new Joystick(RobotMap.X3D_LEFT_JOYSTICK_ID),
+                                X3D_RIGHT = new Joystick(RobotMap.X3D_RIGHT_JOYSTICK_ID);
+  
+  // Get axis for specific functions
+  public static double getLeftTankDriveAxis() {
+    return X3D_LEFT.getRawAxis(RobotMap.LEFT_TANK_DRIVE_AXIS_ID);
+  }
+  public static double getRightTankDriveAxis() {
+    return X3D_RIGHT.getRawAxis(RobotMap.RIGHT_TANK_DRIVE_AXIS_ID);
+  }
 
-  private static Joystick rightx3d = new Joystick(0);
-  public static Joystick getRightDriverJoystick(){
-    return rightx3d;
+  public static double getForwardArcadeDriveAxis() {
+    return X3D_RIGHT.getRawAxis(RobotMap.FORWARD_ARCADE_DRIVE_AXIS_ID);
   }
-  public static JoystickButton swapFrontButton = new JoystickButton(rightx3d, 3);
+  public static double getAngleArcadeDriveAxis() {
+    return X3D_RIGHT.getRawAxis(RobotMap.ANGLE_ARCADE_DRIVE_AXIS_ID);
+  }
 
-  private static Joystick leftx3d = new Joystick(1);
-  public static Joystick getLeftDriverJoystick(){
-    return leftx3d;
+  public static double getFrontClimberAxis() {
+    return X3D_RIGHT.getRawAxis(RobotMap.FRONT_CLIMBER_AXIS_ID);
   }
-  public static double CHANGETHISMETHODNAMEgetRightTriggerAxis() {
-    return rightx3d.getRawAxis(3);
+  public static double getBackClimberAxis() {
+    return X3D_LEFT.getRawAxis(RobotMap.BACK_CLIMBER_AXIS_ID);
   }
-  public static double CHANGETHISMETHODNAMEgetLeftTriggerAxis() {
-    return leftx3d.getRawAxis(2);
-  }
+
+  // Create and assign default buttons
+  public static JoystickButton swapFrontButton = new JoystickButton(X3D_RIGHT, RobotMap.SWAP_DRIVE_DIRECTION_BUTTON_ID);
 
   public OI(){
     swapFrontButton.whenPressed(new TeleopSwitchCommand());
   }
-
-  //// CREATING BUTTONS
-  // One type of button is a joystick button which is any button on a
-  //// joystick.
-  // You create one by telling it which joystick it's on and which button
-  // number it is.
-  // Joystick stick = new Joystick(port);
-  // Button button = new JoystickButton(stick, buttonNumber);
-
-  // There are a few additional built in buttons you can use. Additionally,
-  // by subclassing Button you can create custom triggers and bind those to
-  // commands the same as any other Button.
-
-  //// TRIGGERING COMMANDS WITH BUTTONS
-  // Once you have a button, it's trivial to bind it to a button in one of
-  // three ways:
-
-  // Start the command when the button is pressed and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenPressed(new ExampleCommand());
-
-  // Run the command while the button is being held down and interrupt it once
-  // the button is released.
-  // button.whileHeld(new ExampleCommand());
-
-  // Start the command when the button is released and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenReleased(new ExampleCommand());
 }

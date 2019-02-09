@@ -29,13 +29,12 @@ public class TeleopDriveCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    SmartDashboard.putNumber("Enocder Value: ", Robot.driveSubsystem.getDistance());
-    SmartDashboard.putNumber("left enc: ", Robot.driveSubsystem.getLeftDriveEncoder());
-    SmartDashboard.putNumber("right enc: ", Robot.driveSubsystem.getRightDriveEncoder());
-    SmartDashboard.putNumber("climb enc: ", Robot.climbsubsystem.getFrontEncoderDistanceValue());
-
-    Robot.driveSubsystem.tankDrive(OI.getLeftDriverJoystick().getRawAxis(1), OI.getRightDriverJoystick().getRawAxis(1));
+    //Drive the robot in tank drive mode
+    if(Robot.driveSubsystem.isArcadeDrive()) {
+      Robot.driveSubsystem.arcadeDrive(OI.getForwardArcadeDriveAxis(), OI.getAngleArcadeDriveAxis());
+    } else {
+      Robot.driveSubsystem.tankDrive(OI.getLeftTankDriveAxis(), OI.getRightTankDriveAxis());
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
