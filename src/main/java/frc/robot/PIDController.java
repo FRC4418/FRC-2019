@@ -57,24 +57,45 @@ public class PIDController {
 
     public double getOutput(double sensorValue){
         if(!disable){
-            double error = setpoint - sensorValue;
-            integral += (error*.02);
-            iTerm = i * error;
-            if(iTerm > outMax){
-                iTerm = outMax;
-            }else if(iTerm < outMin){
-                iTerm = outMin;
+            if(setpoint < 0){
+                double error = setpoint - sensorValue;
+                integral += (error*.02);
+                iTerm = i * error;
+                if(iTerm > outMax){
+                    iTerm = outMax;
+                }else if(iTerm < outMin){
+                    iTerm = outMin;
+                }
+                double dInput = (sensorValue-lastInput) / 0.2;
+                output = p*error + iTerm - d*dInput;
+                lastInput = sensorValue;
+                output/=(setpoint);
+                if(output > outMax){
+                    output = outMax;
+                }else if(output < outMin){
+                    output = outMin;
+                }
+                return -output;
+            }else{
+                double error = setpoint - sensorValue;
+                integral += (error*.02);
+                iTerm = i * error;
+                if(iTerm > outMax){
+                    iTerm = outMax;
+                }else if(iTerm < outMin){
+                    iTerm = outMin;
+                }
+                double dInput = (sensorValue-lastInput) / 0.2;
+                output = p*error + iTerm - d*dInput;
+                lastInput = sensorValue;
+                output/=(setpoint);
+                if(output > outMax){
+                    output = outMax;
+                }else if(output < outMin){
+                    output = outMin;
+                }
+                return output;
             }
-            double dInput = (sensorValue-lastInput) / 0.2;
-            output = p*error + iTerm - d*dInput;
-            lastInput = sensorValue;
-            output/=(setpoint);
-            if(output > outMax){
-                output = outMax;
-            }else if(output < outMin){
-                output = outMin;
-            }
-            return output;
         }else{
             return 0;
         }

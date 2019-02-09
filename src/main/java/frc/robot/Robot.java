@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -38,10 +39,16 @@ public class Robot extends TimedRobot {
   // Create data command
   public static OutputAllDataCommand dataComm = new OutputAllDataCommand();
 
+
+  public static int initialRobotPosition;
+
   @Override
   public void robotInit() {
     m_oi = new OI();
     dataComm.start();
+
+    initialRobotPosition = DriverStation.getInstance().getLocation();
+
   }
 
   /**
