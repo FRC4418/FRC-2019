@@ -6,10 +6,8 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.OI;
 
 public class HatchManipulatorCommand extends Command {
   public HatchManipulatorCommand() {
@@ -27,7 +25,7 @@ public class HatchManipulatorCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatchManipulatorSubsystem.setHatchMotorValue(0.5);
+    Robot.hatchManipulatorSubsystem.setHatchMotorValue(-0.5);
     
   }
 
