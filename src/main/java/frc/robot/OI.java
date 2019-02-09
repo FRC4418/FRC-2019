@@ -22,7 +22,7 @@ public class OI {
     return rightx3d;
   }
   public static JoystickButton swapFrontButton = new JoystickButton(rightx3d, 3);
-
+  public static JoystickButton hatchManipulatorButton = new JoystickButton(rightx3d, 3);
   private static Joystick leftx3d = new Joystick(1);
   public static Joystick getLeftDriverJoystick(){
     return leftx3d;
@@ -36,6 +36,7 @@ public class OI {
 
   public OI(){
     swapFrontButton.whenPressed(new TeleopSwitchCommand());
+    hatchManipulatorButton.whenPressed(new HatchManipulatorCommand());
   }
 
   //// CREATING BUTTONS

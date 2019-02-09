@@ -16,7 +16,7 @@ public class HatchManipulatorCommand extends Command {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     super("HatchManipulator");
-    requires(Robot.hatchManipulator);
+    requires(Robot.hatchManipulatorSubsystem);
   }
 
   // Called just before this Command runs the first time
@@ -27,6 +27,8 @@ public class HatchManipulatorCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.hatchManipulatorSubsystem.setHatchMotorValue(OI.CHANGETHISMETHODNAMEgetRightTriggerAxis());
+    Robot.hatchManipulatorSubsystem.setHatchMotorValue(-OI.CHANGETHISMETHODNAMEgetLeftTriggerAxis());
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -38,11 +40,14 @@ public class HatchManipulatorCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.hatchManipulatorSubsystem.setHatchMotorValue(0);
+    Robot.hatchManipulatorSubsystem.setHatchMotorValue(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }
