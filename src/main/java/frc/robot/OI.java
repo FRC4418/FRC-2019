@@ -27,11 +27,11 @@ public class OI {
   public static Joystick getLeftDriverJoystick(){
     return leftx3d;
   }
-  public static double CHANGETHISMETHODNAMEgetRightTriggerAxis() {
+  public static double getRightSliderAxis() {
     return rightx3d.getRawAxis(3);
   }
-  public static double CHANGETHISMETHODNAMEgetLeftTriggerAxis() {
-    return leftx3d.getRawAxis(2);
+  public static double getLeftSliderAxis() {
+    return leftx3d.getRawAxis(3);
   }
 
   public OI(){
