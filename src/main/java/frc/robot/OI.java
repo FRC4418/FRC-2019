@@ -36,7 +36,8 @@ public class OI {
 
   public OI(){
     swapFrontButton.whenPressed(new TeleopSwitchCommand());
-    hatchManipulatorButton.whenPressed(new HatchManipulatorCommand());
+    hatchManipulatorButton.whileHeld(new HatchManipulatorCommand());
+    hatchManipulatorButton.whenReleased(new HatchManipulatorCommand());
   }
 
   //// CREATING BUTTONS
