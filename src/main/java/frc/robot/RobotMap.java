@@ -38,6 +38,9 @@ public class RobotMap {
                     hatchArmJointEncoderChannelBID = 1;
   public static double climbEncoderDistancePerPulse = 360d / 256d;
 
+// Hatch Manipulator Subsystem IDs
+public static int hatchManipulatorMotorID = 41;
+
   // Drive Subsystem IDs
   public static int leftDriveMotor1ID = 10, 
                     leftDriveMotor2ID = 11, 
