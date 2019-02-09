@@ -9,12 +9,24 @@ package frc.robot.commands;
 
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.DriverStation;
 
 public class AutonomousCommandGroup extends CommandGroup {
   /**
    * Add your docs here.
    */
+  public static int station;
+  
   public AutonomousCommandGroup() {
-    addSequential(new DriveDistanceCommand(100));
+    station = DriverStation.getInstance().getLocation();
+    if(station == 1) {
+      addSequential(new DriveDistanceCommand(100));
+    }
+    else if (station == 2) {
+      addSequential(new DriveDistanceCommand(100));
+    }
+    else if (station == 3) {
+      addSequential(new DriveDistanceCommand(100));
+    }
   }
 }
