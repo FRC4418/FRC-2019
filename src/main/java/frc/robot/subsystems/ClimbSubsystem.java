@@ -30,12 +30,12 @@ public class ClimbSubsystem extends Subsystem {
   // Constructor.
 
   public ClimbSubsystem() {
-    frontClimbEncoder = new Encoder(RobotMap.frontClimbEncoderChannelAID, RobotMap.frontClimbEncoderChannelBID);
-    backClimbEncoder = new Encoder(RobotMap.backClimbEncoderChannelAID, RobotMap.backClimbEncoderChannelBID);
-    frontClimbMotor = new TalonSRX(RobotMap.frontClimbMotorID);
-    backClimbMotor = new TalonSRX(RobotMap.backClimbMotorID);
-    frontClimbEncoder.setDistancePerPulse(RobotMap.climbEncoderDistancePerPulse);
-    backClimbEncoder.setDistancePerPulse(RobotMap.climbEncoderDistancePerPulse);
+    frontClimbEncoder = new Encoder(RobotMap.CLIMBER_FRONT_ENCODER_CHANNELA_ID, RobotMap.CLIMBER_FRONT_ENCODER_CHANNELB_ID);
+    backClimbEncoder = new Encoder(RobotMap.CLIMBER_BACK_ENCODER_CHANNELA_ID, RobotMap.CLIMBER_BACK_ENCODER_CHANNELB_ID);
+    frontClimbMotor = new TalonSRX(RobotMap.CLIMBER_FRONT_TALON_SRX_ID);
+    backClimbMotor = new TalonSRX(RobotMap.CLIMBER_BACK_TALON_SRX_ID);
+    frontClimbEncoder.setDistancePerPulse(RobotMap.CLIMBER_ENCODER_DISTANCE_PER_PULSE);
+    backClimbEncoder.setDistancePerPulse(RobotMap.CLIMBER_ENCODER_DISTANCE_PER_PULSE);
     setClimbLegsBack(0);
     setClimbLegsFront(0);
     resetBothClimbEncoders();

@@ -23,10 +23,9 @@ private TalonSRX hatchArmJointMotor;
 private Encoder hatchArmJointEncoder;
 
 public HatchArmSubsystem() {
-
-  hatchArmJointMotor = new TalonSRX(RobotMap.hatchArmJointMotorID);
-  hatchArmJointEncoder = new Encoder(RobotMap.hatchArmJointEncoderChannelAID, RobotMap.hatchArmJointEncoderChannelBID);
-  
+  hatchArmJointMotor = new TalonSRX(RobotMap.HATCHE_ARM_JOINT_TALON_SRX_ID);
+  hatchArmJointEncoder = new Encoder(RobotMap.HATCH_ARM_JOINT_ENCODER_CHANNELA_ID, RobotMap.HATCH_ARM_JOINT_ENCODER_CHANNELB_ID);
+  hatchArmJointEncoder.setDistancePerPulse(RobotMap.HATCH_ARM_ENCODER_DISTANCE_PER_PULSE);
 }
 
 public void setHatchMotorValue(double motorValue){
