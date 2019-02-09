@@ -33,7 +33,7 @@ public class Robot extends TimedRobot {
   // Creates Drive Subsystem 
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
   // Creates Camera Subsystem
-  public static CameraSubsystem cameraSubsystem = new CameraSubsystem();
+  //public static CameraSubsystem cameraSubsystem = new CameraSubsystem();
   public static AutonomousCommandGroup autoGroup = new AutonomousCommandGroup();
   // Create data command
   public static OutputAllDataCommand dataComm = new OutputAllDataCommand();

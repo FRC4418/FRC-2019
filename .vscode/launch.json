@@ -9,7 +9,8 @@
       "name": "CodeLens (Launch) - PIDTuner",
       "request": "launch",
       "mainClass": "frc.robot.PIDTuner",
-      "projectName": "FRC-2019"
+      "projectName": "FRC-2019",
+      "console": "externalTerminal"
     },
     {
       "type": "wpilib",

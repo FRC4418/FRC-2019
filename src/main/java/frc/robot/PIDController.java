@@ -1,6 +1,8 @@
 package frc.robot;
 
-public class PIDController{
+import java.util.ArrayList;
+
+public class PIDController {
 
     private boolean disable = false;
 
@@ -8,9 +10,9 @@ public class PIDController{
     private double k, t;
     private double p,i,d;
     private double integral, prev_err, setpoint;
-
-    private Object outActuator;
-    private Object inSensor;
+    private double errSum, lastInput, iTerm;
+    private double outMax = 1, outMin = -1;
+    private ArrayList<Boolean> historicalFinishData = new ArrayList<Boolean>();
 
     public PIDController(double setpoint, double p, double i, double d, double k, double t) {
         this.setpoint=setpoint;
@@ -57,19 +59,22 @@ public class PIDController{
         if(!disable){
             double error = setpoint - sensorValue;
             integral += (error*.02);
-            double derivative = (error-prev_err) / .02;
-            output = p*error + i*integral + d*derivative;
-            output/=setpoint;
-            double k = 71501/1875;
-            double v = -38.4048;
-            double voltage = 0;
-            if(output>0){
-                voltage = k*output + v;
+            iTerm = i * error;
+            if(iTerm > outMax){
+                iTerm = outMax;
+            }else if(iTerm < outMin){
+                iTerm = outMin;
             }
-            if(output<0){
-                voltage = k*output - v;
+            double dInput = (sensorValue-lastInput) / 0.2;
+            output = p*error + iTerm - d*dInput;
+            lastInput = sensorValue;
+            output/=(setpoint);
+            if(output > outMax){
+                output = outMax;
+            }else if(output < outMin){
+                output = outMin;
             }
-            return voltage/12;
+            return output;
         }else{
             return 0;
         }
@@ -84,6 +89,15 @@ public class PIDController{
     }
 
     public boolean isFinished(double sensorValue) {
-        return Math.abs(setpoint - sensorValue) < 0.01;
+        return Math.abs(setpoint - sensorValue) < 2.5;
+        /*
+        if(Math.abs(setpoint - sensorValue) < 5){
+            historicalFinishData.add(true);
+        }
+        if(historicalFinishData.size()>=3){
+            return true;
+        }
+        return false;
+        */
     }
 }

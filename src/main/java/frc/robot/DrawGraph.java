@@ -7,16 +7,17 @@ import java.util.List;
 import java.util.Random;
 
 public class DrawGraph extends JPanel {
-    private static final int MAX_SCORE = 200;
+    public static int MAX_SCORE = 200;
     private static final int PREF_W = 800;
     private static final int PREF_H = 650;
     private static final int BORDER_GAP = 30;
     private static final Color GRAPH_COLOR = Color.green;
     private static final Color GRAPH_POINT_COLOR = new Color(150, 50, 50, 180);
     private static final Stroke GRAPH_STROKE = new BasicStroke(3f);
-    private static final int GRAPH_POINT_WIDTH = 12;
+    private static final int GRAPH_POINT_WIDTH = 5;
     private static final int Y_HATCH_CNT = 10;
     private java.util.List<Double> scores;
+    private static JFrame frame = new JFrame("DrawGraph");
 
     public DrawGraph(java.util.List<Double> scores) {
         this.scores = scores;
@@ -97,12 +98,26 @@ public class DrawGraph extends JPanel {
     public static void createAndShowGui(ArrayList<Double> scores) {
 
         DrawGraph mainPanel = new DrawGraph(scores);
-
-        JFrame frame = new JFrame("DrawGraph");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(mainPanel);
+        JScrollPane scroll = new JScrollPane(mainPanel);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.getContentPane().add(scroll);
         frame.pack();
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
+    }
+
+    public static void updateGui(ArrayList<Double> scores){
+        frame.getContentPane().remove(0);
+        DrawGraph mainPanel = new DrawGraph(scores);
+        JScrollPane scroll = new JScrollPane(mainPanel);
+        frame.getContentPane().setVisible(false);
+        frame.getContentPane().add(scroll);
+        frame.getContentPane().setVisible(true);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    public static void clearContent(){
+        DrawGraph mainPanel = new DrawGraph(new ArrayList<Double>());
     }
 }
