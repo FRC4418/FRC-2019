@@ -3,6 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 
 
 public class FMSCall extends Command {
@@ -15,28 +16,28 @@ public class FMSCall extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        frc.robot.Robot.driverPos = DriverStation.getInstance().getLocation();
-    	frc.robot.Robot.gameData = DriverStation.getInstance().getGameSpecificMessage();
+        Robot.driverPos = DriverStation.getInstance().getLocation();
+    	Robot.gameData = DriverStation.getInstance().getGameSpecificMessage();
     	int retries = 100;
-        while (frc.robot.Robot.gameData.length() < 2 && retries > 0) {
-            DriverStation.reportError("Gamedata is " + frc.robot.Robot.gameData + " retrying " + retries, false);
+        while (Robot.gameData.length() < 2 && retries > 0) {
+            DriverStation.reportError("Gamedata is " + Robot.gameData + " retrying " + retries, false);
             try {
                 Thread.sleep(5);
-                frc.robot.Robot.gameData = DriverStation.getInstance().getGameSpecificMessage();
-                if (frc.robot.Robot.gameData == null) {
-                    frc.robot.Robot.gameData = "";
+                Robot.gameData = DriverStation.getInstance().getGameSpecificMessage();
+                if (Robot.gameData == null) {
+                    Robot.gameData = "";
                 }
             } catch (Exception e) {
             }
             retries--;
         }
-        DriverStation.reportError("gameData before parse: " + frc.robot.Robot.gameData, false);
+        DriverStation.reportError("gameData before parse: " + Robot.gameData, false);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        SmartDashboard.putString("Driver Station: ", Integer.toString(frc.robot.Robot.driverPos));
-    	SmartDashboard.putString("Game Message: ", frc.robot.Robot.gameData);
+        SmartDashboard.putString("Driver Station: ", Integer.toString(Robot.driverPos));
+    	SmartDashboard.putString("Game Message: ", Robot.gameData);
     }
 
     // Make this return true when this Command no longer needs to run execute()

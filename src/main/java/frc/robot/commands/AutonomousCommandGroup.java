@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import frc.robot.Robot;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -16,13 +17,14 @@ public class AutonomousCommandGroup extends CommandGroup {
    * Add your docs here.
    */
   public AutonomousCommandGroup() {
-    if(frc.robot.Robot.driverPos == 1) {
+    addSequential(new FMSCall());
+    if(Robot.driverPos == 1) {
       addSequential(new DriveDistanceCommand(100));
     }
-    else if (frc.robot.Robot.driverPos == 2) {
+    else if (Robot.driverPos == 2) {
       addSequential(new DriveDistanceCommand(100));
     }
-    else if (frc.robot.Robot.driverPos == 3) {
+    else if (Robot.driverPos == 3) {
       addSequential(new DriveDistanceCommand(100));
     }
   }
