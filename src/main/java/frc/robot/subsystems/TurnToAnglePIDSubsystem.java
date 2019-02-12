@@ -19,7 +19,9 @@ public class TurnToAnglePIDSubsystem extends PIDSubsystem {
    */
   public TurnToAnglePIDSubsystem(double setpoint) {
     // Intert a subsystem name and PID values here
-    super("DriveSubsystem", 1, 0, 1);
+    super("TurnToAngle", 2, 0, 0);
+    setAbsoluteTolerance(0.05);
+    getPIDController().setContinuous(false);
     // Use these to get going:
     // setSetpoint() - Sets where the PID controller should move the system
     // to
@@ -51,6 +53,6 @@ public class TurnToAnglePIDSubsystem extends PIDSubsystem {
   protected void usePIDOutput(double output) {
     // Use output to drive your system, like a motor
     // e.g. yourMotor.set(output);
-    Robot.driveSubsystem.tankDrive(output, -output);
+    Robot.driveSubsystem.tankDrive(output, output);
   }
 }
