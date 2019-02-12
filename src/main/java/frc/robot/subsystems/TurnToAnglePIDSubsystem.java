@@ -17,7 +17,7 @@ public class TurnToAnglePIDSubsystem extends PIDSubsystem {
   /**
    * Add your docs here.
    */
-  public TurnToAnglePIDSubsystem(double setpoint) {
+  public TurnToAnglePIDSubsystem() {
     // Intert a subsystem name and PID values here
     super("TurnToAngle", 2, 0, 0);
     setAbsoluteTolerance(0.05);
@@ -27,7 +27,7 @@ public class TurnToAnglePIDSubsystem extends PIDSubsystem {
     // to
     // enable() - Enables the PID controller.
 
-    setSetpoint(setpoint);
+    setSetpoint(90);
     Robot.driveSubsystem.resetGyro();
   }
 
