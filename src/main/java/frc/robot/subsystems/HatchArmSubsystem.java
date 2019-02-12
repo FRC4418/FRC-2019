@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.HatchArmCommand;
 /**
  * Add your docs here.
  */
@@ -27,6 +28,7 @@ public HatchArmSubsystem() {
   hatchArmJointEncoder = new Encoder(RobotMap.HATCH_ARM_JOINT_ENCODER_CHANNELA_ID, RobotMap.HATCH_ARM_JOINT_ENCODER_CHANNELB_ID);
   hatchArmJointEncoder.setDistancePerPulse(RobotMap.HATCH_ARM_ENCODER_DISTANCE_PER_PULSE);
 }
+
 
 public void setHatchMotorValue(double motorValue){
   hatchArmJointMotor.set(ControlMode.PercentOutput, motorValue);
@@ -44,6 +46,7 @@ public void resetHatchEncoderValue(){
 
   @Override
   public void initDefaultCommand() {
+    setDefaultCommand(new HatchArmCommand());
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }

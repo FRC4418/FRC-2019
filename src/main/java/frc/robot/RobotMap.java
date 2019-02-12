@@ -60,9 +60,9 @@ public class RobotMap {
                           ANGLE_ARCADE_DRIVE_AXIS_ID = X3D_AXIS_ROLL,
                           FRONT_CLIMBER_AXIS_ID = GAMEPAD_AXIS_LEFT_TRIGGER, // Climber axis
                           BACK_CLIMBER_AXIS_ID = GAMEPAD_AXIS_RIGHT_TRIGGER,
-                          SWAP_DRIVE_DIRECTION_BUTTON_ID = X3D_BUTTON_TRIGGER; // Functions assigned to buttons
+                          SWAP_DRIVE_DIRECTION_BUTTON_ID = X3D_BUTTON_TRIGGER, // Functions assigned to buttons
+                          HATCH_ARM_AXIS_ID = GAMEPAD_AXIS_RIGHT_X; //Hatch arm axis
                           
-
                           
   
   // Climb Subsystem IDs
@@ -75,14 +75,14 @@ public class RobotMap {
   public static final double CLIMBER_ENCODER_DISTANCE_PER_PULSE = 360d/256;
 
   // Hatch Subsystem IDs
-  public static final int HATCHE_ARM_JOINT_TALON_SRX_ID = 40, 
+  public static final int HATCHE_ARM_JOINT_TALON_SRX_ID = 11, 
                           HATCH_ARM_JOINT_ENCODER_CHANNELA_ID = 0, 
                           HATCH_ARM_JOINT_ENCODER_CHANNELB_ID = 1;
   public static final double HATCH_ARM_ENCODER_DISTANCE_PER_PULSE = 360d/256;
 
   // Drive Subsystem IDs
   public static final int DRIVE_LEFT_A_TALON_SRX_ID = 10, 
-                          DRIVE_LEFT_B_TALON_SRX_ID = 11, 
+                          //DRIVE_LEFT_B_TALON_SRX_ID = 11, 
                           DRIVE_RIGHT_A_TALON_SRX_ID = 20, 
                           DRIVE_RIGHT_B_TALON_SRX_ID = 21, 
                           DRIVE_LEFT_ENCODER_CHANNELA_ID = 6, 

@@ -46,7 +46,7 @@ public class DriveSubsystem extends Subsystem {
   //Instantiate the subsystem
   public DriveSubsystem() {
     leftDriveMotor1 = new WPI_TalonSRX(RobotMap.DRIVE_LEFT_A_TALON_SRX_ID);
-    leftDriveMotor2 = new WPI_TalonSRX(RobotMap.DRIVE_LEFT_B_TALON_SRX_ID);
+    //leftDriveMotor2 = new WPI_TalonSRX(RobotMap.DRIVE_LEFT_B_TALON_SRX_ID);
     rightDriveMotor1 = new WPI_TalonSRX(RobotMap.DRIVE_RIGHT_A_TALON_SRX_ID);
     rightDriveMotor2 = new WPI_TalonSRX(RobotMap.DRIVE_RIGHT_B_TALON_SRX_ID);
     robotDrive = new RobotDrive(leftDriveMotor1, leftDriveMotor2, rightDriveMotor1, rightDriveMotor2);
