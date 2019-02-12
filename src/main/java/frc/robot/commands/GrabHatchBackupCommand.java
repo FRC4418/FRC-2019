@@ -8,41 +8,36 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.subsystems.HatchArmSubsystem;
+import frc.robot.subsystems.*;
 
-public class HatchArmSwitchCommand extends Command {
-  public HatchArmSwitchCommand() {
+public class GrabHatchBackupCommand extends Command {
+  public GrabHatchBackupCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.hatchArmSubsystem);
+    requires(Robot.driveSubsystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatchArmSubsystem.moveHatchArm();
-    SmartDashboard.putNumber("Hatch Encoder", Robot.hatchArmSubsystem.getHatchEncoderValue());
+    Robot.driveSubsystem.tankDrive(-10, -10);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.hatchArmSubsystem.isDone();
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.hatchArmSubsystem.toggleIsForward();
-    Robot.hatchArmSubsystem.resetHatchEncoderValue();
   }
 
   // Called when another command which requires one or more of the same

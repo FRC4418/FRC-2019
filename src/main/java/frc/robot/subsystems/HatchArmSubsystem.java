@@ -51,6 +51,20 @@ public void moveHatchArm(){
   }
 }
 
+public void liftHatchArm(){
+  resetHatchEncoderValue();
+  if (isForward){
+    setHatchMotorValue(-20);
+  }
+  else{
+    setHatchMotorValue(20);
+  }
+}
+
+public void stopHatchArm(){
+  setHatchMotorValue(0);
+}
+
 public boolean isDone(){
   if(isForward){
     return getHatchEncoderValue() < -60;
