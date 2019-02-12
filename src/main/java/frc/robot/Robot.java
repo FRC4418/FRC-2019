@@ -38,6 +38,9 @@ public class Robot extends TimedRobot {
   // Create data command
   public static OutputAllDataCommand dataComm = new OutputAllDataCommand();
 
+  public static String gameData;
+  public static int driverPos;
+  
   @Override
   public void robotInit() {
     m_oi = new OI();

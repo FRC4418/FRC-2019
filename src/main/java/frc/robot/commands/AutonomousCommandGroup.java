@@ -15,17 +15,14 @@ public class AutonomousCommandGroup extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public static int station;
-  
   public AutonomousCommandGroup() {
-    station = DriverStation.getInstance().getLocation();
-    if(station == 1) {
+    if(frc.robot.Robot.driverPos == 1) {
       addSequential(new DriveDistanceCommand(100));
     }
-    else if (station == 2) {
+    else if (frc.robot.Robot.driverPos == 2) {
       addSequential(new DriveDistanceCommand(100));
     }
-    else if (station == 3) {
+    else if (frc.robot.Robot.driverPos == 3) {
       addSequential(new DriveDistanceCommand(100));
     }
   }
