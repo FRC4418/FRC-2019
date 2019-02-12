@@ -7,17 +7,20 @@
 
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import frc.robot.OI;
 import frc.robot.Robot;
 
 public class HatchManipulatorCommand extends Command {
+  boolean waiter = false;
+  long initialTime;
   public HatchManipulatorCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     super("HatchManipulator");
     requires(Robot.hatchManipulatorSubsystem);
   }
-
+ 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
@@ -29,14 +32,22 @@ public class HatchManipulatorCommand extends Command {
     if(OI.hatchManipulatorButton.get() == true) {
       Robot.hatchManipulatorSubsystem.setHatchMotorValue(-0.5);
     } else {
+      if (waiter == false) {
+        initialTime = System.currentTimeMillis() + 3000;
+      }
       Robot.hatchManipulatorSubsystem.setHatchMotorValue(0.5);
+      waiter = true;
     }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    if (waiter == true) {
+        return System.currentTimeMillis() > initialTime;
+    } else {
+      return false;
+    }
   }
 
   // Called once after isFinished returns true
