@@ -80,6 +80,9 @@ public class RobotMap {
                           HATCH_ARM_JOINT_ENCODER_CHANNELB_ID = 1;
   public static final double HATCH_ARM_ENCODER_DISTANCE_PER_PULSE = 360d/256;
 
+// Hatch Manipulator Subsystem IDs
+public static int hatchManipulatorMotorID = 41;
+
   // Drive Subsystem IDs
   public static final int DRIVE_LEFT_A_TALON_SRX_ID = 10, 
                           DRIVE_LEFT_B_TALON_SRX_ID = 11, 
