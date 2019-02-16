@@ -8,17 +8,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.PIDAngleControl;
+import frc.robot.PIDAngleController;
 import frc.robot.Robot;
 
 public class TurnToAngleCommand extends Command {
 
-  private PIDAngleControl pid;
+  private PIDAngleController pid;
 
   public TurnToAngleCommand(double setpoint) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    pid = new PIDAngleControl(setpoint, 1,0,0);
+    pid = new PIDAngleController(setpoint, 1,0,0);
   }
 
   // Called just before this Command runs the first time

@@ -7,7 +7,7 @@
 
 package frc.robot;
 
-public class PIDAngleControl{
+public class PIDAngleController{
     private boolean disable = false;
 
     private double output;
@@ -18,7 +18,7 @@ public class PIDAngleControl{
     private Object outActuator;
     private Object inSensor;
 
-    public PIDAngleControl(double setpoint, double p, double i, double d, double k, double t) {
+    public PIDAngleController(double setpoint, double p, double i, double d, double k, double t) {
       this.setpoint=setpoint;
       this.p = p;
       this.i = i;
@@ -27,7 +27,7 @@ public class PIDAngleControl{
       this.t = t;
     }
   
-    public PIDAngleControl(double setpoint, double p, double i, double d) {
+    public PIDAngleController(double setpoint, double p, double i, double d) {
       this.setpoint=setpoint;
       this.p = p;
       this.i = i;
@@ -36,7 +36,7 @@ public class PIDAngleControl{
       t=0;
     }
 
-    public PIDAngleControl(double setpoint, double k, double t, boolean useFullPID) {
+    public PIDAngleController(double setpoint, double k, double t, boolean useFullPID) {
       this.setpoint=setpoint;
       this.k = k;
       this.t = t;
@@ -50,7 +50,7 @@ public class PIDAngleControl{
       }
     }
     
-    public PIDAngleControl(double setpoint){
+    public PIDAngleController(double setpoint){
       this.setpoint=setpoint;
       p=1;
       i=0;
