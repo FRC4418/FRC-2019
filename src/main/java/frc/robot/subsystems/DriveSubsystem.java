@@ -53,7 +53,7 @@ public class DriveSubsystem extends Subsystem {
 
     leftDriveEncoder = new Encoder(RobotMap.DRIVE_LEFT_ENCODER_CHANNELA_ID, RobotMap.DRIVE_LEFT_ENCODER_CHANNELB_ID);
     rightDriveEncoder = new Encoder(RobotMap.DRIVE_RIGHT_ENCODER_CHANNELA_ID, RobotMap.DRIVE_RIGHT_ENCODER_CHANNELB_ID);
-    //driveGyro = new AnalogGyro(RobotMap.gyroID);
+    driveGyro = new AnalogGyro(RobotMap.DRIVE_GYRO_ID);
     driveAccel = new BuiltInAccelerometer();
     frontDriveDistance = new Ultrasonic(RobotMap.DRIVE_FRONT_DISTANCE_PING_ID, RobotMap.DRIVE_FRONT_DISTANCE_ECHO_ID);
     backDriveDistance = new Ultrasonic(RobotMap.DRIVE_BACK_DISTANCE_PING_ID, RobotMap.DRIVE_BACK_DISTANCE_ECHO_ID);
@@ -64,8 +64,8 @@ public class DriveSubsystem extends Subsystem {
     //htDriveMotor1.setInverted(true);
     //rightDriveMotor2.setInverted(true);
 
-    //driveGyro.initGyro();
-    //driveGyro.calibrate();
+    driveGyro.initGyro();
+    driveGyro.calibrate();
 
     leftDriveEncoder.setDistancePerPulse(RobotMap.DRIVE_ENCODER_DISTANCE_PER_PULSE);
     rightDriveEncoder.setDistancePerPulse(RobotMap.DRIVE_ENCODER_DISTANCE_PER_PULSE);
@@ -123,12 +123,12 @@ public class DriveSubsystem extends Subsystem {
 
   //read gyro angle
   public double getGyroValue(){
-    return 0.0;//driveGyro.getAngle();
+    return driveGyro.getAngle();
   }
 
   //reset gyro
   public void resetGyro(){
-    //driveGyro.calibrate();
+    driveGyro.calibrate();
   }
 
   //read left encoder

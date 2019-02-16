@@ -24,6 +24,7 @@ public class TurnToAngleCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.driveSubsystem.resetGyro();
     pid.enable();
   }
 
@@ -31,7 +32,7 @@ public class TurnToAngleCommand extends Command {
   @Override
   protected void execute(){
     double output = pid.getOutput(Robot.driveSubsystem.getGyroValue());
-    Robot.driveSubsystem.tankDrive(output, -output);
+    Robot.driveSubsystem.tankDrive(-output, output);
   }
 
   // Make this return true when this Command no longer needs to run execute()
