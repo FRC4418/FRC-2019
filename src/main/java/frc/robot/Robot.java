@@ -37,8 +37,7 @@ public class Robot extends TimedRobot {
   public static AutonomousCommandGroup autoGroup = new AutonomousCommandGroup();
   // Create data command
   public static OutputAllDataCommand dataComm = new OutputAllDataCommand();
-  // Create Angle PID subsystem
-  public static TurnToAnglePIDSubsystem anglePID = new TurnToAnglePIDSubsystem();
+  
   @Override
   public void robotInit() {
     m_oi = new OI();
