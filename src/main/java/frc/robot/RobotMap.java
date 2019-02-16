@@ -82,7 +82,7 @@ public class RobotMap {
 
   // Drive Subsystem IDs
   public static final int DRIVE_LEFT_A_TALON_SRX_ID = 10, 
-                          //DRIVE_LEFT_B_TALON_SRX_ID = 11, 
+                          DRIVE_LEFT_B_TALON_SRX_ID = 15, //11
                           DRIVE_RIGHT_A_TALON_SRX_ID = 20, 
                           DRIVE_RIGHT_B_TALON_SRX_ID = 21, 
                           DRIVE_LEFT_ENCODER_CHANNELA_ID = 6, 
