@@ -18,7 +18,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
   // Create joysticks
   private static final Joystick X3D_LEFT = new Joystick(RobotMap.X3D_LEFT_JOYSTICK_ID),
-                                X3D_RIGHT = new Joystick(RobotMap.X3D_RIGHT_JOYSTICK_ID);
+                                X3D_RIGHT = new Joystick(RobotMap.X3D_RIGHT_JOYSTICK_ID),
+                                GAMEPAD = new Joystick(RobotMap.GAMEPAD_JOYSTICK_ID);
   
   // Get axis for specific functions
   public static double getLeftTankDriveAxis() {
@@ -40,6 +41,10 @@ public class OI {
   }
   public static double getBackClimberAxis() {
     return X3D_LEFT.getRawAxis(RobotMap.BACK_CLIMBER_AXIS_ID);
+  }
+
+  public static double getHatchArmAxis() {
+    return GAMEPAD.getRawAxis(RobotMap.HATCH_ARM_AXIS_ID);
   }
 
   // Create and assign default buttons
