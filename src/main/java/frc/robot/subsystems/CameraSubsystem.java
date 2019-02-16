@@ -28,6 +28,6 @@ public class CameraSubsystem extends Subsystem {
   }
 
   public void startCameraServer(){
-    CameraServer.getInstance().startAutomaticCapture();
+    
   }
 }

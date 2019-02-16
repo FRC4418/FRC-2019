@@ -41,7 +41,7 @@ public class DriveSubsystem extends Subsystem {
   private Ultrasonic backDriveDistance;
 
   private boolean frontSide = true;
-  private boolean arcadeDrive = true;
+  private boolean arcadeDrive = false;
 
   //Instantiate the subsystem
   public DriveSubsystem() {
@@ -51,6 +51,7 @@ public class DriveSubsystem extends Subsystem {
     rightDriveMotor2 = new WPI_TalonSRX(RobotMap.DRIVE_RIGHT_B_TALON_SRX_ID);
     robotDrive = new RobotDrive(leftDriveMotor1, leftDriveMotor2, rightDriveMotor1, rightDriveMotor2);
 
+    robotDrive.setSafetyEnabled(false);
     leftDriveEncoder = new Encoder(RobotMap.DRIVE_LEFT_ENCODER_CHANNELA_ID, RobotMap.DRIVE_LEFT_ENCODER_CHANNELB_ID);
     rightDriveEncoder = new Encoder(RobotMap.DRIVE_RIGHT_ENCODER_CHANNELA_ID, RobotMap.DRIVE_RIGHT_ENCODER_CHANNELB_ID);
     driveGyro = new AnalogGyro(RobotMap.DRIVE_GYRO_ID);
@@ -105,6 +106,12 @@ public class DriveSubsystem extends Subsystem {
   }
 
   public void teleopTankDrive(double leftValue, double rightValue){
+    if(Math.abs(leftValue) < .05) {
+      leftValue=0;
+    }
+    if(Math.abs(rightValue) < .05) {
+      rightValue=0;
+    }
     //function is cubic divided by 100 thousand. Math can be tweaked to tune handling, but it is pretty good now
     double leftOutput = (Math.pow(leftValue, 3)/100000);
     double rightOutput = (Math.pow(rightValue, 3)/100000);

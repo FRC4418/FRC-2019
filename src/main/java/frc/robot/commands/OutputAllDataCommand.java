@@ -25,7 +25,7 @@ public class OutputAllDataCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    SmartDashboard.putNumber("Hatch Encoder", Robot.hatchArmSubsystem.getHatchEncoderValue());
+    //SmartDashboard.putNumber("Hatch Encoder", Robot.hatchArmSubsystem.getHatchEncoderValue());
     SmartDashboard.putNumber("Climb Back Encoder", Robot.climbsubsystem.getBackEncoderDistanceValue());
     SmartDashboard.putNumber("Climb Front Encoder", Robot.climbsubsystem.getFrontEncoderDistanceValue());
     SmartDashboard.putNumber("Drive Left Drive Value", Robot.driveSubsystem.getLeftDriveValue());

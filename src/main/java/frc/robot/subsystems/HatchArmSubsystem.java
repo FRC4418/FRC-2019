@@ -20,26 +20,26 @@ public class HatchArmSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 private TalonSRX hatchArmJointMotor;
-private Encoder hatchArmJointEncoder;
+//private Encoder hatchArmJointEncoder;
 
 public HatchArmSubsystem() {
   hatchArmJointMotor = new TalonSRX(RobotMap.HATCHE_ARM_JOINT_TALON_SRX_ID);
-  hatchArmJointEncoder = new Encoder(RobotMap.HATCH_ARM_JOINT_ENCODER_CHANNELA_ID, RobotMap.HATCH_ARM_JOINT_ENCODER_CHANNELB_ID);
-  hatchArmJointEncoder.setDistancePerPulse(RobotMap.HATCH_ARM_ENCODER_DISTANCE_PER_PULSE);
+  //hatchArmJointEncoder = new Encoder(RobotMap.HATCH_ARM_JOINT_ENCODER_CHANNELA_ID, RobotMap.HATCH_ARM_JOINT_ENCODER_CHANNELB_ID);
+  //hatchArmJointEncoder.setDistancePerPulse(RobotMap.HATCH_ARM_ENCODER_DISTANCE_PER_PULSE);
 }
 
 public void setHatchMotorValue(double motorValue){
   hatchArmJointMotor.set(ControlMode.PercentOutput, motorValue);
 }
 
-public double getHatchEncoderValue(){
+/*public double getHatchEncoderValue(){
   return hatchArmJointEncoder.getDistance();
 }
 
 public void resetHatchEncoderValue(){
   hatchArmJointEncoder.reset();
 }
-
+*/
   
 
   @Override
