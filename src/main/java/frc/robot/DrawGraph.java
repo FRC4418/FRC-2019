@@ -2,13 +2,16 @@ package frc.robot;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-public class DrawGraph extends JPanel {
+public class DrawGraph extends JPanel{
     public static int MAX_SCORE = 200;
-    private static final int PREF_W = 800;
+    private static final int PREF_W = 40000;
     private static final int PREF_H = 650;
     private static final int BORDER_GAP = 30;
     private static final Color GRAPH_COLOR = Color.green;
@@ -18,6 +21,7 @@ public class DrawGraph extends JPanel {
     private static final int Y_HATCH_CNT = 10;
     private java.util.List<Double> scores;
     private static JFrame frame = new JFrame("DrawGraph");
+    private static double scale = 1;
 
     public DrawGraph(java.util.List<Double> scores) {
         this.scores = scores;
@@ -27,12 +31,15 @@ public class DrawGraph extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+        g2.translate(getWidth()/2,getHeight()/2);
+        g2.scale(scale, scale);
+        g2.translate(-getWidth()/2,-getHeight()/2);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         double xScale = ((double) getWidth() - 2 * BORDER_GAP) / (scores.size() - 1);
         double yScale = ((double) getHeight() - 2 * BORDER_GAP) / (MAX_SCORE - 1);
 
-        java.util.List<Point> graphPoints = new ArrayList<Point>();
+        List<Point> graphPoints = new ArrayList<Point>();
         for (int i = 0; i < scores.size(); i++) {
             int x1 = (int) (i * xScale + BORDER_GAP);
             int y1 = (int) ((MAX_SCORE - scores.get(i)) * yScale + BORDER_GAP);
@@ -98,20 +105,60 @@ public class DrawGraph extends JPanel {
     public static void createAndShowGui(ArrayList<Double> scores) {
 
         DrawGraph mainPanel = new DrawGraph(scores);
-        JScrollPane scroll = new JScrollPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.getContentPane().add(scroll);
+        frame.getContentPane().add(mainPanel);
         frame.pack();
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
+        frame.addMouseWheelListener(new MouseWheelListener(){
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent m) {
+                if(m.getWheelRotation() > 0){
+                    scale+=0.05;
+                    frame.repaint();
+                }
+                if(m.getWheelRotation() < 0){
+                    scale-=0.05;
+                    frame.repaint();
+                }
+            }
+        });
+        frame.addKeyListener(new KeyListener(){
+            @Override
+            public void keyPressed(KeyEvent k) {
+                System.out.println(k.getKeyCode());
+                switch( k.getKeyCode() ) { 
+                    case 38:
+                        frame.getContentPane().getComponent(0).getGraphics().translate(0, 10);
+                        break;
+                    case 40:
+                        frame.getContentPane().getGraphics().translate(0,-10);
+                        break;
+                    case 37:
+                        frame.getContentPane().getGraphics().translate(-10,0);
+                        break;
+                    case 39:
+                        frame.getContentPane().getGraphics().translate(10, 0);
+                        break;
+                 }
+                
+            }
+            @Override
+            public void keyReleased(KeyEvent k) {
+                
+            }
+            @Override
+            public void keyTyped(KeyEvent k) {
+                
+            }
+        });
     }
 
     public static void updateGui(ArrayList<Double> scores){
         frame.getContentPane().remove(0);
         DrawGraph mainPanel = new DrawGraph(scores);
-        JScrollPane scroll = new JScrollPane(mainPanel);
         frame.getContentPane().setVisible(false);
-        frame.getContentPane().add(scroll);
+        frame.getContentPane().add(mainPanel);
         frame.getContentPane().setVisible(true);
         frame.revalidate();
         frame.repaint();
