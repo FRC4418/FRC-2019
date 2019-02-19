@@ -2,6 +2,7 @@ package frc.robot;
 
 public class PIDController{
     private boolean disable = false;
+    private boolean isNegative;
 
     private double output;
     private double k, t;
@@ -13,6 +14,7 @@ public class PIDController{
 
     public PIDController(double setpoint, double p, double i, double d, double k, double t) {
       this.setpoint=setpoint;
+      isNegative = Math.signum(setpoint) == -1;
       this.p = p;
       this.i = i;
       this.d = d;
@@ -62,7 +64,12 @@ public class PIDController{
       }else{
         output=0;
       }
-      return output;
+      if (isNegative){
+        return -output;
+      }
+      else{
+        return output;
+      }
     }
 
     public void disable(){
