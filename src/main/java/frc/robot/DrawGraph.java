@@ -102,24 +102,6 @@ public class DrawGraph extends JPanel{
         return new Dimension(PREF_W, PREF_H);
     }
 
-    @Override
-    protected void processKeyEvent(KeyEvent k) {
-        switch( k.getKeyCode() ) { 
-            case KeyEvent.VK_UP:
-                frame.setLocation(frame.getLocation().x, frame.getLocation().y-1);
-                break;
-            case KeyEvent.VK_DOWN:
-                frame.setLocation(frame.getLocation().x, frame.getLocation().y-1);
-                break;
-            case KeyEvent.VK_LEFT:
-                frame.setLocation(frame.getLocation().x, frame.getLocation().y-1);
-                break;
-            case KeyEvent.VK_RIGHT:
-                frame.setLocation(frame.getLocation().x, frame.getLocation().y-1);
-                break;
-         }
-    }
-
     public static void createAndShowGui(ArrayList<Double> scores) {
 
         DrawGraph mainPanel = new DrawGraph(scores);
@@ -139,6 +121,35 @@ public class DrawGraph extends JPanel{
                     scale-=0.05;
                     frame.repaint();
                 }
+                System.out.println("Scale: " + scale);
+            }
+        });
+        frame.addKeyListener(new KeyListener(){
+            @Override
+            public void keyPressed(KeyEvent k) {
+                switch( k.getKeyCode() ) { 
+                    case KeyEvent.VK_UP:
+                        mainPanel.setLocation(mainPanel.getLocation().x, mainPanel.getLocation().y-5);
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        mainPanel.setLocation(mainPanel.getLocation().x, mainPanel.getLocation().y+5);
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        mainPanel.setLocation(mainPanel.getLocation().x-5, mainPanel.getLocation().y);
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        mainPanel.setLocation(mainPanel.getLocation().x+5, mainPanel.getLocation().y);
+                        break;
+                 }
+                
+            }
+            @Override
+            public void keyReleased(KeyEvent k) {
+                
+            }
+            @Override
+            public void keyTyped(KeyEvent k) {
+                
             }
         });
     }
@@ -149,17 +160,53 @@ public class DrawGraph extends JPanel{
         frame.getContentPane().setVisible(false);
         frame.getContentPane().add(mainPanel);
         frame.getContentPane().setVisible(true);
+        frame.addMouseWheelListener(new MouseWheelListener(){
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent m) {
+                if(m.getWheelRotation() > 0){
+                    scale+=0.05;
+                    frame.repaint();
+                }
+                if(m.getWheelRotation() < 0){
+                    scale-=0.05;
+                    frame.repaint();
+                }
+                System.out.println("Scale: " + scale);
+            }
+        });
+        frame.addKeyListener(new KeyListener(){
+            @Override
+            public void keyPressed(KeyEvent k) {
+                switch( k.getKeyCode() ) { 
+                    case KeyEvent.VK_UP:
+                        mainPanel.setLocation(mainPanel.getLocation().x, mainPanel.getLocation().y-5);
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        mainPanel.setLocation(mainPanel.getLocation().x, mainPanel.getLocation().y+5);
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        mainPanel.setLocation(mainPanel.getLocation().x-5, mainPanel.getLocation().y);
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        mainPanel.setLocation(mainPanel.getLocation().x+5, mainPanel.getLocation().y);
+                        break;
+                 }
+                
+            }
+            @Override
+            public void keyReleased(KeyEvent k) {
+                
+            }
+            @Override
+            public void keyTyped(KeyEvent k) {
+                
+            }
+        });
         frame.revalidate();
         frame.repaint();
     }
 
     public static void clearContent(){
         DrawGraph mainPanel = new DrawGraph(new ArrayList<Double>());
-    }
-}
-
-class graphFrame extends javax.swing.JFrame{
-    public graphFrame(){
-
     }
 }
