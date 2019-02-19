@@ -11,6 +11,7 @@ import frc.robot.subsystems.*;
 import frc.robot.Robot;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.DriverStation;
 
 public class AutonomousCommandGroup extends CommandGroup {
   /**
@@ -18,7 +19,17 @@ public class AutonomousCommandGroup extends CommandGroup {
    */
   public AutonomousCommandGroup() {
     //addSequential(new DriveDistanceCommand(50));
-    addSequential(new TurnToAngleCommand(90));
+    //addSequential(new TurnToAngleCommand(90));
     //addSequential(new DriveDistanceCommand(50));
+    addSequential(new FMSCall());
+    if(Robot.driverPos == 1) {
+      addSequential(new DriveDistanceCommand(100));
+    }
+    else if (Robot.driverPos == 2) {
+      addSequential(new DriveDistanceCommand(100));
+    }
+    else if (Robot.driverPos == 3) {
+      addSequential(new DriveDistanceCommand(100));
+    }
   }
 }

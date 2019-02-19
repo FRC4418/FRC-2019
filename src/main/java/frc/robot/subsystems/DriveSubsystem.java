@@ -41,7 +41,7 @@ public class DriveSubsystem extends Subsystem {
   private Ultrasonic backDriveDistance;
 
   private boolean frontSide = true;
-  private boolean arcadeDrive = true;
+  private boolean arcadeDrive = false;
 
   //Instantiate the subsystem
   public DriveSubsystem() {
