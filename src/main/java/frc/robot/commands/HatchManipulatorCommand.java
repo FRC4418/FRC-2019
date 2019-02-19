@@ -6,20 +6,20 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Robot;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import frc.robot.OI;
+import frc.robot.Robot;
 
-public class TeleopDriveCommand extends Command {
-  public TeleopDriveCommand() {
+public class HatchManipulatorCommand extends Command {
+  boolean waiter = false;
+  long initialTime;
+  public HatchManipulatorCommand() {
     // Use requires() here to declare subsystem dependencies
-    super("TeleopDrive");
     // eg. requires(chassis);
-    requires(Robot.driveSubsystem);
+    super("HatchManipulator");
+    requires(Robot.hatchManipulatorSubsystem);
   }
-  
  
   // Called just before this Command runs the first time
   @Override
@@ -29,24 +29,31 @@ public class TeleopDriveCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //Drive the robot in tank drive mode
-    if(Robot.driveSubsystem.isArcadeDrive()) {
-      Robot.driveSubsystem.arcadeDrive(OI.getForwardArcadeDriveAxis(), OI.getAngleArcadeDriveAxis());
+    if(OI.hatchManipulatorButton.get() == true) {
+      Robot.hatchManipulatorSubsystem.setHatchMotorValue(-0.5);
     } else {
-      Robot.driveSubsystem.tankDrive(OI.getLeftTankDriveAxis(), OI.getRightTankDriveAxis());
+      if (waiter == false) {
+        initialTime = System.currentTimeMillis() + 3000;
+      }
+      Robot.hatchManipulatorSubsystem.setHatchMotorValue(0.5);
+      waiter = true;
     }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    if (waiter == true) {
+        return System.currentTimeMillis() > initialTime;
+    } else {
+      return false;
+    }
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveSubsystem.stopDrive();
+    Robot.hatchManipulatorSubsystem.setHatchMotorValue(0);
   }
 
   // Called when another command which requires one or more of the same

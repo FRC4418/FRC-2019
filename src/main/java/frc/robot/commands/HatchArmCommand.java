@@ -8,19 +8,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Robot;
 import frc.robot.OI;
+import frc.robot.Robot;
 
-public class TeleopDriveCommand extends Command {
-  public TeleopDriveCommand() {
+public class HatchArmCommand extends Command {
+  public HatchArmCommand() {
     // Use requires() here to declare subsystem dependencies
-    super("TeleopDrive");
+    super ("HatchArm");
     // eg. requires(chassis);
-    requires(Robot.driveSubsystem);
+    requires(Robot.hatchArmSubsystem);
   }
-  
- 
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
@@ -29,12 +27,7 @@ public class TeleopDriveCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //Drive the robot in tank drive mode
-    if(Robot.driveSubsystem.isArcadeDrive()) {
-      Robot.driveSubsystem.arcadeDrive(OI.getForwardArcadeDriveAxis(), OI.getAngleArcadeDriveAxis());
-    } else {
-      Robot.driveSubsystem.tankDrive(OI.getLeftTankDriveAxis(), OI.getRightTankDriveAxis());
-    }
+    Robot.hatchArmSubsystem.setHatchMotorValue(OI.getHatchArmAxis());
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -46,7 +39,7 @@ public class TeleopDriveCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveSubsystem.stopDrive();
+    Robot.hatchArmSubsystem.setHatchMotorValue(0.0);
   }
 
   // Called when another command which requires one or more of the same

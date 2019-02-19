@@ -8,45 +8,42 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.PIDController;
 import frc.robot.Robot;
-import frc.robot.OI;
 
-public class TeleopDriveCommand extends Command {
-  public TeleopDriveCommand() {
+public class DriveDistanceCommand extends Command {
+
+  private PIDController pid;
+
+  public DriveDistanceCommand(double setpoint) {
     // Use requires() here to declare subsystem dependencies
-    super("TeleopDrive");
     // eg. requires(chassis);
-    requires(Robot.driveSubsystem);
+    pid = new PIDController(setpoint, 2,0,0);
   }
-  
- 
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    pid.enable();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
-    //Drive the robot in tank drive mode
-    if(Robot.driveSubsystem.isArcadeDrive()) {
-      Robot.driveSubsystem.arcadeDrive(OI.getForwardArcadeDriveAxis(), OI.getAngleArcadeDriveAxis());
-    } else {
-      Robot.driveSubsystem.tankDrive(OI.getLeftTankDriveAxis(), OI.getRightTankDriveAxis());
-    }
+  protected void execute(){
+    double output = pid.getOutput(Robot.driveSubsystem.getDistance());
+    Robot.driveSubsystem.tankDrive(output, output);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return pid.isFinished();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveSubsystem.stopDrive();
+    pid.disable();
   }
 
   // Called when another command which requires one or more of the same

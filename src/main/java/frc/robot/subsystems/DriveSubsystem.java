@@ -8,13 +8,14 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.TeleopDriveCommand;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Ultrasonic;
 
 /**
@@ -27,10 +28,11 @@ public class DriveSubsystem extends Subsystem {
   // API Objects
   // Motors and encoders and gyroscopes and stuff
   // Allocate memory to speed up instantiation later
-  private TalonSRX leftDriveMotor1;
-  private TalonSRX leftDriveMotor2;
-  private TalonSRX rightDriveMotor1;
-  private TalonSRX rightDriveMotor2;
+  private WPI_TalonSRX leftDriveMotor1;
+  private WPI_TalonSRX leftDriveMotor2;
+  private WPI_TalonSRX rightDriveMotor1;
+  private WPI_TalonSRX rightDriveMotor2;
+  private RobotDrive robotDrive;
   private Encoder leftDriveEncoder;
   private Encoder rightDriveEncoder;
   private AnalogGyro driveGyro;
@@ -39,31 +41,34 @@ public class DriveSubsystem extends Subsystem {
   private Ultrasonic backDriveDistance;
 
   private boolean frontSide = true;
+  private boolean arcadeDrive = false;
 
   //Instantiate the subsystem
-  public DriveSubsystem(){
-    leftDriveMotor1 = new TalonSRX(RobotMap.leftDriveMotor1ID);
-    leftDriveMotor2 = new TalonSRX(RobotMap.leftDriveMotor2ID);
-    rightDriveMotor1 = new TalonSRX(RobotMap.rightDriveMotor1ID);
-    rightDriveMotor2 = new TalonSRX(RobotMap.rightDriveMotor2ID);
-    leftDriveEncoder = new Encoder(RobotMap.leftDriveEncoderChannelAID, RobotMap.leftDriveEncoderChannelBID);
-    rightDriveEncoder = new Encoder(RobotMap.rightDriveEncoderChannelAID, RobotMap.rightDriveEncoderChannelBID);
-    driveGyro = new AnalogGyro(RobotMap.gyroID);
+  public DriveSubsystem() {
+    leftDriveMotor1 = new WPI_TalonSRX(RobotMap.DRIVE_LEFT_A_TALON_SRX_ID);
+    leftDriveMotor2 = new WPI_TalonSRX(RobotMap.DRIVE_LEFT_B_TALON_SRX_ID);
+    rightDriveMotor1 = new WPI_TalonSRX(RobotMap.DRIVE_RIGHT_A_TALON_SRX_ID);
+    rightDriveMotor2 = new WPI_TalonSRX(RobotMap.DRIVE_RIGHT_B_TALON_SRX_ID);
+    robotDrive = new RobotDrive(leftDriveMotor1, leftDriveMotor2, rightDriveMotor1, rightDriveMotor2);
+
+    leftDriveEncoder = new Encoder(RobotMap.DRIVE_LEFT_ENCODER_CHANNELA_ID, RobotMap.DRIVE_LEFT_ENCODER_CHANNELB_ID);
+    rightDriveEncoder = new Encoder(RobotMap.DRIVE_RIGHT_ENCODER_CHANNELA_ID, RobotMap.DRIVE_RIGHT_ENCODER_CHANNELB_ID);
+    driveGyro = new AnalogGyro(RobotMap.DRIVE_GYRO_ID);
     driveAccel = new BuiltInAccelerometer();
-    frontDriveDistance = new Ultrasonic(RobotMap.frontDriveDistancePing, RobotMap.frontDriveDistanceEcho);
-    backDriveDistance = new Ultrasonic(RobotMap.backDriveDistancePing, RobotMap.backDriveDistanceEcho);
+    frontDriveDistance = new Ultrasonic(RobotMap.DRIVE_FRONT_DISTANCE_PING_ID, RobotMap.DRIVE_FRONT_DISTANCE_ECHO_ID);
+    backDriveDistance = new Ultrasonic(RobotMap.DRIVE_BACK_DISTANCE_PING_ID, RobotMap.DRIVE_BACK_DISTANCE_ECHO_ID);
 
     leftDriveMotor2.follow(leftDriveMotor1);
     rightDriveMotor2.follow(rightDriveMotor1);
 
-    rightDriveMotor1.setInverted(true);
-    rightDriveMotor2.setInverted(true);
+    //htDriveMotor1.setInverted(true);
+    //rightDriveMotor2.setInverted(true);
 
     driveGyro.initGyro();
     driveGyro.calibrate();
 
-    leftDriveEncoder.setDistancePerPulse(RobotMap.distancePerPulse);
-    rightDriveEncoder.setDistancePerPulse(RobotMap.distancePerPulse);
+    leftDriveEncoder.setDistancePerPulse(RobotMap.DRIVE_ENCODER_DISTANCE_PER_PULSE);
+    rightDriveEncoder.setDistancePerPulse(RobotMap.DRIVE_ENCODER_DISTANCE_PER_PULSE);
     leftDriveEncoder.reset();
     rightDriveEncoder.reset();
 
@@ -83,12 +88,19 @@ public class DriveSubsystem extends Subsystem {
 
   //drive both motors at once
   public void tankDrive(double leftValue, double rightValue){
+    //robotDrive.tankDrive(leftValue, rightValue);
     if(frontSide){
-      leftDriveMotor1.set(ControlMode.PercentOutput, -leftValue);
-      rightDriveMotor1.set(ControlMode.PercentOutput, -rightValue);
+      robotDrive.tankDrive(-leftValue, -rightValue);
     }else{
-      leftDriveMotor1.set(ControlMode.PercentOutput, rightValue);
-      rightDriveMotor1.set(ControlMode.PercentOutput, leftValue);
+      robotDrive.tankDrive(rightValue, leftValue);
+    }
+  }
+
+  public void arcadeDrive(double forwardValue, double angleValue) {
+    if(frontSide) {
+      robotDrive.arcadeDrive(forwardValue, -angleValue);
+    } else {
+      robotDrive.arcadeDrive(-forwardValue, -angleValue);
     }
   }
 
@@ -194,6 +206,14 @@ public class DriveSubsystem extends Subsystem {
   public void swapFront(){
     frontSide = !frontSide;
     resetEncoders();
+  }
+
+  public boolean isArcadeDrive() {
+    return arcadeDrive;
+  }
+
+  public void setArcadeDrive(boolean mode) {
+    arcadeDrive = mode;
   }
 
   public void stopDrive(){
