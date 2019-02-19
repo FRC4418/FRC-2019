@@ -39,7 +39,7 @@ public class Robot extends TimedRobot {
   public static AutonomousCommandGroup autoGroup = new AutonomousCommandGroup();
   // Create data command
   public static OutputAllDataCommand dataComm = new OutputAllDataCommand();
-
+  
   public static String gameData;
   public static int driverPos;
   
