@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class PIDController {
 
     private boolean disable = false;
+    private boolean isNegative;
 
     private double output;
     private double k, t;

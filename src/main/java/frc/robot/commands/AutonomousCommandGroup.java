@@ -17,7 +17,7 @@ public class AutonomousCommandGroup extends CommandGroup {
    * Add your docs here.
    */
   public AutonomousCommandGroup() {
-    //addSequential(new FMSCall());
+    addSequential(new FMSCall());
     if(Robot.driverPos == 1) {
       addSequential(new DriveDistanceCommand(100));
     }

@@ -19,14 +19,17 @@ import frc.robot.RobotMap;
 public class HatchManipulator extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private TalonSRX hatchManpulatorMotor;
+  private TalonSRX hatchManipulatorMotorA;
+  private TalonSRX hatchManipulatorMotorB;
   
   public HatchManipulator() {
-    hatchManpulatorMotor = new TalonSRX(RobotMap.hatchManipulatorMotorID);
+    hatchManipulatorMotorA = new TalonSRX(RobotMap.hatchManipulatorMotorID);
+    hatchManipulatorMotorB = new TalonSRX(RobotMap.hatchManipulatorMotorIDB);
   }
   
   public void setHatchMotorValue(double motorValue){
-    hatchManpulatorMotor.set(ControlMode.PercentOutput, motorValue);
+    hatchManipulatorMotorA.set(ControlMode.PercentOutput, -motorValue);
+    hatchManipulatorMotorB.set(ControlMode.PercentOutput, motorValue);
   }
 
   @Override
