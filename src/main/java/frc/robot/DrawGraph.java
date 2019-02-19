@@ -102,6 +102,24 @@ public class DrawGraph extends JPanel{
         return new Dimension(PREF_W, PREF_H);
     }
 
+    @Override
+    protected void processKeyEvent(KeyEvent k) {
+        switch( k.getKeyCode() ) { 
+            case KeyEvent.VK_UP:
+                frame.setLocation(frame.getLocation().x, frame.getLocation().y-1);
+                break;
+            case KeyEvent.VK_DOWN:
+                frame.setLocation(frame.getLocation().x, frame.getLocation().y-1);
+                break;
+            case KeyEvent.VK_LEFT:
+                frame.setLocation(frame.getLocation().x, frame.getLocation().y-1);
+                break;
+            case KeyEvent.VK_RIGHT:
+                frame.setLocation(frame.getLocation().x, frame.getLocation().y-1);
+                break;
+         }
+    }
+
     public static void createAndShowGui(ArrayList<Double> scores) {
 
         DrawGraph mainPanel = new DrawGraph(scores);
@@ -123,35 +141,6 @@ public class DrawGraph extends JPanel{
                 }
             }
         });
-        frame.addKeyListener(new KeyListener(){
-            @Override
-            public void keyPressed(KeyEvent k) {
-                System.out.println(k.getKeyCode());
-                switch( k.getKeyCode() ) { 
-                    case 38:
-                        frame.getContentPane().getComponent(0).getGraphics().translate(0, 10);
-                        break;
-                    case 40:
-                        frame.getContentPane().getGraphics().translate(0,-10);
-                        break;
-                    case 37:
-                        frame.getContentPane().getGraphics().translate(-10,0);
-                        break;
-                    case 39:
-                        frame.getContentPane().getGraphics().translate(10, 0);
-                        break;
-                 }
-                
-            }
-            @Override
-            public void keyReleased(KeyEvent k) {
-                
-            }
-            @Override
-            public void keyTyped(KeyEvent k) {
-                
-            }
-        });
     }
 
     public static void updateGui(ArrayList<Double> scores){
@@ -166,5 +155,11 @@ public class DrawGraph extends JPanel{
 
     public static void clearContent(){
         DrawGraph mainPanel = new DrawGraph(new ArrayList<Double>());
+    }
+}
+
+class graphFrame extends javax.swing.JFrame{
+    public graphFrame(){
+
     }
 }
