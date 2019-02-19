@@ -27,7 +27,6 @@ public class AutonomousCommandGroup extends CommandGroup {
     else if (Robot.driverPos == 3) {
       addSequential(new DriveDistanceCommand(100));
     }
-    
   }
   
 }

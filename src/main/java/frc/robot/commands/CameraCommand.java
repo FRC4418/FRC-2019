@@ -14,13 +14,13 @@ public class CameraCommand extends Command {
   public CameraCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.cameraSubsystem);
+    //requires(Robot.cameraSubsystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.cameraSubsystem.startCameraServer();
+    //Robot.cameraSubsystem.startCameraServer();
   }
 
   // Called repeatedly when this Command is scheduled to run

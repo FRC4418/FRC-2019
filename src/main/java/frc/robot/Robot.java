@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -36,19 +37,24 @@ public class Robot extends TimedRobot {
   // Creates Drive Subsystem 
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
   // Creates Camera Subsystem
-  public static CameraSubsystem cameraSubsystem = new CameraSubsystem();
+  //public static CameraSubsystem cameraSubsystem = new CameraSubsystem();
   public static AutonomousCommandGroup autoGroup = new AutonomousCommandGroup();
   // Create data command
   public static OutputAllDataCommand dataComm = new OutputAllDataCommand();
 
   public static String gameData;
   public static int driverPos;
-  
+
+  public static int initialRobotPosition;
+
   @Override
   public void robotInit() {
     m_oi = new OI();
     dataComm.start();
     CameraServer.getInstance().startAutomaticCapture();
+
+    initialRobotPosition = DriverStation.getInstance().getLocation();
+
   }
 
   /**
