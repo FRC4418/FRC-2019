@@ -26,7 +26,7 @@ public class HatchArmCommand extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  protected void execute() { //move the hatch arm on execute. 
     Robot.hatchArmSubsystem.setHatchMotorValue(OI.getHatchArmAxis());
   }
 
@@ -38,7 +38,7 @@ public class HatchArmCommand extends Command {
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
+  protected void end() { // stops the arm motor when ending.
     Robot.hatchArmSubsystem.setHatchMotorValue(0.0);
   }
 

@@ -14,7 +14,7 @@ import frc.robot.commands.*;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
 public class OI {
   // Create joysticks
   private static final Joystick X3D_LEFT = new Joystick(RobotMap.X3D_LEFT_JOYSTICK_ID),
@@ -49,7 +49,6 @@ public class OI {
 
   // Create and assign default buttons
   public static JoystickButton swapFrontButton = new JoystickButton(X3D_RIGHT, RobotMap.SWAP_DRIVE_DIRECTION_BUTTON_ID);
-  public static JoystickButton swapFrontButton = new JoystickButton(X3D_RIGHT, 3);
   public static JoystickButton hatchManipulatorButton = new JoystickButton(X3D_RIGHT, 3);
 
   public OI(){

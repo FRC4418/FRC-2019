@@ -10,7 +10,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.OI;
-import frc.robot.subsystems.ClimbSubsystem;
 
 public class ClimbControlCommand extends Command {
   public ClimbControlCommand() {
@@ -27,7 +26,7 @@ public class ClimbControlCommand extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  protected void execute() { // when executed a motor will move depending on command.
     Robot.climbsubsystem.setClimbLegsBack(OI.getFrontClimberAxis());
     Robot.climbsubsystem.setClimbLegsFront(-OI.getBackClimberAxis());
   }
@@ -40,7 +39,7 @@ public class ClimbControlCommand extends Command {
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
+  protected void end() { // sets all motors to 0 to stop them when it ends.
     Robot.climbsubsystem.setClimbLegsFront(0.0);
     Robot.climbsubsystem.setClimbLegsBack(0.0);
   }

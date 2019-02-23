@@ -42,40 +42,40 @@ public class ClimbSubsystem extends Subsystem {
   }
   
   @Override
-  public void initDefaultCommand() {
+  public void initDefaultCommand() { // create control command.
    setDefaultCommand(new ClimbControlCommand());
 }
 
   // The following methods are getters.
-  public double getFrontEncoderDistanceValue() {
+  public double getFrontEncoderDistanceValue() { // gets the front climb encoder's value in distance.
     double distance = frontClimbEncoder.getDistance();
     return distance;
   }
 
-  public double getBackEncoderDistanceValue() {
+  public double getBackEncoderDistanceValue() { // gets the back climb encoder's value in distance.
     double distance = backClimbEncoder.getDistance();
     return distance;
   }
 
   // The following methods are mutators.
-  public void resetBothClimbEncoders() {
+  public void resetBothClimbEncoders() { // resets both encoders to 0.
       frontClimbEncoder.reset();
       backClimbEncoder.reset();
   }
 
-  public void resetFrontClimbEncoder() {
+  public void resetFrontClimbEncoder() { //resets the front encoder to 0.
     frontClimbEncoder.reset();
   }
 
-  public void resetBackClimbEncoder() {
+  public void resetBackClimbEncoder() { //resets the back encoder to 0.
     backClimbEncoder.reset();
   }
 
-  public void setClimbLegsFront(double motorValue) {
+  public void setClimbLegsFront(double motorValue) { // starts the front motor.
     frontClimbMotor.set(ControlMode.PercentOutput, motorValue);
   }
 
-  public void setClimbLegsBack(double motorValue) {
+  public void setClimbLegsBack(double motorValue) { // starts the back motor.
     backClimbMotor.set(ControlMode.PercentOutput, motorValue);
   }
 
