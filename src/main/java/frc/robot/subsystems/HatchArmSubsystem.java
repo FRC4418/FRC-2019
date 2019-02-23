@@ -31,6 +31,7 @@ public HatchArmSubsystem() {
 
 
 public void setHatchMotorValue(double motorValue){
+  //sets motor to axis input
   hatchArmJointMotor.set(ControlMode.PercentOutput, motorValue);
 }
 
