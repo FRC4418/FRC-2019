@@ -8,36 +8,47 @@ import frc.robot.Robot;
 
 public class FMSCall extends Command {
 
-	
+    DriverStation ds;
+    
     public FMSCall() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+        ds = DriverStation.getInstance();
+    }
+
+    private void attemptToGetFMSData() {
+        try {
+            Robot.driverPos = ds.getLocation();
+            Robot.gameData = ds.getGameSpecificMessage();
+            if (Robot.gameData == null) {
+                Robot.gameData = "";
+            }
+        } catch (Exception e) {
+            System.out.print("Error in getting FMS data: \n" + e.toString());
+        }
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.driverPos = DriverStation.getInstance().getLocation();
-    	Robot.gameData = DriverStation.getInstance().getGameSpecificMessage();
-    	int retries = 100;
+        attemptToGetFMSData();
+        int retries = 100;
+        long nextRunTime = System.currentTimeMillis() + 5000;
         while (Robot.gameData.length() < 2 && retries > 0) {
-            DriverStation.reportError("Gamedata is " + Robot.gameData + " retrying " + retries, false);
-            try {
-                Thread.sleep(5);
-                Robot.gameData = DriverStation.getInstance().getGameSpecificMessage();
-                if (Robot.gameData == null) {
-                    Robot.gameData = "";
-                }
-            } catch (Exception e) {
+            if(System.currentTimeMillis() > nextRunTime) {
+                nextRunTime = System.currentTimeMillis() + 5000;
+                DriverStation.reportError("Gamedata is \"" + Robot.gameData + "\" retrying " + retries, false);
+                attemptToGetFMSData();
+                retries--;
             }
-            retries--;
         }
         DriverStation.reportError("gameData before parse: " + Robot.gameData, false);
+
+        SmartDashboard.putString("Driver Station: ", Integer.toString(Robot.driverPos));
+    	SmartDashboard.putString("Game Message: ", Robot.gameData);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        SmartDashboard.putString("Driver Station: ", Integer.toString(Robot.driverPos));
-    	SmartDashboard.putString("Game Message: ", Robot.gameData);
     }
 
     // Make this return true when this Command no longer needs to run execute()
