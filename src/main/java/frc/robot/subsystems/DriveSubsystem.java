@@ -206,6 +206,7 @@ public class DriveSubsystem extends Subsystem {
   public void swapFront(){
     frontSide = !frontSide;
     resetEncoders();
+    resetGyro();
   }
 
   public boolean isArcadeDrive() {
