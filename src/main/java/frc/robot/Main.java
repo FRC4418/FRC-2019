@@ -36,6 +36,8 @@ public final class Main {
    * <p>If you change your main robot class, change the parameter type.
    */
   public static void main(String... args) {
+    System.out.print("\n\n\n[[[Entered Main]]]\n");
+    System.out.print("\n\n\n[[[Started Post]]]\n");
 
     // START RIO POST
 
@@ -268,7 +270,7 @@ public final class Main {
     // general dio test
 
     // END RIO POST
-
+    System.out.print("\n\n\n[[[Finished POST]]]\n");
     RobotBase.startRobot(Robot::new);
   }
 }

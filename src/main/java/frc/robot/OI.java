@@ -37,10 +37,10 @@ public class OI {
   }
 
   public static double getFrontClimberAxis() {
-    return X3D_RIGHT.getRawAxis(RobotMap.FRONT_CLIMBER_AXIS_ID);
+    return GAMEPAD.getRawAxis(RobotMap.FRONT_CLIMBER_AXIS_ID);
   }
   public static double getBackClimberAxis() {
-    return X3D_LEFT.getRawAxis(RobotMap.BACK_CLIMBER_AXIS_ID);
+    return GAMEPAD.getRawAxis(RobotMap.BACK_CLIMBER_AXIS_ID);
   }
 
   public static double getHatchArmAxis() {
@@ -49,7 +49,6 @@ public class OI {
 
   // Create and assign default buttons
   public static JoystickButton swapFrontButton = new JoystickButton(X3D_RIGHT, RobotMap.SWAP_DRIVE_DIRECTION_BUTTON_ID);
-  public static JoystickButton swapFrontButton = new JoystickButton(X3D_RIGHT, 3);
   public static JoystickButton hatchManipulatorButton = new JoystickButton(X3D_RIGHT, 3);
 
   public OI(){
