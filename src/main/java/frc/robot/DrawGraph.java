@@ -6,12 +6,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DrawGraph extends JPanel{
+public class DrawGraph extends ZoomAndPanCanvas{
     public static int MAX_SCORE = 200;
-    private static final int PREF_W = 40000;
+    private static final int PREF_W = 1000;
     private static final int PREF_H = 650;
     private static final int BORDER_GAP = 30;
     private static final Color GRAPH_COLOR = Color.green;
@@ -23,17 +24,21 @@ public class DrawGraph extends JPanel{
     private static JFrame frame = new JFrame("DrawGraph");
     private static double scale = 1;
 
+    private int oldWidth = PREF_W;
+    private int oldHeight = PREF_H;
+
     public DrawGraph(java.util.List<Double> scores) {
         this.scores = scores;
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    public void paint(Graphics g) {
+        super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.translate(getWidth()/2,getHeight()/2);
         g2.scale(scale, scale);
         g2.translate(-getWidth()/2,-getHeight()/2);
+        setSize(oldWidth, oldHeight);
+        
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         double xScale = ((double) getWidth() - 2 * BORDER_GAP) / (scores.size() - 1);
@@ -95,6 +100,9 @@ public class DrawGraph extends JPanel{
             int ovalH = GRAPH_POINT_WIDTH;
             g2.fillOval(x, y, ovalW, ovalH);
         }
+        validate();
+        oldWidth = getWidth();
+        oldHeight = getHeight();
     }
 
     @Override
@@ -105,25 +113,13 @@ public class DrawGraph extends JPanel{
     public static void createAndShowGui(ArrayList<Double> scores) {
 
         DrawGraph mainPanel = new DrawGraph(scores);
+        JScrollPane scroll = new JScrollPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.getContentPane().add(mainPanel);
+        frame.getContentPane().add(scroll);
         frame.pack();
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
-        frame.addMouseWheelListener(new MouseWheelListener(){
-            @Override
-            public void mouseWheelMoved(MouseWheelEvent m) {
-                if(m.getWheelRotation() > 0){
-                    scale+=0.05;
-                    frame.repaint();
-                }
-                if(m.getWheelRotation() < 0){
-                    scale-=0.05;
-                    frame.repaint();
-                }
-                System.out.println("Scale: " + scale);
-            }
-        });
+        
         frame.addKeyListener(new KeyListener(){
             @Override
             public void keyPressed(KeyEvent k) {
@@ -139,6 +135,14 @@ public class DrawGraph extends JPanel{
                         break;
                     case KeyEvent.VK_RIGHT:
                         mainPanel.setLocation(mainPanel.getLocation().x+5, mainPanel.getLocation().y);
+                        break;
+                    case KeyEvent.VK_EQUALS:
+                        scale+=0.01;
+                        frame.repaint();
+                        break;
+                    case KeyEvent.VK_MINUS:
+                        scale-=0.01;
+                        frame.repaint();
                         break;
                  }
                 
@@ -157,23 +161,11 @@ public class DrawGraph extends JPanel{
     public static void updateGui(ArrayList<Double> scores){
         frame.getContentPane().remove(0);
         DrawGraph mainPanel = new DrawGraph(scores);
+        JScrollPane scroll = new JScrollPane(mainPanel);
         frame.getContentPane().setVisible(false);
-        frame.getContentPane().add(mainPanel);
+        frame.getContentPane().add(scroll);
         frame.getContentPane().setVisible(true);
-        frame.addMouseWheelListener(new MouseWheelListener(){
-            @Override
-            public void mouseWheelMoved(MouseWheelEvent m) {
-                if(m.getWheelRotation() > 0){
-                    scale+=0.05;
-                    frame.repaint();
-                }
-                if(m.getWheelRotation() < 0){
-                    scale-=0.05;
-                    frame.repaint();
-                }
-                System.out.println("Scale: " + scale);
-            }
-        });
+        
         frame.addKeyListener(new KeyListener(){
             @Override
             public void keyPressed(KeyEvent k) {
@@ -189,6 +181,14 @@ public class DrawGraph extends JPanel{
                         break;
                     case KeyEvent.VK_RIGHT:
                         mainPanel.setLocation(mainPanel.getLocation().x+5, mainPanel.getLocation().y);
+                        break;
+                    case KeyEvent.VK_EQUALS:
+                        scale+=0.01;
+                        frame.repaint();
+                        break;
+                    case KeyEvent.VK_MINUS:
+                        scale-=0.01;
+                        frame.repaint();
                         break;
                  }
                 

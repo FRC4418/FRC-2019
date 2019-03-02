@@ -111,7 +111,7 @@ public class PIDController {
     }
 
     public boolean isFinished(double sensorValue) {
-        return Math.abs(setpoint - sensorValue) < 2.5;
+        return Math.abs(setpoint - sensorValue) < 0.1;
         /*
         if(Math.abs(setpoint - sensorValue) < 5){
             historicalFinishData.add(true);

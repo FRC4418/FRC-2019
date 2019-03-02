@@ -1,7 +1,6 @@
 package frc.robot;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 public class PIDTuner {
@@ -43,7 +42,7 @@ public class PIDTuner {
                         double output = pid.getOutput(encoder.getSensorValue());
                         sensorValues.add(encoder.getSensorValue());
                         encoder.move(output);
-                        if(sensorValues.size()>20000){
+                        if(sensorValues.size()>1000){
                             break;
                         }
                     }
@@ -62,6 +61,7 @@ public class PIDTuner {
                     sensorValues = new ArrayList<Double>();
                     p+=0.01;
                 }
+                DrawGraph.updateGui(sensorValues);
                 break;
             }
             System.out.println("Use KT?");
@@ -93,9 +93,13 @@ public class PIDTuner {
             while(!pid.isFinished(encoder.getSensorValue())){
                 double output = pid.getOutput(encoder.getSensorValue());
                 sensorValues.add(encoder.getSensorValue());
-                System.out.println("PID Out: " + output);
+                if(output >= 0){
+                    System.out.println("PID Out: +" + output);
+                }else{
+                    System.out.println("PID Out: " + output);
+                }
                 encoder.move(output);
-                if(sensorValues.size()>20000){
+                if(sensorValues.size()>1000){
                     break;
                 }
                 DrawGraph.updateGui(sensorValues);

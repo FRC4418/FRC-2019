@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "CodeLens (Launch) - ZoomAndPanCanvas",
+      "request": "launch",
+      "mainClass": "frc.robot.ZoomAndPanCanvas",
+      "projectName": "FRC-2019"
+    },
+    {
+      "type": "java",
       "name": "CodeLens (Launch) - PIDTuner",
       "request": "launch",
       "mainClass": "frc.robot.PIDTuner",
