@@ -8,8 +8,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -43,20 +41,8 @@ public class OI {
   // Start the command when the button is released and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
-
-  public static Joystick joystick0 = new Joystick(1);
-
-  public static JoystickButton turnToAngleAButton = new JoystickButton(joystick0, 0);
-
-  public OI(){
-    turnToAngleAButton.whenPressed(new StartTurnToAnglePIDCommand(90));
-  }
-
-  public static double getJoystickLeftYAxis(){
-    return joystick0.getRawAxis(1);
-  }
-
-  public static double getJoystickRightYAxis(){
-    return joystick0.getRawAxis(5);
+  private static Joystick stick = new Joystick(0);
+  public static Joystick getDriverJoystick(){
+    return stick;
   }
 }
