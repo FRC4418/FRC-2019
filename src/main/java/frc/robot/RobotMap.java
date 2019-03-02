@@ -112,4 +112,17 @@ public class RobotMap {
   public static void setRobotDirection(boolean isForward) {
     robotDirectionIsForward = isForward;
   }
+  
+    // RIO Post Info
+  public static int[] expectedTalonIDs = {DRIVE_LEFT_A_TALON_SRX_ID, DRIVE_LEFT_B_TALON_SRX_ID, DRIVE_RIGHT_A_TALON_SRX_ID, 
+                                        DRIVE_RIGHT_B_TALON_SRX_ID, CLIMBER_FRONT_TALON_SRX_ID, CLIMBER_BACK_TALON_SRX_ID, 
+                                        HATCHE_ARM_JOINT_TALON_SRX_ID};
+  public static int[] expectedDIOEncoders = {DRIVE_LEFT_ENCODER_CHANNELA_ID,DRIVE_LEFT_ENCODER_CHANNELB_ID,
+                                            CLIMBER_FRONT_ENCODER_CHANNELA_ID,CLIMBER_FRONT_ENCODER_CHANNELB_ID,CLIMBER_BACK_ENCODER_CHANNELA_ID,
+                                            CLIMBER_BACK_ENCODER_CHANNELB_ID,DRIVE_RIGHT_A_TALON_SRX_ID,
+                                            DRIVE_RIGHT_B_TALON_SRX_ID,HATCH_ARM_JOINT_ENCODER_CHANNELA_ID,HATCH_ARM_JOINT_ENCODER_CHANNELB_ID};
+  public static int expectedGyro = DRIVE_GYRO_ID;
+  public static int[] expectedDIOUltrasonic = {DRIVE_FRONT_DISTANCE_PING_ID,DRIVE_FRONT_DISTANCE_ECHO_ID,DRIVE_BACK_DISTANCE_PING_ID,
+                                               DRIVE_BACK_DISTANCE_ECHO_ID};
+
 }

@@ -14,6 +14,7 @@ import frc.robot.RobotMap;
 public class SwitchDirectionCommand extends Command {
   private boolean direction;
 
+  // allow for the direction to be toggled
   public SwitchDirectionCommand() {
     // Use requires() here to declare subsystem dependencies
     super("SwitchDirection<T>");
@@ -22,6 +23,7 @@ public class SwitchDirectionCommand extends Command {
     direction = !RobotMap.isRobotDirectionForward();
   }
 
+  // allow for the direction to be manually set
   public SwitchDirectionCommand(boolean directionForward) {
     super("SwitchDirection<S>");
     direction = directionForward;
@@ -30,7 +32,8 @@ public class SwitchDirectionCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    RobotMap.setRobotDirection(direction);;
+    // set the direction that is forward, true is forward
+    RobotMap.setRobotDirection(direction);
   }
 
   // Called repeatedly when this Command is scheduled to run
