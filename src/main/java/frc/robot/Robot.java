@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -45,6 +46,8 @@ public class Robot extends TimedRobot {
   
   @Override
   public void robotInit() {
+    System.out.print("\n\n\n[[[Entered RobotInit]]]\n");
+    CameraServer.getInstance().startAutomaticCapture();
     m_oi = new OI();
     dataComm.start();
   }
@@ -71,6 +74,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    System.out.print("\n\n\n[[[State Disabled]]]\n");
     Scheduler.getInstance().removeAll();
     if(!dataComm.isRunning()){
       dataComm.start();
@@ -98,6 +102,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    System.out.print("\n\n\n[[[State Autonomous]]]\n");
     autoGroup.start();
     if(!dataComm.isRunning()){
       dataComm.start();
@@ -124,6 +129,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    System.out.print("\n\n\n[[[State Teleop]]]\n");
     if(!dataComm.isRunning()){
       dataComm.start();
     }

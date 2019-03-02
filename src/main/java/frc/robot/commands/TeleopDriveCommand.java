@@ -29,12 +29,11 @@ public class TeleopDriveCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //Drive the robot in tank drive mode
+    // call the correct drive mode
     if(Robot.driveSubsystem.isArcadeDrive()) {
-      Robot.driveSubsystem.arcadeDrive(OI.getForwardArcadeDriveAxis(), OI.getAngleArcadeDriveAxis());
+      Robot.driveSubsystem.teleopArcadeDriveWrapper(OI.getForwardArcadeDriveAxis(), OI.getAngleArcadeDriveAxis());
     } else {
-      
-      Robot.driveSubsystem.tankDrive(OI.getLeftTankDriveAxis(), OI.getRightTankDriveAxis());
+      Robot.driveSubsystem.teleopTankDriveWrapper(OI.getLeftTankDriveAxis(), OI.getRightTankDriveAxis());
     }
   }
 

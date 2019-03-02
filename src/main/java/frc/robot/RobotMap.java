@@ -58,8 +58,8 @@ public class RobotMap {
                           RIGHT_TANK_DRIVE_AXIS_ID = X3D_AXIS_PITCH,
                           FORWARD_ARCADE_DRIVE_AXIS_ID = X3D_AXIS_PITCH, // Arcade drive axis
                           ANGLE_ARCADE_DRIVE_AXIS_ID = X3D_AXIS_YAW,
-                          FRONT_CLIMBER_AXIS_ID = GAMEPAD_AXIS_LEFT_TRIGGER, // Climber axis
-                          BACK_CLIMBER_AXIS_ID = GAMEPAD_AXIS_RIGHT_TRIGGER,
+                          FRONT_CLIMBER_AXIS_ID = GAMEPAD_AXIS_LEFT_Y, // Climber axis
+                          BACK_CLIMBER_AXIS_ID = GAMEPAD_AXIS_RIGHT_Y,
                           SWAP_DRIVE_DIRECTION_BUTTON_ID = X3D_BUTTON_TRIGGER, // Functions assigned to buttons
                           HATCH_ARM_AXIS_ID = GAMEPAD_AXIS_RIGHT_X; //Hatch arm axis
                           
@@ -82,8 +82,7 @@ public class RobotMap {
 
 // Hatch Manipulator Subsystem IDs
 public static int hatchManipulatorMotorID = 41;
-
-  // Drive Subsystem IDs
+  
   public static final int DRIVE_LEFT_A_TALON_SRX_ID = 10, 
                           DRIVE_LEFT_B_TALON_SRX_ID = 11,
                           DRIVE_RIGHT_A_TALON_SRX_ID = 20, 
@@ -98,4 +97,17 @@ public static int hatchManipulatorMotorID = 41;
                           DRIVE_BACK_DISTANCE_PING_ID = 12, 
                           DRIVE_BACK_DISTANCE_ECHO_ID = 13;
   public static final double DRIVE_ENCODER_DISTANCE_PER_PULSE  = (15.24 * Math.PI) / 256; // diameter * pi = circumference. circumference / 256 = distance per pulse
+  
+    // RIO Post Info
+  public static int[] expectedTalonIDs = {DRIVE_LEFT_A_TALON_SRX_ID, DRIVE_LEFT_B_TALON_SRX_ID, DRIVE_RIGHT_A_TALON_SRX_ID, 
+                                        DRIVE_RIGHT_B_TALON_SRX_ID, CLIMBER_FRONT_TALON_SRX_ID, CLIMBER_BACK_TALON_SRX_ID, 
+                                        HATCHE_ARM_JOINT_TALON_SRX_ID};
+  public static int[] expectedDIOEncoders = {DRIVE_LEFT_ENCODER_CHANNELA_ID,DRIVE_LEFT_ENCODER_CHANNELB_ID,
+                                            CLIMBER_FRONT_ENCODER_CHANNELA_ID,CLIMBER_FRONT_ENCODER_CHANNELB_ID,CLIMBER_BACK_ENCODER_CHANNELA_ID,
+                                            CLIMBER_BACK_ENCODER_CHANNELB_ID,DRIVE_RIGHT_A_TALON_SRX_ID,
+                                            DRIVE_RIGHT_B_TALON_SRX_ID,HATCH_ARM_JOINT_ENCODER_CHANNELA_ID,HATCH_ARM_JOINT_ENCODER_CHANNELB_ID};
+  public static int expectedGyro = DRIVE_GYRO_ID;
+  public static int[] expectedDIOUltrasonic = {DRIVE_FRONT_DISTANCE_PING_ID,DRIVE_FRONT_DISTANCE_ECHO_ID,DRIVE_BACK_DISTANCE_PING_ID,
+                                               DRIVE_BACK_DISTANCE_ECHO_ID};
+
 }
