@@ -26,6 +26,9 @@ public class AutonomousCommandGroup extends CommandGroup {
       addSequential(new DriveDistanceCommand(119.38));
       addSequential(new TurnToAngleCommand(31.16));
       addSequential(new DriveDistanceCommand(280.8732));
+      addSequential(new TurnToAngleCommand(-49.67));
+      addSequential(new DriveDistanceCommand(9.04));
+
     }
     else if (Robot.driverPos == 2) {
       addSequential(new DriveDistanceCommand(100));
@@ -34,6 +37,8 @@ public class AutonomousCommandGroup extends CommandGroup {
       addSequential(new DriveDistanceCommand(119.38));
       addSequential(new TurnToAngleCommand(-31.16));
       addSequential(new DriveDistanceCommand(280.8732));
+      addSequential(new TurnToAngleCommand(49.67));
+      addSequential(new DriveDistanceCommand(9.04));
     }
   }
 }
