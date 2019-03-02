@@ -47,7 +47,6 @@ public class DriveSubsystem extends Subsystem {
   private Ultrasonic frontDriveDistance;
   private Ultrasonic backDriveDistance;
 
-  private boolean frontSide = true;
   private boolean arcadeDrive = true;
 
 
@@ -163,7 +162,7 @@ public class DriveSubsystem extends Subsystem {
   //drive both motors at once
   public void tankDrive(double leftValue, double rightValue){
     //robotDrive.tankDrive(leftValue, rightValue);
-    if(frontSide){
+    if(RobotMap.isRobotDirectionForward()){
       robotDrive.tankDrive(-leftValue, -rightValue);
     }else{
       robotDrive.tankDrive(rightValue, leftValue);
@@ -178,7 +177,7 @@ public class DriveSubsystem extends Subsystem {
 
   // standard arcade drive with directional toggle
   public void arcadeDrive(double forwardValue, double angleValue) {
-    if(frontSide) {
+    if(RobotMap.isRobotDirectionForward()) {
       robotDrive.arcadeDrive(forwardValue, -angleValue);
     } else {
       robotDrive.arcadeDrive(-forwardValue, -angleValue);
@@ -243,17 +242,6 @@ public class DriveSubsystem extends Subsystem {
     arcadeDrive = mode;
   }
 
-  //read which side is front
-  public boolean isFrontSide(){
-    return frontSide;
-  }
-
-  //swap the front and back of the robot
-  public void swapFront(){
-    frontSide = !frontSide;
-    resetEncoders();
-  }
-
 
 
 
@@ -286,7 +274,7 @@ public class DriveSubsystem extends Subsystem {
   }
 
   public double getDistance(){
-    if(frontSide){
+    if(RobotMap.isRobotDirectionForward()){
       return (getRightDriveEncoder() + getLeftDriveEncoder()) / 2.0;
     }else{
       return (getRightDriveEncoder() + getLeftDriveEncoder()) / -2.0;
