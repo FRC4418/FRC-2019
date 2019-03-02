@@ -23,15 +23,12 @@ public class AutonomousCommandGroup extends CommandGroup {
     //addSequential(new DriveDistanceCommand(50));
     addSequential(new FMSCall());
     if(Robot.driverPos == 1) {
-      addSequential(new DriveDistanceCommand(242.0112));
-      Robot.driveSubsystem.swapFront();
-      addSequential(new TurnToAngleCommand(16.82));
+      addSequential(new DriveDistanceCommand(119.38));
+      addSequential(new TurnToAngleCommand(40.32240993));
       addSequential(new DriveDistanceCommand(280.8732));
-      addSequential(new TurnToAngleCommand(248.28));
-      addSequential(new DriveDistanceCommand(630.6312));
-      Robot.driveSubsystem.swapFront();
-      addSequential(new TurnToAngleCommand(4.7));
-      addSequential(new DriveDistanceCommand(596.9762));
+      addSequential(new TurnToAngleCommand(-40.32240993));
+      addSequential(new DriveDistanceCommand(9.04));
+
     }
     else if (Robot.driverPos == 2) {
       addSequential(new DriveDistanceCommand(308.549));
@@ -41,15 +38,11 @@ public class AutonomousCommandGroup extends CommandGroup {
       addSequential(new DriveDistanceCommand(9.56));
     }
     else if (Robot.driverPos == 3) {
-      addSequential(new DriveDistanceCommand(242.0112));
-      Robot.driveSubsystem.swapFront();
-      addSequential(new TurnToAngleCommand(-16.82));
+      addSequential(new DriveDistanceCommand(119.38));
+      addSequential(new TurnToAngleCommand(-40.32240993));
       addSequential(new DriveDistanceCommand(280.8732));
-      addSequential(new TurnToAngleCommand(-248.28));
-      addSequential(new DriveDistanceCommand(630.6312));
-      Robot.driveSubsystem.swapFront();
-      addSequential(new TurnToAngleCommand(-4.7));
-      addSequential(new DriveDistanceCommand(596.9762));
+      addSequential(new TurnToAngleCommand(40.32240993));
+      addSequential(new DriveDistanceCommand(9.04));
     }
   }
 }
