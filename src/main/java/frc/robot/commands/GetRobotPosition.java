@@ -6,11 +6,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 
-public class FMSCall extends Command {
+public class GetRobotPosition extends Command {
 
     DriverStation ds;
     
-    public FMSCall() {
+    public GetRobotPosition() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         ds = DriverStation.getInstance();
@@ -18,7 +18,7 @@ public class FMSCall extends Command {
 
     private void attemptToGetFMSData() {
         try {
-            Robot.driverPos = ds.getLocation();
+            Robot.robotPos = ds.getLocation();
             Robot.gameData = ds.getGameSpecificMessage();
             if (Robot.gameData == null) {
                 Robot.gameData = "";
@@ -28,8 +28,7 @@ public class FMSCall extends Command {
         }
     }
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
+    private void getThroughFMS() {
         attemptToGetFMSData();
         int retries = 100;
         long nextRunTime = System.currentTimeMillis() + 5000;
@@ -41,9 +40,23 @@ public class FMSCall extends Command {
                 retries--;
             }
         }
+    }
+
+    // Called just before this Command runs the first time
+    protected void initialize() {
+        if(Robot.robotPositionChooser.getSelected() == 0) {
+            getThroughFMS();
+        } else {
+            Robot.robotPos = Robot.robotPositionChooser.getSelected();
+        }
+
+        if(!(Robot.robotPos >= 1 && Robot.robotPos <= 3)) {
+            Robot.robotPos = 0;
+        }
+        
         DriverStation.reportError("gameData before parse: " + Robot.gameData, false);
 
-        SmartDashboard.putString("Driver Station: ", Integer.toString(Robot.driverPos));
+        SmartDashboard.putString("Driver Station: ", Integer.toString(Robot.robotPos));
     	SmartDashboard.putString("Game Message: ", Robot.gameData);
     }
 

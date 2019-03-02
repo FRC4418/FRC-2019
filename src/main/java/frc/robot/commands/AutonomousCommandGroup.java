@@ -21,14 +21,14 @@ public class AutonomousCommandGroup extends CommandGroup {
     //addSequential(new DriveDistanceCommand(50));
     //addSequential(new TurnToAngleCommand(90));
     //addSequential(new DriveDistanceCommand(50));
-    addSequential(new FMSCall());
-    if(Robot.driverPos == 1) {
+    addSequential(new GetRobotPosition());
+    if(Robot.robotPos == 1) {
       addSequential(new DriveDistanceCommand(100));
     }
-    else if (Robot.driverPos == 2) {
+    else if (Robot.robotPos == 2) {
       addSequential(new DriveDistanceCommand(100));
     }
-    else if (Robot.driverPos == 3) {
+    else if (Robot.robotPos == 3) {
       addSequential(new DriveDistanceCommand(100));
     }
   }
