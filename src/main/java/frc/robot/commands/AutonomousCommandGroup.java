@@ -25,7 +25,7 @@ public class AutonomousCommandGroup extends CommandGroup {
     if(Robot.driverPos == 1) {
       addSequential(new DriveDistanceCommand(119.38));
       Robot.driveSubsystem.swapFront();
-      addSequential(new TurnToAngleCommand(16.82));
+      addSequential(new TurnToAngleCommand(9.04));
       addSequential(new DriveDistanceCommand(280.8732));
       addSequential(new TurnToAngleCommand(248.28));
       addSequential(new DriveDistanceCommand(630.6312));
@@ -39,7 +39,7 @@ public class AutonomousCommandGroup extends CommandGroup {
     else if (Robot.driverPos == 3) {
       addSequential(new DriveDistanceCommand(119.38));
       Robot.driveSubsystem.swapFront();
-      addSequential(new TurnToAngleCommand(-16.82));
+      addSequential(new TurnToAngleCommand(-9.04));
       addSequential(new DriveDistanceCommand(280.8732));
       addSequential(new TurnToAngleCommand(-248.28));
       addSequential(new DriveDistanceCommand(630.6312));
