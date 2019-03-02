@@ -21,6 +21,7 @@ public class TeleopSwitchCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    //calls SwapFront command in DriveSubsystem
     Robot.driveSubsystem.swapFront();
   }
 

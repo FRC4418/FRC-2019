@@ -199,7 +199,7 @@ public class DriveSubsystem extends Subsystem {
   }
 
   public void teleopTankDrive(double leftValue, double rightValue){
-    //function is cubic divided by 100 thousand. Math can be tweaked to tune handling, but it is pretty good now
+    //nonlinear function on tank drive value
     double leftOutput = (Math.pow(leftValue, 3)/100000);
     double rightOutput = (Math.pow(rightValue, 3)/100000);
     tankDrive(leftOutput, rightOutput);
@@ -298,6 +298,7 @@ public class DriveSubsystem extends Subsystem {
 
   //swap the front and back of the robot
   public void swapFront(){
+    //switches frontSide boolean
     frontSide = !frontSide;
     resetEncoders();
   }
