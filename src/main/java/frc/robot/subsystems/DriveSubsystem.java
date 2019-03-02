@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.TeleopDriveCommand;
+import frc.robot.teamlibraries.DriveInputPipeline;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -43,17 +44,7 @@ public class DriveSubsystem extends Subsystem {
   private Ultrasonic backDriveDistance;
 
   private boolean frontSide = true;
-  private boolean arcadeDrive = false;
-
-  private double experimentalA;
-  private double experimentalC;
-  private double experimentalCutoff;
-
-  private double deadzone;
-
-  private enum InputMapModes {
-    IMM_LINEAR, IMM_SQUARE, IMM_CUBE, IMM_S
-  }
+  private boolean arcadeDrive = true;
 
   //Instantiate the subsystem
   public DriveSubsystem() {
@@ -89,12 +80,6 @@ public class DriveSubsystem extends Subsystem {
 
     frontDriveDistance.setEnabled(true);
     backDriveDistance.setEnabled(true);
-
-    experimentalA = -1.3;
-    experimentalC = 0.07;
-    experimentalCutoff = Math.sqrt(-2 * Math.pow(experimentalC, 2) * Math.log(1 / experimentalA));
-
-    deadzone = .05;
   }
 
   //control left motor
@@ -147,50 +132,6 @@ public class DriveSubsystem extends Subsystem {
     tankDrive(values[0], values[1]);
   }
 
-  // A fancy function that causes the left and right values to snap to the average
-  // when they are close to the average
-  public double[] experimentalTeleopTankDrive(double[] values) {
-    double avg = (values[0] + values[1]) / 2;
-    double absDiff = Math.abs(values[0] - values[1]); // The difference between the two inputs
-    double magnetism; // how strongly the output is magnetized to a value
-
-    // the function dips below 0
-    // if in the part of the function above 0
-    if(absDiff > experimentalCutoff) {
-      // when the difference between the inputs is great, set magnetism to very nearly 1
-      // when the difference is not much, near 0.2, have the magnetism begin fall towards 0 
-      magnetism = -experimentalA * Math.pow( Math.E, 
-                                        (-Math.pow(absDiff, 2 )) / 
-                                        (2 * Math.pow( experimentalC, 2 )) ) + 1;
-    } else { // else, in the part of the function below 0
-      // set the magnetism to 0
-      // this creates a small zone in which the magnetism will be 0
-      magnetism = 0;
-    }
-
-    // the output is attracted to the input if the magnetism is near 1
-    // the output is attracted to the average if the magnetism is near 0
-    values[0] = values[0]*magnetism + avg*(1-magnetism);
-    values[1] = values[1]*magnetism + avg*(1-magnetism);
-
-    return values;
-  }
-
-  // apply a deadzone to the inputs
-  public double[] deadzoneTankDrive(double[] values) {
-    // if the value is within the deadzone set it to 0
-    if(Math.abs(values[0]) < deadzone) {
-      values[0] = 0;
-    }
-
-    // second verse, same as the first
-    if(Math.abs(values[1]) < deadzone) {
-      values[1] = 0;
-    }
-
-    return values;
-  }
-
   public double[] autoBreakTankDrive(double[] values) {
     // if the input is 0, set break, else don't
     if(values[0] == 0) {
@@ -204,49 +145,6 @@ public class DriveSubsystem extends Subsystem {
     } else {
       setRightBrakemode(false);
     }
-
-    return values;
-  }
-
-  // Apply a custom curve function to the input
-  public double inputMap(double value, InputMapModes inputMapMode) {
-    switch(inputMapMode) {
-      case IMM_SQUARE: // square the input
-        value = Math.pow(value, 2);
-        break;
-      case IMM_CUBE: // cube the input
-        value = Math.pow(value, 3);
-        break;
-      case IMM_S: // apply an s shaped curve to the input
-        // TODO
-        break;
-      default: // apply no curve
-        DriverStation.reportWarning("Using the default input map for some reason, use a different one or fix this ya big dum dum.", false);
-      case IMM_LINEAR: // linear is also the defalt, but, without warning messages
-        // nothing happens yo, 1:1 mapping
-    }
-    
-    return value;
-  }
-
-  // Allow for two values to be mapped at once using different mappings
-  public double[] inputMapWrapper(double[] values, InputMapModes inputMapModeFor0, InputMapModes inputMapModeFor1) {
-    // apply the map for the first value
-    values[0] = inputMap(values[0], inputMapModeFor0);
-
-    // apply the map for the second value
-    values[1] = inputMap(values[1], inputMapModeFor1);
-
-    return values;
-  }
-
-  // Allow for two values to be mapped at once using the same mapping
-  public double[] inputMapWrapper(double[] values, InputMapModes inputMapModeForBoth) {
-    // apply the map for the first value
-    values[0] = inputMap(values[0], inputMapModeForBoth);
-
-    // apply the map for the second value
-    values[1] = inputMap(values[1], inputMapModeForBoth);
 
     return values;
   }
@@ -269,10 +167,13 @@ public class DriveSubsystem extends Subsystem {
     double[] values = {leftValue, rightValue};
 
     // do fancy array manipulation stuffs
-    values = inputMapWrapper(values, InputMapModes.IMM_CUBE);
-    values = experimentalTeleopTankDrive(values);
-    values = deadzoneTankDrive(values);
-    values = autoBreakTankDrive(values);
+    DriveInputPipeline dip = new DriveInputPipeline(values);
+    dip.inputMapWrapper(DriveInputPipeline.InputMapModes.IMM_SQUARE);
+    dip.magnetizeTankDrive();
+    dip.applyDeadzones();
+    values = dip.getValues();
+
+    autoBreakTankDrive(values);
 
     // use the modified arrays to drive the robot
     tankDrive(values);
@@ -284,8 +185,14 @@ public class DriveSubsystem extends Subsystem {
     double[] values = {forwardValue, angleValue};
 
     // do fancy array manipulation stuffs
-    values = inputMapWrapper(values, InputMapModes.IMM_SQUARE, InputMapModes.IMM_SQUARE);
-    values = deadzoneTankDrive(values);
+    /*values = inputMapWrapper(values, InputMapModes.IMM_SQUARE, InputMapModes.IMM_SQUARE);
+    values = deadzoneTankDrive(values);*/
+    DriveInputPipeline dip = new DriveInputPipeline(values);
+    dip.inputMapWrapper(DriveInputPipeline.InputMapModes.IMM_CUBE, DriveInputPipeline.InputMapModes.IMM_CUBE);
+    dip.applyDeadzones();
+    values = dip.getValues();
+    
+    autoBreakTankDrive(dip.convertArcadeDriveToTank(values));
 
     // use the modified arrays to drive the robot
     arcadeDrive(values);

@@ -58,8 +58,8 @@ public class RobotMap {
                           RIGHT_TANK_DRIVE_AXIS_ID = X3D_AXIS_PITCH,
                           FORWARD_ARCADE_DRIVE_AXIS_ID = X3D_AXIS_PITCH, // Arcade drive axis
                           ANGLE_ARCADE_DRIVE_AXIS_ID = X3D_AXIS_YAW,
-                          FRONT_CLIMBER_AXIS_ID = GAMEPAD_AXIS_LEFT_TRIGGER, // Climber axis
-                          BACK_CLIMBER_AXIS_ID = GAMEPAD_AXIS_RIGHT_TRIGGER,
+                          FRONT_CLIMBER_AXIS_ID = GAMEPAD_AXIS_LEFT_Y, // Climber axis
+                          BACK_CLIMBER_AXIS_ID = GAMEPAD_AXIS_RIGHT_Y,
                           SWAP_DRIVE_DIRECTION_BUTTON_ID = X3D_BUTTON_TRIGGER, // Functions assigned to buttons
                           HATCH_ARM_AXIS_ID = GAMEPAD_AXIS_RIGHT_X; //Hatch arm axis
                           
