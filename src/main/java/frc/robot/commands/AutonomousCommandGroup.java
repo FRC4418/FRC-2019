@@ -24,28 +24,16 @@ public class AutonomousCommandGroup extends CommandGroup {
     addSequential(new FMSCall());
     if(Robot.driverPos == 1) {
       addSequential(new DriveDistanceCommand(119.38));
-      Robot.driveSubsystem.swapFront();
-      addSequential(new TurnToAngleCommand(9.04));
+      addSequential(new TurnToAngleCommand(31.16));
       addSequential(new DriveDistanceCommand(280.8732));
-      addSequential(new TurnToAngleCommand(248.28));
-      addSequential(new DriveDistanceCommand(630.6312));
-      Robot.driveSubsystem.swapFront();
-      addSequential(new TurnToAngleCommand(4.7));
-      addSequential(new DriveDistanceCommand(596.9762));
     }
     else if (Robot.driverPos == 2) {
       addSequential(new DriveDistanceCommand(100));
     }
     else if (Robot.driverPos == 3) {
       addSequential(new DriveDistanceCommand(119.38));
-      Robot.driveSubsystem.swapFront();
-      addSequential(new TurnToAngleCommand(-9.04));
+      addSequential(new TurnToAngleCommand(-31.16));
       addSequential(new DriveDistanceCommand(280.8732));
-      addSequential(new TurnToAngleCommand(-248.28));
-      addSequential(new DriveDistanceCommand(630.6312));
-      Robot.driveSubsystem.swapFront();
-      addSequential(new TurnToAngleCommand(-4.7));
-      addSequential(new DriveDistanceCommand(596.9762));
     }
   }
 }
