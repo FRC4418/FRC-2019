@@ -62,8 +62,9 @@ public class RobotMap {
                           BACK_CLIMBER_AXIS_ID = GAMEPAD_AXIS_RIGHT_Y,
                           SWAP_DRIVE_DIRECTION_BUTTON_ID = X3D_BUTTON_TRIGGER, // Functions assigned to buttons
                           SET_DIRECTION_FORWARD_BUTTON_ID = GAMEPAD_BUTON_RIGHT_BUMPER,
-                          SET_DIRECTION_BACKWARD_BUTTON_ID = GAMEPAD_BUTON_LEFT_BUMPER,
-                          HATCH_ARM_AXIS_ID = GAMEPAD_AXIS_RIGHT_X; //Hatch arm axis
+                          SET_DIRECTION_BACKWARD_BUTTON_ID = GAMEPAD_BUTON_LEFT_BUMPER;
+                          //HATCH_ARM_AXIS_A_ID = GAMEPAD_AXIS_RIGHT_TRIGGER, //Hatch arm axis
+                          //HATCH_ARM_AXIS_B_ID = GAMEPAD_AXIS_LEFT_TRIGGER; //Hatch arm axis
                           
                           
   
@@ -83,7 +84,8 @@ public class RobotMap {
   public static final double HATCH_ARM_ENCODER_DISTANCE_PER_PULSE = 360d/256;
 
   // Hatch Manipulator Subsystem IDs
-  public static int hatchManipulatorMotorID = 41;
+  public static int hatchManipulatorMotorAID = 45,
+                    hatchManipulatorMotorBID = 46;
 
   // Drive Subsystem IDs
   public static final int DRIVE_LEFT_A_TALON_SRX_ID = 10, 
