@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class OutputAllDataCommand extends Command {
@@ -38,7 +39,7 @@ public class OutputAllDataCommand extends Command {
     SmartDashboard.putNumber("Drive Accel Z", Robot.driveSubsystem.getDriveAccelZ());
     SmartDashboard.putNumber("Drive Front Distance",Robot.driveSubsystem.getFrontDriveDistance());
     SmartDashboard.putNumber("Drive Back Distance", Robot.driveSubsystem.getBackDriveDistance());
-    SmartDashboard.putBoolean("Drive Front", Robot.driveSubsystem.isFrontSide());
+    SmartDashboard.putBoolean("Robot Front Side", RobotMap.isRobotDirectionForward());
   }
 
   // Make this return true when this Command no longer needs to run execute()

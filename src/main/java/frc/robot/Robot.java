@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutonomousCommandGroup;
 import frc.robot.subsystems.*;
@@ -30,7 +31,7 @@ public class Robot extends TimedRobot {
    // Creates Hatch Subsystem
   public static HatchArmSubsystem hatchArmSubsystem = new HatchArmSubsystem();
   // Create HatchManipulator Subsystem
-  public static HatchManipulator hatchManipulatorSubsystem = new HatchManipulator();
+  public static HatchManipulatorSubsystem hatchManipulatorSubsystem = new HatchManipulatorSubsystem();
    // Creates Climb Subsystem
   public static ClimbSubsystem climbsubsystem = new ClimbSubsystem();
   // Creates Drive Subsystem 
@@ -42,7 +43,10 @@ public class Robot extends TimedRobot {
   public static OutputAllDataCommand dataComm = new OutputAllDataCommand();
   
   public static String gameData;
-  public static int driverPos;
+  public static int robotPos;
+
+  public static SendableChooser<Integer> robotPositionChooser;
+  public static SendableChooser<String> autoRoutineChooser;
   
   @Override
   public void robotInit() {
@@ -50,6 +54,19 @@ public class Robot extends TimedRobot {
     CameraServer.getInstance().startAutomaticCapture();
     m_oi = new OI();
     dataComm.start();
+
+    robotPositionChooser = new SendableChooser<Integer>();
+    robotPositionChooser.setName("Set Robot Position");
+    robotPositionChooser.addDefault("FMS", 0);
+    robotPositionChooser.addObject("Left", 1);
+    robotPositionChooser.addObject("Center", 2);
+    robotPositionChooser.addObject("Right", 3);
+    SmartDashboard.putData(robotPositionChooser);
+
+    autoRoutineChooser = new SendableChooser<String>();
+    autoRoutineChooser.setName("Set Auto Routine");
+    autoRoutineChooser.addDefault("Drive Straight", "straight");
+    autoRoutineChooser.addObject("Other One", "justno");
   }
 
   /**
