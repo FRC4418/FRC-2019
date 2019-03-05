@@ -44,7 +44,7 @@ public class OI {
   }
 
   public static double getHatchArmAxis() {
-    return 0;//GAMEPAD.getRawAxis(RobotMap.HATCH_ARM_AXIS_A_ID);
+    return GAMEPAD.getRawAxis(RobotMap.HATCH_ARM_AXIS_A_ID) - GAMEPAD.getRawAxis(RobotMap.HATCH_ARM_AXIS_B_ID);
   }
 
   // Create and assign default buttons
@@ -54,7 +54,7 @@ public class OI {
   public static JoystickButton setDirectionBackwardButton = new JoystickButton(GAMEPAD, RobotMap.SET_DIRECTION_BACKWARD_BUTTON_ID);
 
   public OI(){
-    swapFrontButton.whenPressed(new SwitchDirectionCommand());
+    swapFrontButton.whenPressed(new SwitchDirectionCommand( !RobotMap.isRobotDirectionForward()) );
     hatchManipulatorButton.whileHeld(new GrabCommand());
     //hatchManipulatorButton.whenReleased(new GrabCommand());
     setDirectionForwardButton.whenPressed(new SwitchDirectionCommand(true));
