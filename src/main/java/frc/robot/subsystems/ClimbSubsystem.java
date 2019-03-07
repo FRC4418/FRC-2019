@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -26,19 +27,28 @@ public class ClimbSubsystem extends Subsystem {
   Encoder backClimbEncoder;
   TalonSRX frontClimbMotor;
   TalonSRX backClimbMotor;
+  DigitalInput frontLimitSwitchA;
+  DigitalInput frontLimitSwitchB;
+  DigitalInput backLimitSwitchA;
+  DigitalInput backLimitSwitchB;
+
 
   // Constructor.
 
   public ClimbSubsystem() {
-    frontClimbEncoder = new Encoder(RobotMap.CLIMBER_FRONT_ENCODER_CHANNELA_ID, RobotMap.CLIMBER_FRONT_ENCODER_CHANNELB_ID);
-    backClimbEncoder = new Encoder(RobotMap.CLIMBER_BACK_ENCODER_CHANNELA_ID, RobotMap.CLIMBER_BACK_ENCODER_CHANNELB_ID);
+    //frontClimbEncoder = new Encoder(RobotMap.CLIMBER_FRONT_ENCODER_CHANNELA_ID, RobotMap.CLIMBER_FRONT_ENCODER_CHANNELB_ID);
+    //backClimbEncoder = new Encoder(RobotMap.CLIMBER_BACK_ENCODER_CHANNELA_ID, RobotMap.CLIMBER_BACK_ENCODER_CHANNELB_ID);
     frontClimbMotor = new TalonSRX(RobotMap.CLIMBER_FRONT_TALON_SRX_ID);
     backClimbMotor = new TalonSRX(RobotMap.CLIMBER_BACK_TALON_SRX_ID);
     frontClimbEncoder.setDistancePerPulse(RobotMap.CLIMBER_ENCODER_DISTANCE_PER_PULSE);
     backClimbEncoder.setDistancePerPulse(RobotMap.CLIMBER_ENCODER_DISTANCE_PER_PULSE);
+    frontLimitSwitchA = new DigitalInput(RobotMap.CLIMBER_FRONT_ENCODER_CHANNELA_ID);
+    frontLimitSwitchB = new DigitalInput(RobotMap.CLIMBER_FRONT_ENCODER_CHANNELB_ID);
+    backLimitSwitchA = new DigitalInput(RobotMap.CLIMBER_BACK_ENCODER_CHANNELA_ID);
+    backLimitSwitchB = new DigitalInput(RobotMap.CLIMBER_BACK_ENCODER_CHANNELB_ID);
     setClimbLegsBack(0);
     setClimbLegsFront(0);
-    resetBothClimbEncoders();
+    //resetBothClimbEncoders();
   }
   
   @Override
@@ -47,36 +57,60 @@ public class ClimbSubsystem extends Subsystem {
 }
 
   // The following methods are getters.
-  public double getFrontEncoderDistanceValue() {
-    double distance = frontClimbEncoder.getDistance();
-    return distance;
+  // public double getFrontEncoderDistanceValue() {
+  //   double distance = frontClimbEncoder.getDistance();
+  //   return distance;
+  // }
+
+  // public double getBackEncoderDistanceValue() {
+  //   double distance = backClimbEncoder.getDistance();
+  //   return distance;
+  // }
+
+  // // The following methods are mutators.
+  // public void resetBothClimbEncoders() {
+  //     frontClimbEncoder.reset();
+  //     backClimbEncoder.reset();
+  // }
+
+  // public void resetFrontClimbEncoder() {
+  //   frontClimbEncoder.reset();
+  // }
+
+  // public void resetBackClimbEncoder() {
+  //   backClimbEncoder.reset();
+  // }
+  public boolean getFrontLimitSwitchAValue(){
+    return frontLimitSwitchA.get();
   }
 
-  public double getBackEncoderDistanceValue() {
-    double distance = backClimbEncoder.getDistance();
-    return distance;
+  public boolean getFrontLimitSwitchBValue(){
+    return frontLimitSwitchB.get();
   }
 
-  // The following methods are mutators.
-  public void resetBothClimbEncoders() {
-      frontClimbEncoder.reset();
-      backClimbEncoder.reset();
+  public boolean getBackLimitSwitchAValue(){
+    return backLimitSwitchA.get();
   }
 
-  public void resetFrontClimbEncoder() {
-    frontClimbEncoder.reset();
-  }
-
-  public void resetBackClimbEncoder() {
-    backClimbEncoder.reset();
+  public boolean getBackLimitSwitchBValue(){
+    return backLimitSwitchB.get();
   }
 
   public void setClimbLegsFront(double motorValue) {
-    frontClimbMotor.set(ControlMode.PercentOutput, motorValue);
+    if ((getFrontLimitSwitchAValue() || getFrontLimitSwitchBValue()) && motorValue > 0){
+      frontClimbMotor.set(ControlMode.PercentOutput, 0);
+    }
+    else{
+      frontClimbMotor.set(ControlMode.PercentOutput, motorValue);
+    }
+      
   }
 
   public void setClimbLegsBack(double motorValue) {
+    if ((getBackLimitSwitchAValue() || getBackLimitSwitchBValue()) && motorValue > 0){
+      backClimbMotor.set(ControlMode.PercentOutput, 0);
+
+    }
     backClimbMotor.set(ControlMode.PercentOutput, motorValue);
   }
-
 }
