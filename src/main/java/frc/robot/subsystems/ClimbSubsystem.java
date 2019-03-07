@@ -36,8 +36,8 @@ public class ClimbSubsystem extends Subsystem {
   // Constructor.
 
   public ClimbSubsystem() {
-    //frontClimbEncoder = new Encoder(RobotMap.CLIMBER_FRONT_ENCODER_CHANNELA_ID, RobotMap.CLIMBER_FRONT_ENCODER_CHANNELB_ID);
-    //backClimbEncoder = new Encoder(RobotMap.CLIMBER_BACK_ENCODER_CHANNELA_ID, RobotMap.CLIMBER_BACK_ENCODER_CHANNELB_ID);
+    frontClimbEncoder = new Encoder(RobotMap.CLIMBER_FRONT_ENCODER_CHANNELA_ID, RobotMap.CLIMBER_FRONT_ENCODER_CHANNELB_ID);
+    backClimbEncoder = new Encoder(RobotMap.CLIMBER_BACK_ENCODER_CHANNELA_ID, RobotMap.CLIMBER_BACK_ENCODER_CHANNELB_ID);
     frontClimbMotor = new TalonSRX(RobotMap.CLIMBER_FRONT_TALON_SRX_ID);
     backClimbMotor = new TalonSRX(RobotMap.CLIMBER_BACK_TALON_SRX_ID);
     frontClimbEncoder.setDistancePerPulse(RobotMap.CLIMBER_ENCODER_DISTANCE_PER_PULSE);
@@ -48,7 +48,7 @@ public class ClimbSubsystem extends Subsystem {
     backLimitSwitchB = new DigitalInput(RobotMap.CLIMBER_BACK_ENCODER_CHANNELB_ID);
     setClimbLegsBack(0);
     setClimbLegsFront(0);
-    //resetBothClimbEncoders();
+    resetBothClimbEncoders();
   }
   
   @Override
@@ -57,29 +57,30 @@ public class ClimbSubsystem extends Subsystem {
 }
 
   // The following methods are getters.
-  // public double getFrontEncoderDistanceValue() {
-  //   double distance = frontClimbEncoder.getDistance();
-  //   return distance;
-  // }
+   public double getFrontEncoderDistanceValue() {
+     double distance = frontClimbEncoder.getDistance();
+     return distance;
+   }
 
-  // public double getBackEncoderDistanceValue() {
-  //   double distance = backClimbEncoder.getDistance();
-  //   return distance;
-  // }
+   public double getBackEncoderDistanceValue() {
+     double distance = backClimbEncoder.getDistance();
+     return distance;
+   }
 
-  // // The following methods are mutators.
-  // public void resetBothClimbEncoders() {
-  //     frontClimbEncoder.reset();
-  //     backClimbEncoder.reset();
-  // }
+   // The following methods are mutators.
+   public void resetBothClimbEncoders() {
+       frontClimbEncoder.reset();
+       backClimbEncoder.reset();
+   }
 
-  // public void resetFrontClimbEncoder() {
-  //   frontClimbEncoder.reset();
-  // }
+   public void resetFrontClimbEncoder() {
+     frontClimbEncoder.reset();
+   }
 
-  // public void resetBackClimbEncoder() {
-  //   backClimbEncoder.reset();
-  // }
+   public void resetBackClimbEncoder() {
+     backClimbEncoder.reset();
+   }
+   /////////////
   public boolean getFrontLimitSwitchAValue(){
     return frontLimitSwitchA.get();
   }
@@ -97,7 +98,7 @@ public class ClimbSubsystem extends Subsystem {
   }
 
   public void setClimbLegsFront(double motorValue) {
-    if ((getFrontLimitSwitchAValue() || getFrontLimitSwitchBValue()) && motorValue > 0){
+    if ((getFrontLimitSwitchAValue() || getFrontLimitSwitchBValue()) && motorValue > 0 && getFrontEncoderDistanceValue() < 100){
       frontClimbMotor.set(ControlMode.PercentOutput, 0);
     }
     else{
@@ -107,7 +108,7 @@ public class ClimbSubsystem extends Subsystem {
   }
 
   public void setClimbLegsBack(double motorValue) {
-    if ((getBackLimitSwitchAValue() || getBackLimitSwitchBValue()) && motorValue > 0){
+    if ((getBackLimitSwitchAValue() || getBackLimitSwitchBValue()) && motorValue > 0 && getBackEncoderDistanceValue() < 100){
       backClimbMotor.set(ControlMode.PercentOutput, 0);
 
     }
