@@ -54,7 +54,7 @@ public class OI {
   public static JoystickButton setDirectionBackwardButton = new JoystickButton(GAMEPAD, RobotMap.SET_DIRECTION_BACKWARD_BUTTON_ID);
 
   public OI(){
-    swapFrontButton.whenPressed(new SwitchDirectionCommand( !RobotMap.isRobotDirectionForward()) );
+    swapFrontButton.whenPressed(new SwitchDirectionCommand());
     hatchManipulatorButton.whileHeld(new GrabCommand());
     //hatchManipulatorButton.whenReleased(new GrabCommand());
     setDirectionForwardButton.whenPressed(new SwitchDirectionCommand(true));
