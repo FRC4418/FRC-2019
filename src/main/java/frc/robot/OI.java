@@ -44,7 +44,7 @@ public class OI {
   }
 
   public static double getHatchArmAxis() {
-    return 0;//GAMEPAD.getRawAxis(RobotMap.HATCH_ARM_AXIS_A_ID);
+    return GAMEPAD.getRawAxis(RobotMap.HATCH_ARM_AXIS_A_ID) - GAMEPAD.getRawAxis(RobotMap.HATCH_ARM_AXIS_B_ID);
   }
 
   // Create and assign default buttons

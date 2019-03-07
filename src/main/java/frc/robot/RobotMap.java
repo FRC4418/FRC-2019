@@ -62,9 +62,9 @@ public class RobotMap {
                           BACK_CLIMBER_AXIS_ID = GAMEPAD_AXIS_RIGHT_Y,
                           SWAP_DRIVE_DIRECTION_BUTTON_ID = X3D_BUTTON_TRIGGER, // Functions assigned to buttons
                           SET_DIRECTION_FORWARD_BUTTON_ID = GAMEPAD_BUTON_RIGHT_BUMPER,
-                          SET_DIRECTION_BACKWARD_BUTTON_ID = GAMEPAD_BUTON_LEFT_BUMPER;
-                          //HATCH_ARM_AXIS_A_ID = GAMEPAD_AXIS_RIGHT_TRIGGER, //Hatch arm axis
-                          //HATCH_ARM_AXIS_B_ID = GAMEPAD_AXIS_LEFT_TRIGGER; //Hatch arm axis
+                          SET_DIRECTION_BACKWARD_BUTTON_ID = GAMEPAD_BUTON_LEFT_BUMPER,
+                          HATCH_ARM_AXIS_A_ID = GAMEPAD_AXIS_RIGHT_TRIGGER, //Hatch arm axis
+                          HATCH_ARM_AXIS_B_ID = GAMEPAD_AXIS_LEFT_TRIGGER; //Hatch arm axis
                           
                           
   

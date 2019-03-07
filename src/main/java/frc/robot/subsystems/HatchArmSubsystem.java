@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -25,6 +26,8 @@ private Encoder hatchArmJointEncoder;
 
 public HatchArmSubsystem() {
   hatchArmJointMotor = new TalonSRX(RobotMap.HATCHE_ARM_JOINT_TALON_SRX_ID);
+  hatchArmJointMotor.setNeutralMode(NeutralMode.Brake);
+
   hatchArmJointEncoder = new Encoder(RobotMap.HATCH_ARM_JOINT_ENCODER_CHANNELA_ID, RobotMap.HATCH_ARM_JOINT_ENCODER_CHANNELB_ID);
   hatchArmJointEncoder.setDistancePerPulse(RobotMap.HATCH_ARM_ENCODER_DISTANCE_PER_PULSE);
 }
