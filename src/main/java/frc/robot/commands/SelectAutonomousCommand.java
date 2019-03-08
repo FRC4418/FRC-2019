@@ -20,7 +20,7 @@ public class SelectAutonomousCommand extends Command {
   @Override
   protected void initialize() {
     if(Robot.robotPos >= 1 || Robot.robotPos <= 3) {
-      new DriveDistanceCommand(100).start();
+      new DriveDistanceCommand(-100).start();
     }
   }
 
