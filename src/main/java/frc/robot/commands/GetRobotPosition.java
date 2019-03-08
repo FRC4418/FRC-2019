@@ -54,10 +54,10 @@ public class GetRobotPosition extends Command {
             Robot.robotPos = 0;
         }
         
-        DriverStation.reportError("gameData before parse: " + Robot.gameData, false);
+        //DriverStation.reportError("gameData before parse: " + Robot.gameData, false);
 
         SmartDashboard.putString("Driver Station: ", Integer.toString(Robot.robotPos));
-    	SmartDashboard.putString("Game Message: ", Robot.gameData);
+    	//SmartDashboard.putString("Game Message: ", Robot.gameData);
     }
 
     // Called repeatedly when this Command is scheduled to run

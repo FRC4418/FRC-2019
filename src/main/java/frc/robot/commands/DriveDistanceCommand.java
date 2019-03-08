@@ -18,7 +18,7 @@ public class DriveDistanceCommand extends Command {
   public DriveDistanceCommand(double setpoint) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    pid = new PIDController(setpoint, 2,0,0);
+    pid = new PIDController(setpoint, 5,0,0);
   }
 
   // Called just before this Command runs the first time

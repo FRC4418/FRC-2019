@@ -265,12 +265,12 @@ public class DriveSubsystem extends Subsystem {
 
   //read left encoder
   public double getLeftDriveEncoder(){
-    return leftDriveEncoder.getDistance();
+    return -leftDriveEncoder.getDistance();
   }
 
   //read right encoder
   public double getRightDriveEncoder(){
-    return -rightDriveEncoder.getDistance();
+    return rightDriveEncoder.getDistance();
   }
 
   public double getDistance(){
