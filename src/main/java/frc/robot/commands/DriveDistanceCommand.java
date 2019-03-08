@@ -18,7 +18,7 @@ public class DriveDistanceCommand extends Command {
   public DriveDistanceCommand(double setpoint) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    pid = new PIDController(setpoint, 5,0,0);
+    pid = new PIDController(setpoint, 1,0,0);
   }
 
   // Called just before this Command runs the first time
@@ -37,7 +37,7 @@ public class DriveDistanceCommand extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return pid.isFinished();
+    return pid.isFinished(5);
   }
 
   // Called once after isFinished returns true
