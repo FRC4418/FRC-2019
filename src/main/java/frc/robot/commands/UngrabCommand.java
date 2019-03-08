@@ -28,19 +28,24 @@ public class UngrabCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatchManipulatorSubsystem.setHatchMotorValue(.5);
+    if(System.currentTimeMillis() < time && Robot.hatchManipulatorSubsystem.goodbool) {
+      Robot.hatchManipulatorSubsystem.setHatchMotorValue(.1);
+    } else {
+      Robot.hatchManipulatorSubsystem.setHatchMotorValue(0);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return System.currentTimeMillis() > time;
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
     Robot.hatchManipulatorSubsystem.setHatchMotorValue(0);
+    Robot.hatchManipulatorSubsystem.goodbool=true;
   }
 
   // Called when another command which requires one or more of the same

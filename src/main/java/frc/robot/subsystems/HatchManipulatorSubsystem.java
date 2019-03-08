@@ -7,6 +7,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -18,6 +19,7 @@ import frc.robot.commands.*;
  * Add your docs here.
  */
 public class HatchManipulatorSubsystem extends Subsystem {
+  public boolean goodbool = false;
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   private TalonSRX hatchManpulatorAMotor,
@@ -28,6 +30,9 @@ public class HatchManipulatorSubsystem extends Subsystem {
     hatchManpulatorBMotor = new TalonSRX(RobotMap.hatchManipulatorMotorBID);
 
     hatchManpulatorBMotor.follow(hatchManpulatorAMotor);
+
+    hatchManpulatorAMotor.setNeutralMode(NeutralMode.Coast);
+    hatchManpulatorBMotor.setNeutralMode(NeutralMode.Coast);
   }
   
   public void setHatchMotorValue(double motorValue){

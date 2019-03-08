@@ -42,10 +42,10 @@ public class ClimbSubsystem extends Subsystem {
     backClimbMotor = new TalonSRX(RobotMap.CLIMBER_BACK_TALON_SRX_ID);
     //frontClimbEncoder.setDistancePerPulse(RobotMap.CLIMBER_ENCODER_DISTANCE_PER_PULSE);
     //backClimbEncoder.setDistancePerPulse(RobotMap.CLIMBER_ENCODER_DISTANCE_PER_PULSE);
-    frontLimitSwitchA = new DigitalInput(RobotMap.CLIMBER_FRONT_ENCODER_CHANNELA_ID);
-    frontLimitSwitchB = new DigitalInput(RobotMap.CLIMBER_FRONT_ENCODER_CHANNELB_ID);
-    backLimitSwitchA = new DigitalInput(RobotMap.CLIMBER_BACK_ENCODER_CHANNELA_ID);
-    backLimitSwitchB = new DigitalInput(RobotMap.CLIMBER_BACK_ENCODER_CHANNELB_ID);
+    // frontLimitSwitchA = new DigitalInput(RobotMap.CLIMBER_FRONT_ENCODER_CHANNELA_ID);
+    // frontLimitSwitchB = new DigitalInput(RobotMap.CLIMBER_FRONT_ENCODER_CHANNELB_ID);
+    // backLimitSwitchA = new DigitalInput(RobotMap.CLIMBER_BACK_ENCODER_CHANNELA_ID);
+    // backLimitSwitchB = new DigitalInput(RobotMap.CLIMBER_BACK_ENCODER_CHANNELB_ID);
     setClimbLegsBack(0);
     setClimbLegsFront(0);
     //resetBothClimbEncoders();
@@ -80,39 +80,39 @@ public class ClimbSubsystem extends Subsystem {
   // public void resetBackClimbEncoder() {
   //   backClimbEncoder.reset();
   // }
-  public boolean getFrontLimitSwitchAValue(){
-    return frontLimitSwitchA.get();
-  }
+  // public boolean getFrontLimitSwitchAValue(){
+  //   return frontLimitSwitchA.get();
+  // }
 
-  public boolean getFrontLimitSwitchBValue(){
-    return frontLimitSwitchB.get();
-  }
+  // public boolean getFrontLimitSwitchBValue(){
+  //   return frontLimitSwitchB.get();
+  // }
 
-  public boolean getBackLimitSwitchAValue(){
-    return backLimitSwitchA.get();
-  }
+  // public boolean getBackLimitSwitchAValue(){
+  //   return backLimitSwitchA.get();
+  // }
 
-  public boolean getBackLimitSwitchBValue(){
-    return backLimitSwitchB.get();
-  }
+  // public boolean getBackLimitSwitchBValue(){
+  //   return backLimitSwitchB.get();
+  // }
 
   public void setClimbLegsFront(double motorValue) {
-    if ((getFrontLimitSwitchAValue() || getFrontLimitSwitchBValue()) && motorValue > 0){
-      frontClimbMotor.set(ControlMode.PercentOutput, 0);
-    }
-    else{
+    //if ((getFrontLimitSwitchAValue() || getFrontLimitSwitchBValue()) && motorValue > 0){
+      //frontClimbMotor.set(ControlMode.PercentOutput, 0);
+    //}
+    //else{
       frontClimbMotor.set(ControlMode.PercentOutput, motorValue);
-    }
+    //}
       
   }
 
   public void setClimbLegsBack(double motorValue) {
-    if ((getBackLimitSwitchAValue() || getBackLimitSwitchBValue()) && motorValue > 0){
-      backClimbMotor.set(ControlMode.PercentOutput, 0);
+    // if ((getBackLimitSwitchAValue() || getBackLimitSwitchBValue()) && motorValue > 0){
+    //   backClimbMotor.set(ControlMode.PercentOutput, 0);
 
-    }
-    else{
+    // }
+    //else{
     backClimbMotor.set(ControlMode.PercentOutput, motorValue);
-    }
+   // }
   }
 }

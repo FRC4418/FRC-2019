@@ -12,10 +12,10 @@ public class DriveInputPipeline {
 
     // The amplitude of the bell curve
     // How fast the values fall towards 0
-    private double magA = 1.5;
+    private double magA = 1.4;
     // The width of the bell curve
     // How wide the magnetic range is
-    private double magC = 0.1;
+    private double magC = 0.07;
     // Where the bell curve crosses the x-axis
     // When to cutoff the bell curve function and switch to just 0
     private double magCutoff;

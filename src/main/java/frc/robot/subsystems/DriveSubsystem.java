@@ -202,8 +202,8 @@ public class DriveSubsystem extends Subsystem {
 
     // do fancy array manipulation stuffs
     DriveInputPipeline dip = new DriveInputPipeline(values);
-    dip.inputMapWrapper(DriveInputPipeline.InputMapModes.IMM_SQUARE);
     dip.magnetizeTankDrive();
+    dip.inputMapWrapper(DriveInputPipeline.InputMapModes.IMM_SQUARE);
     dip.applyDeadzones();
     values = dip.getValues();
 

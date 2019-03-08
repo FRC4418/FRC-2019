@@ -25,6 +25,7 @@ public class DriveDistanceCommand extends Command {
   @Override
   protected void initialize() {
     pid.enable();
+    Robot.driveSubsystem.resetEncoders();
   }
 
   // Called repeatedly when this Command is scheduled to run
