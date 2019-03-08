@@ -47,6 +47,8 @@ public class Robot extends TimedRobot {
 
   public static SendableChooser<Integer> robotPositionChooser;
   public static SendableChooser<String> autoRoutineChooser;
+
+  public static SendableChooser<Boolean> useTeleopInSandstorm;
   
   @Override
   public void robotInit() {
@@ -67,6 +69,12 @@ public class Robot extends TimedRobot {
     autoRoutineChooser.setName("Set Auto Routine");
     autoRoutineChooser.addDefault("Drive Straight", "straight");
     autoRoutineChooser.addObject("Other One", "justno");
+
+    useTeleopInSandstorm = new SendableChooser<Boolean>();
+    useTeleopInSandstorm.setName("Use Teleop in Sandstorm");
+    useTeleopInSandstorm.addOption("Teleop", true);
+    useTeleopInSandstorm.addOption("Auto", false);
+    useTeleopInSandstorm.setDefaultOption("Auto", false);
   }
 
   /**
@@ -120,7 +128,11 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     System.out.print("\n\n\n[[[State Autonomous]]]\n");
-    autoGroup.start();
+    if(useTeleopInSandstorm.getSelected()) {
+      Scheduler.getInstance().run();
+    } else {
+      autoGroup.start();
+    }
     if(!dataComm.isRunning()){
       dataComm.start();
     }
