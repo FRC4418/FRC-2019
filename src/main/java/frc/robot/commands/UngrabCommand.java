@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class UngrabCommand extends Command {
+  private long time;
+
   public UngrabCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -20,18 +22,19 @@ public class UngrabCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    time = System.currentTimeMillis() + 500;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatchManipulatorSubsystem.setHatchMotorValue(0);
+    Robot.hatchManipulatorSubsystem.setHatchMotorValue(.5);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return System.currentTimeMillis() > time;
   }
 
   // Called once after isFinished returns true
