@@ -23,8 +23,8 @@ public class ClimbSubsystem extends Subsystem {
   // here. Call these from Commands.
   
   //objects.
-  Encoder frontClimbEncoder;
-  Encoder backClimbEncoder;
+  //Encoder frontClimbEncoder;
+  //Encoder backClimbEncoder;
   TalonSRX frontClimbMotor;
   TalonSRX backClimbMotor;
   DigitalInput frontLimitSwitchA;
@@ -40,8 +40,8 @@ public class ClimbSubsystem extends Subsystem {
     //backClimbEncoder = new Encoder(RobotMap.CLIMBER_BACK_ENCODER_CHANNELA_ID, RobotMap.CLIMBER_BACK_ENCODER_CHANNELB_ID);
     frontClimbMotor = new TalonSRX(RobotMap.CLIMBER_FRONT_TALON_SRX_ID);
     backClimbMotor = new TalonSRX(RobotMap.CLIMBER_BACK_TALON_SRX_ID);
-    frontClimbEncoder.setDistancePerPulse(RobotMap.CLIMBER_ENCODER_DISTANCE_PER_PULSE);
-    backClimbEncoder.setDistancePerPulse(RobotMap.CLIMBER_ENCODER_DISTANCE_PER_PULSE);
+    //frontClimbEncoder.setDistancePerPulse(RobotMap.CLIMBER_ENCODER_DISTANCE_PER_PULSE);
+    //backClimbEncoder.setDistancePerPulse(RobotMap.CLIMBER_ENCODER_DISTANCE_PER_PULSE);
     frontLimitSwitchA = new DigitalInput(RobotMap.CLIMBER_FRONT_ENCODER_CHANNELA_ID);
     frontLimitSwitchB = new DigitalInput(RobotMap.CLIMBER_FRONT_ENCODER_CHANNELB_ID);
     backLimitSwitchA = new DigitalInput(RobotMap.CLIMBER_BACK_ENCODER_CHANNELA_ID);
@@ -111,6 +111,8 @@ public class ClimbSubsystem extends Subsystem {
       backClimbMotor.set(ControlMode.PercentOutput, 0);
 
     }
+    else{
     backClimbMotor.set(ControlMode.PercentOutput, motorValue);
+    }
   }
 }

@@ -54,7 +54,7 @@ public class PIDController{
 
     public double getOutput(double sensorValue){
       if(!disable){
-        double error = setpoint - Robot.driveSubsystem.getDistance();
+        double error = setpoint - Robot.driveSubsystem.getLeftDriveEncoder();
         integral += (error*.02);
         double derivative = (error-prev_err) / .02;
         output = p*error + i*integral + d*derivative;
