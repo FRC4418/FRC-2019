@@ -28,7 +28,12 @@ public class OI {
   public static double getRightTankDriveAxis() {
     return X3D_RIGHT.getRawAxis(RobotMap.RIGHT_TANK_DRIVE_AXIS_ID);
   }
-
+  public static double getRightXAxis(){
+    return X3D_RIGHT.getRawAxis(RobotMap.X_AXIS_ID);
+  }
+  public static double getLeftXAxis(){
+    return X3D_LEFT.getRawAxis(RobotMap.X_AXIS_ID);
+  }
   public static double getForwardArcadeDriveAxis() {
     return X3D_RIGHT.getRawAxis(RobotMap.FORWARD_ARCADE_DRIVE_AXIS_ID);
   }

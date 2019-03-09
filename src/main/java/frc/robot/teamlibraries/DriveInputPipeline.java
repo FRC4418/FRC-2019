@@ -196,4 +196,13 @@ public class DriveInputPipeline {
     private double convertArcadeDriveToTankR(double fwd, double rcw, double a, double b) {
         return fwd - b*rcw + fwd*rcw*(b-a-1);
     }
+
+    // Driver Speed Control -------------------------------------------
+    public void driverSpeedControl(double leftX, double rightX){
+        values[0] = speedControlModifiedAxis(leftX, values[0]);
+        values[1] = speedControlModifiedAxis(-rightX, values[1]);
+    }
+    private double speedControlModifiedAxis(double modAxis, double rawAxis){
+        return (((modAxis + 1) / 2) * rawAxis);
+    }
 }

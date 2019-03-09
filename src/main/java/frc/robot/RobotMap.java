@@ -56,6 +56,7 @@ public class RobotMap {
                           GAMEPAD_JOYSTICK_ID = 2,
                           LEFT_TANK_DRIVE_AXIS_ID = X3D_AXIS_PITCH, // Tank drive axis
                           RIGHT_TANK_DRIVE_AXIS_ID = X3D_AXIS_PITCH,
+                          X_AXIS_ID = X3D_AXIS_ROLL,
                           FORWARD_ARCADE_DRIVE_AXIS_ID = X3D_AXIS_PITCH, // Arcade drive axis
                           ANGLE_ARCADE_DRIVE_AXIS_ID = X3D_AXIS_YAW,
                           FRONT_CLIMBER_AXIS_ID = GAMEPAD_AXIS_LEFT_Y, // Climber axis
