@@ -8,49 +8,39 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.PIDController;
 import frc.robot.Robot;
 
-public class DriveDistanceCommand extends Command {
-
-  private PIDController pid;
-
-  public DriveDistanceCommand(double setpoint) {
+public class ToggleArcadeDriveCommand extends Command {
+  public ToggleArcadeDriveCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    pid = new PIDController(setpoint, 1,0,0);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    pid.enable();
+    Robot.driveSubsystem.setArcadeDrive(!Robot.driveSubsystem.isArcadeDrive());
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute(){
-    double output = pid.getOutput(Robot.driveSubsystem.getDistance());
-    Robot.driveSubsystem.tankDrive(output, output);
+  protected void execute() {
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return pid.isFinished();
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    pid.disable();
-    System.out.print("ENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDEDENDED");
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }

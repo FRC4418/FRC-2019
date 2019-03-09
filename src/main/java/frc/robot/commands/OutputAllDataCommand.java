@@ -27,8 +27,8 @@ public class OutputAllDataCommand extends Command {
   @Override
   protected void execute() {
     SmartDashboard.putNumber("Hatch Encoder", Robot.hatchArmSubsystem.getHatchEncoderValue());
-    //SmartDashboard.putNumber("Climb Back Encoder", Robot.climbsubsystem.getBackEncoderDistanceValue());
-    //SmartDashboard.putNumber("Climb Front Encoder", Robot.climbsubsystem.getFrontEncoderDistanceValue());
+    SmartDashboard.putNumber("Climb Back Encoder", Robot.climbsubsystem.getBackEncoderDistanceValue());
+    SmartDashboard.putNumber("Climb Front Encoder", Robot.climbsubsystem.getFrontEncoderDistanceValue());
     SmartDashboard.putNumber("Drive Left Drive Value", Robot.driveSubsystem.getLeftDriveValue());
     SmartDashboard.putNumber("Drive Right Drive Value", Robot.driveSubsystem.getRightDriveValue());
     SmartDashboard.putNumber("Drive Gyro Value", Robot.driveSubsystem.getGyroValue());
@@ -40,10 +40,11 @@ public class OutputAllDataCommand extends Command {
     SmartDashboard.putNumber("Drive Front Distance",Robot.driveSubsystem.getFrontDriveDistance());
     SmartDashboard.putNumber("Drive Back Distance", Robot.driveSubsystem.getBackDriveDistance());
     SmartDashboard.putBoolean("Robot Front Side", RobotMap.isRobotDirectionForward());
-    SmartDashboard.putBoolean("Front Limit Switch A", Robot.climbsubsystem.getFrontLimitSwitchAValue());
-    SmartDashboard.putBoolean("Front Limit Switch B", Robot.climbsubsystem.getFrontLimitSwitchBValue());
-    SmartDashboard.putBoolean("Back Limit Switch A", Robot.climbsubsystem.getBackLimitSwitchAValue());
-    SmartDashboard.putBoolean("Back Limit Switch B", Robot.climbsubsystem.getBackLimitSwitchBValue());
+    // SmartDashboard.putBoolean("Front Limit Switch A", Robot.climbsubsystem.getFrontLimitSwitchAValue());
+    // SmartDashboard.putBoolean("Front Limit Switch B", Robot.climbsubsystem.getFrontLimitSwitchBValue());
+    // SmartDashboard.putBoolean("Back Limit Switch A", Robot.climbsubsystem.getBackLimitSwitchAValue());
+    // SmartDashboard.putBoolean("Back Limit Switch B", Robot.climbsubsystem.getBackLimitSwitchBValue());
+
   }
 
   // Make this return true when this Command no longer needs to run execute()

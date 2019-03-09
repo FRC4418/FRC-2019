@@ -58,7 +58,7 @@ public class PIDController{
         integral += (error*.02);
         double derivative = (error-prev_err) / .02;
         output = p*error + i*integral + d*derivative;
-        output/=Math.abs(setpoint);
+        //output/=Math.abs(setpoint);
       }else{
         output=0;
       }

@@ -75,6 +75,7 @@ public class Robot extends TimedRobot {
     useTeleopInSandstorm.addOption("Teleop", true);
     useTeleopInSandstorm.addOption("Auto", false);
     useTeleopInSandstorm.setDefaultOption("Auto", false);
+    SmartDashboard.putData(useTeleopInSandstorm);
   }
 
   /**
