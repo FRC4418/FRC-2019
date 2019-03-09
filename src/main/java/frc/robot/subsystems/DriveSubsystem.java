@@ -178,9 +178,9 @@ public class DriveSubsystem extends Subsystem {
   // standard arcade drive with directional toggle
   public void arcadeDrive(double forwardValue, double angleValue) {
     if(RobotMap.isRobotDirectionForward()) {
-      robotDrive.arcadeDrive(forwardValue, -angleValue);
-    } else {
       robotDrive.arcadeDrive(-forwardValue, -angleValue);
+    } else {
+      robotDrive.arcadeDrive(forwardValue, -angleValue);
     }
   }
 
