@@ -44,9 +44,11 @@ public class Robot extends TimedRobot {
   
   public static String gameData;
   public static int robotPos;
+  public static int robotLvl;
 
   public static SendableChooser<Integer> robotPositionChooser;
   public static SendableChooser<String> autoRoutineChooser;
+  public static SendableChooser<Integer> robotLevelChooser;
   
   @Override
   public void robotInit() {
@@ -62,6 +64,13 @@ public class Robot extends TimedRobot {
     robotPositionChooser.addObject("Center", 2);
     robotPositionChooser.addObject("Right", 3);
     SmartDashboard.putData(robotPositionChooser);
+    
+    robotLevelChooser = new SendableChooser<Integer>();
+    robotLevelChooser.setName("Set Start Level");
+    robotLevelChooser.addDefault("Level 2", 2);
+    robotLevelChooser.addObject("Level 1", 1);
+    robotLevelChooser.addObject("Level 3", 3);
+    SmartDashboard.putData(robotLevelChooser);
 
     autoRoutineChooser = new SendableChooser<String>();
     autoRoutineChooser.setName("Set Auto Routine");

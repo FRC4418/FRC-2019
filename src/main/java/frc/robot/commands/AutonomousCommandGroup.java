@@ -23,13 +23,37 @@ public class AutonomousCommandGroup extends CommandGroup {
     //addSequential(new DriveDistanceCommand(50));
     addSequential(new GetRobotPosition());
     if(Robot.robotPos == 1) {
-      addSequential(new DriveDistanceCommand(100));
+      if(Robot.robotLvl == 1) {
+        addSequential(new DriveDistanceCommand(100));
+      }
+      if(Robot.robotLvl == 2) {
+        addSequential(new DriveDistanceCommand(100));
+      }
+      if (Robot.robotLvl == 3) {
+        addSequential(new DriveDistanceCommand(100));
+      }
     }
     else if (Robot.robotPos == 2) {
-      addSequential(new DriveDistanceCommand(100));
+      if(Robot.robotLvl == 1) {
+        addSequential(new DriveDistanceCommand(100));
+      }
+      if(Robot.robotLvl == 2) {
+        addSequential(new DriveDistanceCommand(100));
+      }
+      if (Robot.robotLvl == 3) {
+        addSequential(new DriveDistanceCommand(100));
+      }
     }
     else if (Robot.robotPos == 3) {
-      addSequential(new DriveDistanceCommand(100));
+      if(Robot.robotLvl == 1) {
+        addSequential(new DriveDistanceCommand(100));
+      }
+      if(Robot.robotLvl == 2) {
+        addSequential(new DriveDistanceCommand(100));
+      }
+      if (Robot.robotLvl == 3) {
+        addSequential(new DriveDistanceCommand(100));
+      }
     }
   }
 }

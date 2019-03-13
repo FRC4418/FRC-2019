@@ -20,6 +20,7 @@ public class GetRobotPosition extends Command {
         try {
             Robot.robotPos = ds.getLocation();
             Robot.gameData = ds.getGameSpecificMessage();
+            Robot.robotLvl = Robot.robotLevelChooser.getSelected();
             if (Robot.gameData == null) {
                 Robot.gameData = "";
             }
@@ -48,6 +49,7 @@ public class GetRobotPosition extends Command {
             getThroughFMS();
         } else {
             Robot.robotPos = Robot.robotPositionChooser.getSelected();
+            Robot.robotLvl = Robot.robotLevelChooser.getSelected();
         }
 
         if(!(Robot.robotPos >= 1 && Robot.robotPos <= 3)) {
@@ -57,6 +59,7 @@ public class GetRobotPosition extends Command {
         DriverStation.reportError("gameData before parse: " + Robot.gameData, false);
 
         SmartDashboard.putString("Driver Station: ", Integer.toString(Robot.robotPos));
+        SmartDashboard.putString("Robot Level: ", Integer.toString(Robot.robotLvl));
     	SmartDashboard.putString("Game Message: ", Robot.gameData);
     }
 
