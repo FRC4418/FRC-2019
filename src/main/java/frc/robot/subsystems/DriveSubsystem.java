@@ -8,12 +8,15 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.TeleopDriveCommand;
+import frc.robot.teamlibraries.DriveInputPipeline;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -33,15 +36,22 @@ public class DriveSubsystem extends Subsystem {
   private WPI_TalonSRX rightDriveMotor1;
   private WPI_TalonSRX rightDriveMotor2;
   private RobotDrive robotDrive;
+  
   private Encoder leftDriveEncoder;
   private Encoder rightDriveEncoder;
+  
   private AnalogGyro driveGyro;
+  
   private BuiltInAccelerometer driveAccel;
+  
   private Ultrasonic frontDriveDistance;
   private Ultrasonic backDriveDistance;
 
-  private boolean frontSide = true;
   private boolean arcadeDrive = false;
+
+
+
+
 
   //Instantiate the subsystem
   public DriveSubsystem() {
@@ -61,8 +71,8 @@ public class DriveSubsystem extends Subsystem {
     leftDriveMotor2.follow(leftDriveMotor1);
     rightDriveMotor2.follow(rightDriveMotor1);
 
-    //htDriveMotor1.setInverted(true);
-    //rightDriveMotor2.setInverted(true);
+    setLeftBrakemode(false);
+    setRightBrakemode(false);
 
     driveGyro.initGyro();
     driveGyro.calibrate();
@@ -76,6 +86,12 @@ public class DriveSubsystem extends Subsystem {
     backDriveDistance.setEnabled(true);
   }
 
+
+
+
+
+  // set and get the motors stuff
+
   //control left motor
   public void setLeftMotorValue(double motorValue){
     leftDriveMotor1.set(ControlMode.PercentOutput, motorValue);
@@ -84,31 +100,6 @@ public class DriveSubsystem extends Subsystem {
   //control right motor
   public void setRightMotorValue(double motorValue){
     rightDriveMotor1.set(ControlMode.PercentOutput, motorValue);
-  }
-
-  //drive both motors at once
-  public void tankDrive(double leftValue, double rightValue){
-    //robotDrive.tankDrive(leftValue, rightValue);
-    if(frontSide){
-      robotDrive.tankDrive(-leftValue, -rightValue);
-    }else{
-      robotDrive.tankDrive(rightValue, leftValue);
-    }
-  }
-
-  public void arcadeDrive(double forwardValue, double angleValue) {
-    if(frontSide) {
-      robotDrive.arcadeDrive(forwardValue, -angleValue);
-    } else {
-      robotDrive.arcadeDrive(-forwardValue, -angleValue);
-    }
-  }
-
-  public void teleopTankDrive(double leftValue, double rightValue){
-    //function is cubic divided by 100 thousand. Math can be tweaked to tune handling, but it is pretty good now
-    double leftOutput = (Math.pow(leftValue, 3)/100000);
-    double rightOutput = (Math.pow(rightValue, 3)/100000);
-    tankDrive(leftOutput, rightOutput);
   }
 
   //read left motor
@@ -121,6 +112,142 @@ public class DriveSubsystem extends Subsystem {
     return rightDriveMotor1.getMotorOutputPercent();
   }
 
+  // set the left breaks to break or coast
+  public void setLeftBrakemode(boolean isBraking) {
+    // when true, set to breaking mode
+    if(isBraking) {
+      leftDriveMotor1.setNeutralMode(NeutralMode.Brake);
+      leftDriveMotor2.setNeutralMode(NeutralMode.Brake);
+    } else { // else set to coast
+      leftDriveMotor1.setNeutralMode(NeutralMode.Coast);
+      leftDriveMotor2.setNeutralMode(NeutralMode.Coast);
+    }
+  }
+
+  // set the right breaks to break or coast
+  public void setRightBrakemode(boolean isBraking) {
+    // when true, set to breaking mode
+    if(isBraking) {
+      rightDriveMotor1.setNeutralMode(NeutralMode.Brake);
+      rightDriveMotor2.setNeutralMode(NeutralMode.Brake);
+    } else { // else set to coast
+      rightDriveMotor1.setNeutralMode(NeutralMode.Coast);
+      rightDriveMotor2.setNeutralMode(NeutralMode.Coast);
+    }
+  }
+
+  // Automatically set the breaks on when the robot is not moving
+  // and disable them when the robot is moving
+  public void autoBreakTankDrive(double[] values) {
+    // if the input is 0, set break, else don't
+    if(values[0] == 0) {
+      setLeftBrakemode(true);
+    } else {
+      setLeftBrakemode(false);
+    }
+
+    if(values[1] == 0) {
+      setRightBrakemode(true);
+    } else {
+      setRightBrakemode(false);
+    }
+  }
+
+
+
+
+
+  // Control code for the motors
+
+  //drive both motors at once
+  public void tankDrive(double leftValue, double rightValue){
+    //robotDrive.tankDrive(leftValue, rightValue);
+    if(RobotMap.isRobotDirectionForward()){
+      robotDrive.tankDrive(-leftValue, -rightValue);
+    }else{
+      robotDrive.tankDrive(rightValue, leftValue);
+    }
+  }
+
+  // A simple wrapper for tank drive that converts a double array to
+  // the correct values
+  public void tankDrive(double[] values) {
+    tankDrive(values[0], values[1]);
+  }
+
+  // standard arcade drive with directional toggle
+  public void arcadeDrive(double forwardValue, double angleValue) {
+    if(RobotMap.isRobotDirectionForward()) {
+      robotDrive.arcadeDrive(forwardValue, -angleValue);
+    } else {
+      robotDrive.arcadeDrive(-forwardValue, -angleValue);
+    }
+  }
+
+  // a wrapper around arcade to make my life easy
+  public void arcadeDrive(double[] values) {
+    arcadeDrive(values[0], values[1]);
+  }
+
+  // stop driving
+  public void stopDrive(){
+    leftDriveMotor1.set(ControlMode.PercentOutput, 0);
+    rightDriveMotor1.set(ControlMode.PercentOutput, 0);
+  }
+
+  // a wrapper around tank drive that sets stuff up to be better optimized for teleop controll
+  public void teleopTankDriveWrapper(double leftValue, double rightValue) {
+    // Convert to an array to allow for easy data transmission
+    double[] values = {leftValue, rightValue};
+
+    // do fancy array manipulation stuffs
+    DriveInputPipeline dip = new DriveInputPipeline(values);
+    dip.inputMapWrapper(DriveInputPipeline.InputMapModes.IMM_SQUARE);
+    dip.magnetizeTankDrive();
+    dip.applyDeadzones();
+    values = dip.getValues();
+
+    autoBreakTankDrive(values);
+
+    // use the modified arrays to drive the robot
+    tankDrive(values);
+  }
+
+  // a wrapper around arcade drive that sets stuff up to be better optimized for teleop controll
+  public void teleopArcadeDriveWrapper(double forwardValue, double angleValue) {
+    // Convert to an array to allow for easy data transmission
+    double[] values = {forwardValue, angleValue};
+
+    // do fancy array manipulation stuffs
+    /*values = inputMapWrapper(values, InputMapModes.IMM_SQUARE, InputMapModes.IMM_SQUARE);
+    values = deadzoneTankDrive(values);*/
+    DriveInputPipeline dip = new DriveInputPipeline(values);
+    dip.inputMapWrapper(DriveInputPipeline.InputMapModes.IMM_CUBE, DriveInputPipeline.InputMapModes.IMM_CUBE);
+    dip.applyDeadzones();
+    values = dip.getValues();
+    
+    autoBreakTankDrive(dip.convertArcadeDriveToTank(values));
+
+    // use the modified arrays to drive the robot
+    arcadeDrive(values);
+  }
+
+  // get whether the robot is in arcade drive mode or not
+  public boolean isArcadeDrive() {
+    return arcadeDrive;
+  }
+
+  // set the robot to arcade drive or not
+  public void setArcadeDrive(boolean mode) {
+    arcadeDrive = mode;
+  }
+
+
+
+
+
+  // Gyro stuffs
+
   //read gyro angle
   public double getGyroValue(){
     return driveGyro.getAngle();
@@ -130,6 +257,11 @@ public class DriveSubsystem extends Subsystem {
   public void resetGyro(){
     driveGyro.calibrate();
   }
+
+
+
+
+  // Encoder stuffs
 
   //read left encoder
   public double getLeftDriveEncoder(){
@@ -142,7 +274,7 @@ public class DriveSubsystem extends Subsystem {
   }
 
   public double getDistance(){
-    if(frontSide){
+    if(RobotMap.isRobotDirectionForward()){
       return (getRightDriveEncoder() + getLeftDriveEncoder()) / 2.0;
     }else{
       return (getRightDriveEncoder() + getLeftDriveEncoder()) / -2.0;
@@ -159,10 +291,17 @@ public class DriveSubsystem extends Subsystem {
     rightDriveEncoder.reset();
   }
 
+  //reset both encoders
   public void resetEncoders(){
     resetLeftDriveEncoder();
     resetRightDriveEncoder();
   }
+
+
+
+
+
+  // Accelerometr stuffs
 
   //read acceleromter
   public double getDriveAccelX(){
@@ -176,6 +315,12 @@ public class DriveSubsystem extends Subsystem {
   public double getDriveAccelZ(){
     return driveAccel.getZ();
   }
+
+
+
+
+
+  // Range finder
 
   // read front distance
   public double getFrontDriveDistance(){
@@ -197,33 +342,15 @@ public class DriveSubsystem extends Subsystem {
     backDriveDistance.setEnabled(enable);
   }
 
-  //read which side is front
-  public boolean isFrontSide(){
-    return frontSide;
-  }
 
-  //swap the front and back of the robot
-  public void swapFront(){
-    frontSide = !frontSide;
-    resetEncoders();
-  }
 
-  public boolean isArcadeDrive() {
-    return arcadeDrive;
-  }
 
-  public void setArcadeDrive(boolean mode) {
-    arcadeDrive = mode;
-  }
 
-  public void stopDrive(){
-    leftDriveMotor1.set(ControlMode.PercentOutput, 0);
-    rightDriveMotor1.set(ControlMode.PercentOutput, 0);
-  }
+  // Set the default command
+  
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(new TeleopDriveCommand());
   }
 }

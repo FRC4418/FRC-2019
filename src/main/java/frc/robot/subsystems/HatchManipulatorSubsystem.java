@@ -12,26 +12,32 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.*;
 
 /**
  * Add your docs here.
  */
-public class HatchManipulator extends Subsystem {
+public class HatchManipulatorSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private TalonSRX hatchManpulatorMotor;
+  private TalonSRX hatchManpulatorAMotor,
+                    hatchManpulatorBMotor;
   
-  public HatchManipulator() {
-    hatchManpulatorMotor = new TalonSRX(RobotMap.hatchManipulatorMotorID);
+  public HatchManipulatorSubsystem() {
+    hatchManpulatorAMotor = new TalonSRX(RobotMap.hatchManipulatorMotorAID);
+    hatchManpulatorBMotor = new TalonSRX(RobotMap.hatchManipulatorMotorBID);
+
+    hatchManpulatorBMotor.follow(hatchManpulatorAMotor);
   }
   
   public void setHatchMotorValue(double motorValue){
-    hatchManpulatorMotor.set(ControlMode.PercentOutput, motorValue);
+    hatchManpulatorAMotor.set(ControlMode.PercentOutput, motorValue);
   }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new UngrabCommand());
   }
 }

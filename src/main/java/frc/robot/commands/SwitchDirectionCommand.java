@@ -9,19 +9,37 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class TeleopSwitchCommand extends Command {
-  public TeleopSwitchCommand() {
+public class SwitchDirectionCommand extends Command {
+  private boolean direction;
+  private boolean amOverridingDirection;
+
+  // allow for the direction to be toggled
+  public SwitchDirectionCommand() {
     // Use requires() here to declare subsystem dependencies
-    super("TeleopSwitch");
+    super("SwitchDirection<T>");
     // eg. requires(chassis);
-    requires(Robot.driveSubsystem);
+    //requires(Robot.driveSubsystem);
+    amOverridingDirection = false;
+  }
+
+  // allow for the direction to be manually set
+  public SwitchDirectionCommand(boolean directionForward) {
+    super("SwitchDirection<S>");
+    direction = directionForward;
+    amOverridingDirection = directionForward;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.driveSubsystem.swapFront();
+    // set the direction that is forward, true is forward
+    if(amOverridingDirection) {
+      RobotMap.setRobotDirection(direction);
+    } else {
+      RobotMap.toggleRobotDirection();
+    }
   }
 
   // Called repeatedly when this Command is scheduled to run

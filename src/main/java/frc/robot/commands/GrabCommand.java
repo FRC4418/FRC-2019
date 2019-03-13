@@ -6,19 +6,21 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import frc.robot.OI;
 import frc.robot.Robot;
 
-public class HatchArmCommand extends Command {
-  public HatchArmCommand() {
+public class GrabCommand extends Command {
+  boolean waiter = false;
+  long initialTime;
+  public GrabCommand() {
     // Use requires() here to declare subsystem dependencies
-    super ("HatchArm");
     // eg. requires(chassis);
-    requires(Robot.hatchArmSubsystem);
+    super("HatchManipulator");
+    requires(Robot.hatchManipulatorSubsystem);
   }
-
+ 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
@@ -27,8 +29,7 @@ public class HatchArmCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //calls setter command in HatchArmSubsystem
-    Robot.hatchArmSubsystem.setHatchMotorValue(OI.getHatchArmAxis());
+    Robot.hatchManipulatorSubsystem.setHatchMotorValue(-0.5);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -40,7 +41,7 @@ public class HatchArmCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.hatchArmSubsystem.setHatchMotorValue(0.0);
+    Robot.hatchManipulatorSubsystem.setHatchMotorValue(0);
   }
 
   // Called when another command which requires one or more of the same
