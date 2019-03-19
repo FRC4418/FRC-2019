@@ -57,13 +57,20 @@ public class ClimbSubsystem extends Subsystem {
 }
 
   // The following methods are getters.
-  // public double getFrontEncoderDistanceValue() {
+   //public double getFrontEncoderDistanceValue() {
   //   double distance = frontClimbEncoder.getDistance();
   //   return distance;
-  // }
+  //}
+    public double getFrontEncoderDistanceValue(){
+      return frontClimbEncoder.getDistance();
+    }
+
+    public double getBackEncoderDistanceValue(){
+      return backClimbEncoder.getDistance();
+    }
 
   // public double getBackEncoderDistanceValue() {
-  //   double distance = backClimbEncoder.getDistance();
+  //  double distance = backClimbEncoder.getDistance();
   //   return distance;
   // }
 
@@ -80,6 +87,8 @@ public class ClimbSubsystem extends Subsystem {
   // public void resetBackClimbEncoder() {
   //   backClimbEncoder.reset();
   // }
+
+  
   public boolean getFrontLimitSwitchAValue(){
     return frontLimitSwitchA.get();
   }
@@ -105,7 +114,7 @@ public class ClimbSubsystem extends Subsystem {
     }
       
   }
-
+  
   public void setClimbLegsBack(double motorValue) {
     if ((getBackLimitSwitchAValue() || getBackLimitSwitchBValue()) && motorValue > 0){
       backClimbMotor.set(ControlMode.PercentOutput, 0);

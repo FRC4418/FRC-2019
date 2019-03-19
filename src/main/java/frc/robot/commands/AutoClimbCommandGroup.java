@@ -14,12 +14,12 @@ public class AutoClimbCommandGroup extends CommandGroup {
    * Add your docs here.
    */
   public AutoClimbCommandGroup() {
-    addSequential(new AutoClimbCommand/*lower front arm, no code yet*/());
+    addSequential(new AutoClimbFrontCommand(10));
     addSequential( new DriveDistanceCommand(50));
-    addSequential(new AutoClimbCommand/*raise front arm, no code yet*/());
-    addSequential(new AutoClimbCommand/*lower rear arm, no code yet*/());
+    addSequential(new AutoClimbFrontCommand(-10));
+    addSequential(new AutoClimbBackCommand(10));
     addSequential(new DriveDistanceCommand(50));
-    addSequential(new AutoClimbCommand/*raise rear arm, no code yet*/());
+    addSequential(new AutoClimbBackCommand(-10));
     
 
     
