@@ -38,12 +38,15 @@ public class Robot extends TimedRobot {
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
   // Creates Camera Subsystem
   public static CameraSubsystem cameraSubsystem = new CameraSubsystem();
+  //Creates VisionTracking Subsystem
+  public static VisionTrackingSubsystem visionSubsystem = new VisionTrackingSubsystem();
   public static AutonomousCommandGroup autoGroup = new AutonomousCommandGroup();
   // Create data command
   public static OutputAllDataCommand dataComm = new OutputAllDataCommand();
   
   public static String gameData;
   public static int robotPos;
+
 
   public static SendableChooser<Integer> robotPositionChooser;
   public static SendableChooser<String> autoRoutineChooser;
