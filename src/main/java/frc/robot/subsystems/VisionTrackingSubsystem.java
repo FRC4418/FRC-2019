@@ -7,10 +7,11 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.SerialPort;
 import frc.robot.Robot;
 
-public class VisionTrackingSubsystem {
+public class VisionTrackingSubsystem extends Subsystem {
     //need to edit k in kUSB to be correct port number
     private static SerialPort jevois = new SerialPort(921600, SerialPort.Port.kUSB1);
     //private static DriveSubsystem driveSubsystem = new DriveSubsystem();
@@ -72,5 +73,11 @@ public class VisionTrackingSubsystem {
             moveAccordingToXY(newXY);
         }
     }
+
+    @Override
+    protected void initDefaultCommand() {
+
+    }
+
 
 }
