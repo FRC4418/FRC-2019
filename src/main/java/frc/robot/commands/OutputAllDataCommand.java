@@ -16,6 +16,7 @@ public class OutputAllDataCommand extends Command {
   public OutputAllDataCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    // this.setRunWhenDisabled(true);
   }
 
   // Called just before this Command runs the first time

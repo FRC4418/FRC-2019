@@ -65,7 +65,8 @@ public class RobotMap {
                           SET_DIRECTION_BACKWARD_BUTTON_ID = GAMEPAD_BUTON_LEFT_BUMPER,
                           HATCH_ARM_AXIS_A_ID = GAMEPAD_AXIS_RIGHT_TRIGGER, //Hatch arm axis
                           HATCH_ARM_AXIS_B_ID = GAMEPAD_AXIS_LEFT_TRIGGER, //Hatch arm axis
-                          TOGGLE_ARCADE_DRIVE_BUTOON_ID = X3D_BUTTON_5;
+                          TOGGLE_ARCADE_DRIVE_BUTOON_ID = X3D_BUTTON_5,
+                          DRIVE_STRAIGHT_BUTTON_ID = X3D_BUTTON_GRIP;
                           
                           
   

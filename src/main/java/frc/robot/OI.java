@@ -53,6 +53,7 @@ public class OI {
   public static JoystickButton setDirectionForwardButton = new JoystickButton(GAMEPAD, RobotMap.SET_DIRECTION_FORWARD_BUTTON_ID);
   public static JoystickButton setDirectionBackwardButton = new JoystickButton(GAMEPAD, RobotMap.SET_DIRECTION_BACKWARD_BUTTON_ID);
   public static JoystickButton toggleArcadeDriveButton = new JoystickButton(X3D_RIGHT, RobotMap.TOGGLE_ARCADE_DRIVE_BUTOON_ID);
+  public static JoystickButton driveStraightButton = new JoystickButton(X3D_RIGHT, RobotMap.DRIVE_STRAIGHT_BUTTON_ID);
 
   public OI(){
     swapFrontButton.whenPressed(new SwitchDirectionCommand());
@@ -61,5 +62,6 @@ public class OI {
     setDirectionForwardButton.whenPressed(new SwitchDirectionCommand(true));
     setDirectionBackwardButton.whenPressed(new SwitchDirectionCommand(false));
     toggleArcadeDriveButton.whenPressed(new ToggleArcadeDriveCommand());
+    driveStraightButton.whileHeld(new DriveStraightCommand());
   }
 }

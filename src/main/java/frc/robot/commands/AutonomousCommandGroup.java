@@ -21,7 +21,7 @@ public class AutonomousCommandGroup extends CommandGroup {
     //addSequential(new DriveDistanceCommand(50));
     //addSequential(new TurnToAngleCommand(90));
     //addSequential(new DriveDistanceCommand(50));
-    addSequential(new GetRobotPosition());
+    //addSequential(new GetRobotPosition());
     addSequential(new SelectAutonomousCommand());
   }
 }

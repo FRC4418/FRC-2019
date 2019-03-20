@@ -43,7 +43,7 @@ public class Robot extends TimedRobot {
   public static OutputAllDataCommand dataComm = new OutputAllDataCommand();
   
   public static String gameData;
-  public static int robotPos;
+  public static int robotPos = 2;
 
   public static SendableChooser<Integer> robotPositionChooser;
   public static SendableChooser<String> autoRoutineChooser;

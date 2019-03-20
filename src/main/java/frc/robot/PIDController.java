@@ -32,6 +32,9 @@ public class PIDController {
       this.d = d;
       k=0;
       t=0;
+      previousErrors = new ArrayList<Double>();
+      numberOfErrorsToRemember = 5;
+
     }
 
     public PIDController(double setpoint, double k, double t, boolean useFullPID) {
