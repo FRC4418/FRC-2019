@@ -53,6 +53,7 @@ public class OI {
   public static JoystickButton hatchManipulatorButton = new JoystickButton(X3D_RIGHT, 3);
   public static JoystickButton setDirectionForwardButton = new JoystickButton(GAMEPAD, RobotMap.SET_DIRECTION_FORWARD_BUTTON_ID);
   public static JoystickButton setDirectionBackwardButton = new JoystickButton(GAMEPAD, RobotMap.SET_DIRECTION_BACKWARD_BUTTON_ID);
+  public static JoystickButton autoClimbButton = new JoystickButton(X3D_RIGHT, RobotMap.AUTO_CLIMB_BUTTON_ID);
 
   public OI(){
     swapFrontButton.whenPressed(new SwitchDirectionCommand());
@@ -60,5 +61,6 @@ public class OI {
     //hatchManipulatorButton.whenReleased(new GrabCommand());
     setDirectionForwardButton.whenPressed(new SwitchDirectionCommand(true));
     setDirectionBackwardButton.whenPressed(new SwitchDirectionCommand(false));
+    autoClimbButton.whenPressed(new AutoClimbCommandGroup());
   }
 }
