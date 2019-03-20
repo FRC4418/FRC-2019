@@ -66,7 +66,7 @@ public class VisionTrackingSubsystem {
             moveAccordingToXY(newXY);
         }
         //drives forward until y-coordinate is ideal
-        while (xy[1] != 256) {
+        while (xy[1] != 0) {
             Robot.driveSubsystem.tankDrive(5, 5);
             int newXY[] = getXY();
             moveAccordingToXY(newXY);
