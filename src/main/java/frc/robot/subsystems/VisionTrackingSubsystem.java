@@ -35,10 +35,12 @@ public class VisionTrackingSubsystem {
         String[] parsedData = data.split(delims);
         //tests if tracking in the first place
         if (parsedData[0] == "Trk: 1") {
-            String stringX = parsedData[1];
-            String stringY = parsedData[2];
-            int x = stringX.charAt(8);
-            int y = stringY.charAt(8);
+            String stringXWithLabel = parsedData[1];
+            String stringX = stringXWithLabel.substring(8);
+            String stringYWithLabel = parsedData[2];
+            String stringY = stringYWithLabel.substring(8);
+            int x = Integer.valueOf(stringX);
+            int y = Integer.valueOf(stringY);
             xy[0] = x;
             xy[1] = y;
         }
@@ -49,7 +51,7 @@ public class VisionTrackingSubsystem {
     //places the target in a correct position of the camera mapping
     public void moveAccordingToXY(int xy[]){
         //must be changed to ideal value
-        while (xy[0] != 8 || xy[0] != 9) {
+        while (xy[0] != 64 || xy[0] != 192) {
             //checks which ideal location is closer to determine which way to turn
             int distanceTargetLeft = 9 - xy[0];
             int distanceTargetRight = 8 - xy[0];
@@ -64,7 +66,7 @@ public class VisionTrackingSubsystem {
             moveAccordingToXY(newXY);
         }
         //drives forward until y-coordinate is ideal
-        while (xy[1] != 12) {
+        while (xy[1] != 256) {
             Robot.driveSubsystem.tankDrive(5, 5);
             int newXY[] = getXY();
             moveAccordingToXY(newXY);
