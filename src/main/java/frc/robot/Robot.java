@@ -40,7 +40,7 @@ public class Robot extends TimedRobot {
   // Creates Camera Subsystem
   public static CameraSubsystem cameraSubsystem = new CameraSubsystem();
   //Creates VisionTracking Subsystem
-  public static Subsystem visionSubsystem = new VisionTrackingSubsystem();
+  public static VisionSubsystem visionSubsystem = new VisionSubsystem();
   public static AutonomousCommandGroup autoGroup = new AutonomousCommandGroup();
   // Create data command
   public static OutputAllDataCommand dataComm = new OutputAllDataCommand();
