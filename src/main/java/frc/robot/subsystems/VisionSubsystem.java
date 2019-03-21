@@ -58,22 +58,25 @@ public class VisionSubsystem extends Subsystem {
 
   //returns the data derived from serial message sent by camera
   public int[] getXY() {
+      JSONParser parser = new JSONParser();
+      public final double x;
+      public final double y;
       //creates xy array with nonsense values originally and parses string containing data to adjust nonsensical values
-      int[] xy = {800,800};
-      String delims = "[,]";
-      String data = jevois.readString();
-      String[] parsedData = data.split(delims);
-      //tests if tracking in the first place
-      if (parsedData[0] == "Trk: 1") {
-          String stringXWithLabel = parsedData[1];
-          String stringX = stringXWithLabel.substring(8);
-          String stringYWithLabel = parsedData[2];
-          String stringY = stringYWithLabel.substring(8);
-          int x = Integer.valueOf(stringX);
-          int y = Integer.valueOf(stringY);
-          xy[0] = x;
-          xy[1] = y;
-      }
+    //   int[] xy = {800,800};
+    //   String delims = "[,]";
+    //   String data = jevois.readString();
+    //   String[] parsedData = data.split(delims);
+    //   //tests if tracking in the first place
+    //   if (parsedData[0] == "Trk: 1") {
+    //       String stringXWithLabel = parsedData[1];
+    //       String stringX = stringXWithLabel.substring(8);
+    //       String stringYWithLabel = parsedData[2];
+    //       String stringY = stringYWithLabel.substring(8);
+    //       int x = Integer.valueOf(stringX);
+    //       int y = Integer.valueOf(stringY);
+    //       xy[0] = x;
+    //       xy[1] = y;
+    //   }
       //returns array of coordinates nonsensical or not
       return xy;
   }
