@@ -19,7 +19,7 @@ public class VisionSubsystem extends Subsystem {
   private static SerialPort jevois;
 
   public VisionSubsystem() {
-    jevois = new SerialPort(921600, SerialPort.Port.kUSB1);
+    jevois = new SerialPort(115200, SerialPort.Port.kUSB1);
   }
   //need to edit k in kUSB to be correct port number
   @Override
