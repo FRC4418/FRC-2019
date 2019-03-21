@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -58,7 +59,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     System.out.print("\n\n\n[[[Entered RobotInit]]]\n");
     CameraServer.getInstance().startAutomaticCapture(0);
-    CameraServer.getInstance().startAutomaticCapture(1);
+  
+    //CameraServer.getInstance().startAutomaticCapture(1);
     m_oi = new OI();
     dataComm.start();
 

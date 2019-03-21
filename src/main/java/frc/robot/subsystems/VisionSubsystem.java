@@ -8,6 +8,10 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.json.simple.parser.ParseException;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.PWM;
@@ -25,9 +29,11 @@ public class VisionSubsystem extends Subsystem {
   private static SerialPort jevois;
 
   public VisionSubsystem() {
-    jevois = new SerialPort(921600, SerialPort.Port.values()[1]);
-   limeLight = new DigitalOutput(RobotMap.VISION_LIGHT_ID);
-   limeLight.set(true);
+    //jevois = new SerialPort(111520, SerialPort.Port.values()[1]);
+    // jevois = new SerialPort(111520, SerialPort.Port.kUSB1);
+    limeLight = new DigitalOutput(RobotMap.VISION_LIGHT_ID);
+    limeLight.set(true);
+    jevois = new SerialPort(115200, SerialPort.Port.kUSB1);
   }
   //need to edit k in kUSB to be correct port number
   @Override
@@ -54,22 +60,26 @@ public class VisionSubsystem extends Subsystem {
 
   //returns the data derived from serial message sent by camera
   public int[] getXY() {
-      //creates xy array with nonsense values originally and parses string containing data to adjust nonsensical values
-      int[] xy = {800,800};
-      String delims = "[,]";
-      String data = jevois.readString();
-      String[] parsedData = data.split(delims);
-      //tests if tracking in the first place
-      if (parsedData[0] == "Trk: 1") {
-          String stringXWithLabel = parsedData[1];
-          String stringX = stringXWithLabel.substring(8);
-          String stringYWithLabel = parsedData[2];
-          String stringY = stringYWithLabel.substring(8);
-          int x = Integer.valueOf(stringX);
-          int y = Integer.valueOf(stringY);
-          xy[0] = x;
-          xy[1] = y;
-      }
+    //   //creates xy array with nonsense values originally and parses string containing data to adjust nonsensical values
+    //   int[] xy = {800,800};
+    //   String delims = "[,]";
+    //   String data = jevois.readString();
+    //   SmartDashboard.putString("JeVois XY:", data);
+    //   String[] parsedData = data.split(delims);
+    //   //tests if tracking in the first place
+    //   if (parsedData[0] == "Trk: 1") {
+    //       String stringXWithLabel = parsedData[1];
+    //       String stringX = stringXWithLabel.substring(8);
+    //       String stringYWithLabel = parsedData[2];
+    //       String stringY = stringYWithLabel.substring(8);
+    //       int x = Integer.valueOf(stringX);
+    //       int y = Integer.valueOf(stringY);
+    //       xy[0] = x;
+    //       xy[1] = y;
+    //   }
+    try {
+
+    } catch (ParseException)
       //returns array of coordinates nonsensical or not
       return xy;
   }
