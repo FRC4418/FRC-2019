@@ -9,13 +9,13 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.VisionSubsystem;;
+// import frc.robot.subsystems.VisionSubsystem;;
 
 public class VisionTrackingCommand extends Command {
   public VisionTrackingCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.visionSubsystem);
+    // requires(Robot.visionSubsystem);
   }
 
   // Called just before this Command runs the first time
@@ -27,11 +27,11 @@ public class VisionTrackingCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.visionSubsystem.startTracking();
-    int xy[] = Robot.visionSubsystem.getXY();
-    while (xy[0] != 800) {
-      Robot.visionSubsystem.moveAccordingToXY(xy);
-    }
+    // Robot.visionSubsystem.startTracking();
+    // int xy[] = Robot.visionSubsystem.getXY();
+    // while (xy[0] != 800) {
+    //   Robot.visionSubsystem.moveAccordingToXY(xy);
+    // }
   }
 
   // Make this return true when this Command no longer needs to run execute()
