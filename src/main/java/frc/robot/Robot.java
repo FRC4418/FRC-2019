@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutonomousCommandGroup;
@@ -38,12 +39,15 @@ public class Robot extends TimedRobot {
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
   // Creates Camera Subsystem
   public static CameraSubsystem cameraSubsystem = new CameraSubsystem();
+  //Creates VisionTracking Subsystem
+  public static VisionSubsystem visionSubsystem = new VisionSubsystem();
   public static AutonomousCommandGroup autoGroup = new AutonomousCommandGroup();
   // Create data command
   public static OutputAllDataCommand dataComm = new OutputAllDataCommand();
   
   public static String gameData;
   public static int robotPos = 2;
+
 
   public static SendableChooser<Integer> robotPositionChooser;
   public static SendableChooser<String> autoRoutineChooser;
