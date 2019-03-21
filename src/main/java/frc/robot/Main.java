@@ -153,7 +153,7 @@ public final class Main {
     System.out.println();
 
     // END CAN TEST
-
+/*
     // START DIO Encoder TEST
 
     System.out.println();
@@ -268,7 +268,7 @@ public final class Main {
     System.out.println();
 
     // general dio test
-
+*/
     // END RIO POST
     System.out.print("\n\n\n[[[Finished POST]]]\n");
     RobotBase.startRobot(Robot::new);

@@ -38,8 +38,8 @@ public class OutputAllDataCommand extends Command {
     SmartDashboard.putNumber("Drive Accel X", Robot.driveSubsystem.getDriveAccelX());
     SmartDashboard.putNumber("Drive Accel Y", Robot.driveSubsystem.getDriveAccelY());
     SmartDashboard.putNumber("Drive Accel Z", Robot.driveSubsystem.getDriveAccelZ());
-    SmartDashboard.putNumber("Drive Front Distance",Robot.driveSubsystem.getFrontDriveDistance());
-    SmartDashboard.putNumber("Drive Back Distance", Robot.driveSubsystem.getBackDriveDistance());
+    //SmartDashboard.putNumber("Drive Front Distance",Robot.driveSubsystem.getFrontDriveDistance());
+    //SmartDashboard.putNumber("Drive Back Distance", Robot.driveSubsystem.getBackDriveDistance());
     SmartDashboard.putBoolean("Robot Front Side", RobotMap.isRobotDirectionForward());
     // SmartDashboard.putBoolean("Front Limit Switch A", Robot.climbsubsystem.getFrontLimitSwitchAValue());
     // SmartDashboard.putBoolean("Front Limit Switch B", Robot.climbsubsystem.getFrontLimitSwitchBValue());

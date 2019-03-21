@@ -57,7 +57,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     System.out.print("\n\n\n[[[Entered RobotInit]]]\n");
-    CameraServer.getInstance().startAutomaticCapture();
+    CameraServer.getInstance().startAutomaticCapture(0);
+    CameraServer.getInstance().startAutomaticCapture(1);
     m_oi = new OI();
     dataComm.start();
 

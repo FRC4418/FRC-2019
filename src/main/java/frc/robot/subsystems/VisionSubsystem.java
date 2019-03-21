@@ -8,24 +8,40 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.SerialPort;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 /**
  * Add your docs here.
  */
 public class VisionSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+
+  private DigitalOutput limeLight;
   private static SerialPort jevois;
 
   public VisionSubsystem() {
-    jevois = new SerialPort(921600, SerialPort.Port.kUSB1);
+    jevois = new SerialPort(921600, SerialPort.Port.values()[1]);
+   limeLight = new DigitalOutput(RobotMap.VISION_LIGHT_ID);
+   limeLight.set(true);
   }
   //need to edit k in kUSB to be correct port number
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+  }
+
+  public void swapLimeLight() {
+      if(limeLight.get()){
+          limeLight.set(false);
+      }else{
+          limeLight.set(true);
+      }
   }
   //private static DriveSubsystem driveSubsystem = new DriveSubsystem();
   //gets current xy coordinates and adjusts according to those coordinates
