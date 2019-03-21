@@ -25,14 +25,121 @@ public class VisionSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private DigitalOutput limeLight;
-  private static SerialPort jevois;
+   private int x;
+   private int y;
+   private DigitalOutput limeLight;
+   private static SerialPort jevois;
+   JSONParser parser = new JSONParser();
+   SerialPort port;
+   private String sanatizedString = "nothing";
+   
+   //constructor that needs the port to be passed and sets port to this passed value
+   public VisionSubsystem(SerialPort jevois) {
+       port = jevois;
+       limeLight = new DigitalOutput(RobotMap.VISION_LIGHT_ID);
+       limeLight.set(true);
+    }
 
-  public VisionSubsystem() {
-    jevois = new SerialPort(921600, SerialPort.Port.values()[1]);
-   limeLight = new DigitalOutput(RobotMap.VISION_LIGHT_ID);
-   limeLight.set(true);
+    //updates x and y values based upon parsed json 
+    public void updateVision(){
+
+        try{
+           String jsonString = this.getString();
+  
+           if (jsonString != null){
+              int tryX = parseX(jsonString);
+              int tryY = parseY(jsonString);
+     
+           if (tryX != 800 && tryY != 800){
+              x = tryX;
+              y = tryY;
+            }
+          }
+        } catch (Exception e){
+        }
   }
+   
+    //parses the x value
+    public int parseX(String jsonString) {
+        int badValue = 800;
+        try {
+            Object object = parser.parse(jsonString);
+            JSONObject jsonObject = (JSONObject) object;
+
+            if (jsonObject != null){ 
+
+                int distString = (int) jsonObject.get("XCntr");
+                
+                return (Integer.valueOf(distString));
+             }
+        }
+        catch (java.text.ParseException e) {
+
+        }
+        catch (UncleanStatusException e) {
+
+        }
+        catch (ClassCastException e) {
+
+        }
+        return badValue;
+    }
+
+    //parses y value
+    public int parseY(String jsonString) {
+        int badValue = 800;
+        try {
+            Object object = parser.parse(jsonString);
+            JSONObject jsonObject = (JSONObject) object;
+
+            if (jsonObject != null){ 
+
+                int distString = (int) jsonObject.get("YCntr");
+                
+                return (Integer.valueOf(distString));
+             }
+        }
+        catch (java.text.ParseException e) {
+
+        }
+        catch (UncleanStatusException e) {
+
+        }
+        catch (ClassCastException e) {
+            
+        }
+        return badValue;
+    }
+
+    public int getX(){
+       
+      return x;
+    }
+  
+    public int getY(){
+      
+      return y;
+   }
+
+   //returns json string from port
+    public String getString(){
+      try {     
+         if(port.getBytesReceived()>2){
+            
+            String unsanatizedString = port.readString();
+              
+            if(unsanatizedString.length()>5&&!unsanatizedString.isBlank()&&!unsanatizedString.isEmpty()){
+
+                 sanatizedString = unsanatizedString;
+              }
+           }
+        } 
+      catch (Exception e) {
+         }
+       
+        return sanatizedString;   
+    } 
+
   //need to edit k in kUSB to be correct port number
   @Override
   public void initDefaultCommand() {
@@ -47,63 +154,28 @@ public class VisionSubsystem extends Subsystem {
           limeLight.set(true);
       }
   }
-  //private static DriveSubsystem driveSubsystem = new DriveSubsystem();
-  //gets current xy coordinates and adjusts according to those coordinates
-  public void startTracking() {
-      int [] xy = getXY();
-      while (xy[0] != 800) {
-          moveAccordingToXY(xy);
-      }
-  }
-
-  //returns the data derived from serial message sent by camera
-  public int[] getXY() {
-      JSONParser parser = new JSONParser();
-      public final double x;
-      public final double y;
-      //creates xy array with nonsense values originally and parses string containing data to adjust nonsensical values
-    //   int[] xy = {800,800};
-    //   String delims = "[,]";
-    //   String data = jevois.readString();
-    //   String[] parsedData = data.split(delims);
-    //   //tests if tracking in the first place
-    //   if (parsedData[0] == "Trk: 1") {
-    //       String stringXWithLabel = parsedData[1];
-    //       String stringX = stringXWithLabel.substring(8);
-    //       String stringYWithLabel = parsedData[2];
-    //       String stringY = stringYWithLabel.substring(8);
-    //       int x = Integer.valueOf(stringX);
-    //       int y = Integer.valueOf(stringY);
-    //       xy[0] = x;
-    //       xy[1] = y;
-    //   }
-      //returns array of coordinates nonsensical or not
-      return xy;
-  }
 
   //places the target in a correct position of the camera mapping
-  public void moveAccordingToXY(int xy[]){
+  public void moveAccordingToXY(){
       //must be changed to ideal value
-      while (xy[0] != 64 || xy[0] != 192) {
+      updateVision();
+
+      while (x != 64 || y != 192) {
           //checks which ideal location is closer to determine which way to turn
-          int distanceTargetLeft = 9 - xy[0];
-          int distanceTargetRight = 8 - xy[0];
+          int distanceTargetLeft = 9 - x;
+          int distanceTargetRight = 8 - y;
           if (distanceTargetLeft > distanceTargetRight) {
               Robot.driveSubsystem.setLeftMotorValue(10);
           } else {
               Robot.driveSubsystem.setRightMotorValue(10);
           }
           //get updated xy values
-          int newXY[] = getXY();
-          //recursively call function again with updated xy values
-          moveAccordingToXY(newXY);
+          updateVision();
       }
       //drives forward until y-coordinate is ideal
-      while (xy[1] != 0) {
+      while (y != 0) {
           Robot.driveSubsystem.tankDrive(5, 5);
-          int newXY[] = getXY();
-          moveAccordingToXY(newXY);
+          updateVision();
       }
   }
-  
 }

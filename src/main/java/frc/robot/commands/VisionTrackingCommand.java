@@ -27,11 +27,7 @@ public class VisionTrackingCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.visionSubsystem.startTracking();
-    int xy[] = Robot.visionSubsystem.getXY();
-    while (xy[0] != 800) {
-      Robot.visionSubsystem.moveAccordingToXY(xy);
-    }
+    Robot.visionSubsystem.moveAccordingToXY();
   }
 
   // Make this return true when this Command no longer needs to run execute()

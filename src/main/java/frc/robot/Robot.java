@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -17,7 +18,7 @@ import frc.robot.commands.AutonomousCommandGroup;
 import frc.robot.subsystems.*;
 import frc.robot.OI;
 import frc.robot.commands.OutputAllDataCommand;
-
+import edu.wpi.first.wpilibj.SerialPort;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -40,11 +41,13 @@ public class Robot extends TimedRobot {
   // Creates Camera Subsystem
   public static CameraSubsystem cameraSubsystem = new CameraSubsystem();
   //Creates VisionTracking Subsystem
-  public static VisionSubsystem visionSubsystem = new VisionSubsystem();
+  public static SerialPort jevois = new SerialPort(115200, Port.kUSB2);
+  public static VisionSubsystem visionSubsystem = new VisionSubsystem(jevois);
   public static AutonomousCommandGroup autoGroup = new AutonomousCommandGroup();
   // Create data command
   public static OutputAllDataCommand dataComm = new OutputAllDataCommand();
   
+
   public static String gameData;
   public static int robotPos = 2;
 
