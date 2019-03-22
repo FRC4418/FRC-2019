@@ -8,8 +8,8 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -18,7 +18,7 @@ import frc.robot.commands.AutonomousCommandGroup;
 import frc.robot.subsystems.*;
 import frc.robot.OI;
 import frc.robot.commands.OutputAllDataCommand;
-
+import edu.wpi.first.wpilibj.SerialPort;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -41,11 +41,15 @@ public class Robot extends TimedRobot {
   // Creates Camera Subsystem
   public static CameraSubsystem cameraSubsystem = new CameraSubsystem();
   //Creates VisionTracking Subsystem
-  // public static VisionSubsystem visionSubsystem = new VisionSubsystem();
+ // public static SerialPort jevois;
+ 
+ 
+ // public static VisionSubsystem visionSubsystem = new VisionSubsystem(jevois);
   public static AutonomousCommandGroup autoGroup = new AutonomousCommandGroup();
   // Create data command
   public static OutputAllDataCommand dataComm = new OutputAllDataCommand();
   
+
   public static String gameData;
   public static int robotPos = 2;
 
@@ -57,9 +61,14 @@ public class Robot extends TimedRobot {
   
   @Override
   public void robotInit() {
+    // try {
+    //   jevois = new SerialPort(115200, Port.kUSB2);
+    // } catch (Exception e) {
+    //   //TODO: handle exception
+    //   e.printStackTrace();
+    // }
     System.out.print("\n\n\n[[[Entered RobotInit]]]\n");
-    CameraServer.getInstance().startAutomaticCapture(0);
-  
+    //CameraServer.getInstance().startAutomaticCapture(0);
     //CameraServer.getInstance().startAutomaticCapture(1);
     m_oi = new OI();
     dataComm.start();
@@ -181,6 +190,7 @@ public class Robot extends TimedRobot {
     if(!dataComm.isRunning()){
       dataComm.start();
     }
+   //System.out.println(jevois.readString()+":(");
   }
 
   /**
