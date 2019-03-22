@@ -162,10 +162,10 @@ public class VisionSubsystem extends Subsystem {
   public void moveAccordingToXY(){
       //must be changed to ideal value
       updateVision();
-      while (x != 64 || y != 192) {
+      while (x != 75 || y != 225) {
           //checks which ideal location is closer to determine which way to turn
-          int distanceTargetLeft = 9 - x;
-          int distanceTargetRight = 8 - y;
+          int distanceTargetLeft = 75 - x;
+          int distanceTargetRight = 225 - y;
           if (distanceTargetLeft > distanceTargetRight) {
               time = System.currentTimeMillis() + 1000;
               while (time > System.currentTimeMillis()) {
@@ -181,7 +181,7 @@ public class VisionSubsystem extends Subsystem {
           updateVision();
       }
       //drives forward until y-coordinate is ideal
-      while (y != 0) {
+      while (y != 110) {
           Robot.driveSubsystem.tankDrive(5, 5);
           updateVision();
       }
