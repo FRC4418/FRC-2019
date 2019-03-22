@@ -25,6 +25,7 @@ public class VisionSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
+   private long time;
    private int x;
    private int y;
    private DigitalOutput limeLight;
@@ -161,15 +162,20 @@ public class VisionSubsystem extends Subsystem {
   public void moveAccordingToXY(){
       //must be changed to ideal value
       updateVision();
-
       while (x != 64 || y != 192) {
           //checks which ideal location is closer to determine which way to turn
           int distanceTargetLeft = 9 - x;
           int distanceTargetRight = 8 - y;
           if (distanceTargetLeft > distanceTargetRight) {
-              Robot.driveSubsystem.setLeftMotorValue(10);
+              time = System.currentTimeMillis() + 1000;
+              while (time > System.currentTimeMillis()) {
+                Robot.driveSubsystem.setLeftMotorValue(10);
+              }
           } else {
-              Robot.driveSubsystem.setRightMotorValue(10);
+            time = System.currentTimeMillis() + 1000;
+            while (time > System.currentTimeMillis()) {
+                Robot.driveSubsystem.setRightMotorValue(10);
+            }
           }
           //get updated xy values
           updateVision();
@@ -179,5 +185,6 @@ public class VisionSubsystem extends Subsystem {
           Robot.driveSubsystem.tankDrive(5, 5);
           updateVision();
       }
+      Robot.driveSubsystem.tankDrive(0, 0);
   }
 }

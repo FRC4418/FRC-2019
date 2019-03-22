@@ -62,13 +62,13 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     try {
-      jevois = new SerialPort(115200, Port.kUSB2);
+      jevois = new SerialPort(115200, Port.kUSB1);
     } catch (Exception e) {
       //TODO: handle exception
       e.printStackTrace();
     }
     System.out.print("\n\n\n[[[Entered RobotInit]]]\n");
-    //CameraServer.getInstance().startAutomaticCapture(0);
+    CameraServer.getInstance().startAutomaticCapture(2);
     //CameraServer.getInstance().startAutomaticCapture(1);
     m_oi = new OI();
     dataComm.start();
