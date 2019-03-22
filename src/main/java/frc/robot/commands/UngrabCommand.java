@@ -40,6 +40,11 @@ public class UngrabCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    time = System.currentTimeMillis() + 200;
+    while (time > System.currentTimeMillis())
+    {
+      Robot.hatchManipulatorSubsystem.setLowerMotorValue(0.1);
+    }
     Robot.hatchManipulatorSubsystem.setHatchMotorValue(0);
   }
 

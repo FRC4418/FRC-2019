@@ -39,6 +39,10 @@ public class HatchManipulatorSubsystem extends Subsystem {
     hatchManpulatorBMotor.set(ControlMode.PercentOutput, -motorValue);
   }
 
+  public void setLowerMotorValue(double motorValue) {
+    hatchManpulatorBMotor.set(ControlMode.PercentOutput, motorValue);
+  }
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
