@@ -62,7 +62,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     try {
-      jevois = new SerialPort(115200, Port.kUSB1);
+      jevois = new SerialPort(115200, Port.kUSB2);
     } catch (Exception e) {
       //TODO: handle exception
       e.printStackTrace();
