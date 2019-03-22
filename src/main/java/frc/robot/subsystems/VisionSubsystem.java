@@ -64,6 +64,7 @@ public class VisionSubsystem extends Subsystem {
         int badValue = 800;
         try {
             Object object = parser.parse(jsonString);
+            System.out.print(jsonString);
             JSONObject jsonObject = (JSONObject) object;
 
             if (jsonObject != null){ 
@@ -73,7 +74,7 @@ public class VisionSubsystem extends Subsystem {
                 return (Integer.valueOf(distString));
              }
         }
-        catch (java.text.ParseException e) {
+        catch (ParseException e) {
 
         }
         catch (UncleanStatusException e) {
@@ -90,6 +91,7 @@ public class VisionSubsystem extends Subsystem {
         int badValue = 800;
         try {
             Object object = parser.parse(jsonString);
+            System.out.print(jsonString);
             JSONObject jsonObject = (JSONObject) object;
 
             if (jsonObject != null){ 
@@ -99,7 +101,7 @@ public class VisionSubsystem extends Subsystem {
                 return (Integer.valueOf(distString));
              }
         }
-        catch (java.text.ParseException e) {
+        catch (ParseException e) {
 
         }
         catch (UncleanStatusException e) {

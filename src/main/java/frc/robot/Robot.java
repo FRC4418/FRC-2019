@@ -41,7 +41,9 @@ public class Robot extends TimedRobot {
   // Creates Camera Subsystem
   public static CameraSubsystem cameraSubsystem = new CameraSubsystem();
   //Creates VisionTracking Subsystem
-  public static SerialPort jevois = new SerialPort(115200, Port.kUSB2);
+  public static SerialPort jevois;
+ 
+ 
   public static VisionSubsystem visionSubsystem = new VisionSubsystem(jevois);
   public static AutonomousCommandGroup autoGroup = new AutonomousCommandGroup();
   // Create data command
@@ -59,9 +61,15 @@ public class Robot extends TimedRobot {
   
   @Override
   public void robotInit() {
+    try {
+      jevois = new SerialPort(115200, Port.kUSB1);
+    } catch (Exception e) {
+      //TODO: handle exception
+      e.printStackTrace();
+    }
     System.out.print("\n\n\n[[[Entered RobotInit]]]\n");
-    CameraServer.getInstance().startAutomaticCapture(0);
-    CameraServer.getInstance().startAutomaticCapture(1);
+    //CameraServer.getInstance().startAutomaticCapture(0);
+    //CameraServer.getInstance().startAutomaticCapture(1);
     m_oi = new OI();
     dataComm.start();
 
@@ -182,6 +190,7 @@ public class Robot extends TimedRobot {
     if(!dataComm.isRunning()){
       dataComm.start();
     }
+    System.out.println(jevois.readString()+":(");
   }
 
   /**
