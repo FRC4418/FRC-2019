@@ -1,6 +1,8 @@
 package frc.robot;
 
-public class PIDController{
+import java.util.ArrayList;
+
+public class PIDController {
     private boolean disable = false;
 
     private double output;
@@ -10,6 +12,9 @@ public class PIDController{
   
     private Object outActuator;
     private Object inSensor;
+
+    private ArrayList<Double> previousErrors;
+    private int numberOfErrorsToRemember;
 
     public PIDController(double setpoint, double p, double i, double d, double k, double t) {
       this.setpoint=setpoint;
@@ -27,6 +32,9 @@ public class PIDController{
       this.d = d;
       k=0;
       t=0;
+      previousErrors = new ArrayList<Double>();
+      numberOfErrorsToRemember = 5;
+
     }
 
     public PIDController(double setpoint, double k, double t, boolean useFullPID) {
@@ -41,6 +49,8 @@ public class PIDController{
         p=0.45*k;
         i=0.54*k/t;
       }
+      previousErrors = new ArrayList<Double>();
+      numberOfErrorsToRemember = 5;
     }
     
     public PIDController(double setpoint){
@@ -54,11 +64,18 @@ public class PIDController{
 
     public double getOutput(double sensorValue){
       if(!disable){
-        double error = setpoint - Robot.driveSubsystem.getDistance();
+        // error is the desired value - the actual
+        double error = setpoint - sensorValue;
+        // integral is the previous integral + (the current error * 20 milliseconds)
         integral += (error*.02);
+        // derivative is (the current error - the previous error) / 20 milliseconds
         double derivative = (error-prev_err) / .02;
+        // each factor times its constant factor
         output = p*error + i*integral + d*derivative;
-        output/=setpoint;
+        previousErrors.add(error);
+        if(previousErrors.size() > numberOfErrorsToRemember) {
+          previousErrors.remove(0);
+        }
       }else{
         output=0;
       }
@@ -73,7 +90,13 @@ public class PIDController{
       disable = false;
     }
   
-    public boolean isFinished() {
-      return Math.abs(setpoint - Robot.driveSubsystem.getDistance()) < 5;
+    public boolean isFinished(double errorTolerance) {
+      double average = 0;
+      for(double error : previousErrors) {
+        average += error;
+      }
+      average /= numberOfErrorsToRemember;
+      return Math.abs(average)
+       < errorTolerance;
     }
 }

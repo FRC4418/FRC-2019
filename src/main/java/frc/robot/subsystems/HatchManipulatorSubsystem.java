@@ -7,6 +7,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -27,11 +28,15 @@ public class HatchManipulatorSubsystem extends Subsystem {
     hatchManpulatorAMotor = new TalonSRX(RobotMap.hatchManipulatorMotorAID);
     hatchManpulatorBMotor = new TalonSRX(RobotMap.hatchManipulatorMotorBID);
 
-    hatchManpulatorBMotor.follow(hatchManpulatorAMotor);
+    //hatchManpulatorBMotor.follow(hatchManpulatorAMotor);
+
+    hatchManpulatorAMotor.setNeutralMode(NeutralMode.Coast);
+    hatchManpulatorBMotor.setNeutralMode(NeutralMode.Coast);
   }
   
   public void setHatchMotorValue(double motorValue){
     hatchManpulatorAMotor.set(ControlMode.PercentOutput, motorValue);
+    hatchManpulatorBMotor.set(ControlMode.PercentOutput, -motorValue);
   }
 
   @Override

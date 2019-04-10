@@ -8,8 +8,10 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutonomousCommandGroup;
@@ -38,20 +40,27 @@ public class Robot extends TimedRobot {
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
   // Creates Camera Subsystem
   public static CameraSubsystem cameraSubsystem = new CameraSubsystem();
+  //Creates VisionTracking Subsystem
+  // public static VisionSubsystem visionSubsystem = new VisionSubsystem();
   public static AutonomousCommandGroup autoGroup = new AutonomousCommandGroup();
   // Create data command
   public static OutputAllDataCommand dataComm = new OutputAllDataCommand();
   
   public static String gameData;
-  public static int robotPos;
+  public static int robotPos = 2;
+
 
   public static SendableChooser<Integer> robotPositionChooser;
   public static SendableChooser<String> autoRoutineChooser;
+
+  public static SendableChooser<Boolean> useTeleopInSandstorm;
   
   @Override
   public void robotInit() {
     System.out.print("\n\n\n[[[Entered RobotInit]]]\n");
-    CameraServer.getInstance().startAutomaticCapture();
+    CameraServer.getInstance().startAutomaticCapture(0);
+  
+    //CameraServer.getInstance().startAutomaticCapture(1);
     m_oi = new OI();
     dataComm.start();
 
@@ -67,6 +76,13 @@ public class Robot extends TimedRobot {
     autoRoutineChooser.setName("Set Auto Routine");
     autoRoutineChooser.addDefault("Drive Straight", "straight");
     autoRoutineChooser.addObject("Other One", "justno");
+
+    useTeleopInSandstorm = new SendableChooser<Boolean>();
+    useTeleopInSandstorm.setName("Use Teleop in Sandstorm");
+    useTeleopInSandstorm.addOption("Teleop", true);
+    useTeleopInSandstorm.addOption("Auto", false);
+    useTeleopInSandstorm.setDefaultOption("Auto", false);
+    SmartDashboard.putData(useTeleopInSandstorm);
   }
 
   /**
@@ -120,7 +136,11 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     System.out.print("\n\n\n[[[State Autonomous]]]\n");
-    autoGroup.start();
+    if(useTeleopInSandstorm.getSelected()) {
+      Scheduler.getInstance().run();
+    } else {
+      autoGroup.start();
+    }
     if(!dataComm.isRunning()){
       dataComm.start();
     }

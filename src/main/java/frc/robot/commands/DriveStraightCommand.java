@@ -9,44 +9,48 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
+import frc.robot.subsystems.*;
 
-public class UngrabCommand extends Command {
-  private long time;
-
-  public UngrabCommand() {
+public class DriveStraightCommand extends Command {
+  public DriveStraightCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.hatchManipulatorSubsystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    time = System.currentTimeMillis() + 500;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatchManipulatorSubsystem.setHatchMotorValue(.1);
+    Robot.driveSubsystem.setLeftBrakemode(false);
+    Robot.driveSubsystem.setRightBrakemode(false);
+    if(RobotMap.isRobotDirectionForward()) {
+      Robot.driveSubsystem.setLeftMotorValue(50);
+      Robot.driveSubsystem.setRightMotorValue(-50);
+    }
+    else {
+      Robot.driveSubsystem.setLeftMotorValue(-50);
+      Robot.driveSubsystem.setRightMotorValue(50);
+    }
   }
-
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return System.currentTimeMillis() > time;
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.hatchManipulatorSubsystem.setHatchMotorValue(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }

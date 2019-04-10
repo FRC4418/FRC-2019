@@ -57,14 +57,17 @@ public class RobotMap {
                           LEFT_TANK_DRIVE_AXIS_ID = X3D_AXIS_PITCH, // Tank drive axis
                           RIGHT_TANK_DRIVE_AXIS_ID = X3D_AXIS_PITCH,
                           FORWARD_ARCADE_DRIVE_AXIS_ID = X3D_AXIS_PITCH, // Arcade drive axis
-                          ANGLE_ARCADE_DRIVE_AXIS_ID = X3D_AXIS_YAW,
+                          ANGLE_ARCADE_DRIVE_AXIS_ID = X3D_AXIS_ROLL,
                           FRONT_CLIMBER_AXIS_ID = GAMEPAD_AXIS_LEFT_Y, // Climber axis
                           BACK_CLIMBER_AXIS_ID = GAMEPAD_AXIS_RIGHT_Y,
                           SWAP_DRIVE_DIRECTION_BUTTON_ID = X3D_BUTTON_TRIGGER, // Functions assigned to buttons
                           SET_DIRECTION_FORWARD_BUTTON_ID = GAMEPAD_BUTON_RIGHT_BUMPER,
                           SET_DIRECTION_BACKWARD_BUTTON_ID = GAMEPAD_BUTON_LEFT_BUMPER,
                           HATCH_ARM_AXIS_A_ID = GAMEPAD_AXIS_RIGHT_TRIGGER, //Hatch arm axis
-                          HATCH_ARM_AXIS_B_ID = GAMEPAD_AXIS_LEFT_TRIGGER; //Hatch arm axis
+                          HATCH_ARM_AXIS_B_ID = GAMEPAD_AXIS_LEFT_TRIGGER, //Hatch arm axis
+                          TOGGLE_ARCADE_DRIVE_BUTOON_ID = X3D_BUTTON_5,
+                          DRIVE_STRAIGHT_BUTTON_ID = X3D_BUTTON_GRIP,
+                          TOGGLE_VISION_LIGHT_BUTTON_ID = X3D_BUTTON_11;
                           
                           
   
@@ -79,8 +82,8 @@ public class RobotMap {
 
   // Hatch Subsystem IDs
   public static final int HATCHE_ARM_JOINT_TALON_SRX_ID = 40, 
-                          HATCH_ARM_JOINT_ENCODER_CHANNELA_ID = 0, 
-                          HATCH_ARM_JOINT_ENCODER_CHANNELB_ID = 1;
+                          HATCH_ARM_JOINT_ENCODER_CHANNELA_ID = 10, 
+                          HATCH_ARM_JOINT_ENCODER_CHANNELB_ID = 11;
   public static final double HATCH_ARM_ENCODER_DISTANCE_PER_PULSE = 360d/256;
 
   // Hatch Manipulator Subsystem IDs
@@ -96,12 +99,10 @@ public class RobotMap {
                           DRIVE_LEFT_ENCODER_CHANNELB_ID = 7, 
                           DRIVE_RIGHT_ENCODER_CHANNELA_ID = 8, 
                           DRIVE_RIGHT_ENCODER_CHANNELB_ID = 9, 
-                          DRIVE_GYRO_ID = 0,
-                          DRIVE_FRONT_DISTANCE_PING_ID = 10, 
-                          DRIVE_FRONT_DISTANCE_ECHO_ID = 11, 
-                          DRIVE_BACK_DISTANCE_PING_ID = 12, 
-                          DRIVE_BACK_DISTANCE_ECHO_ID = 13;
+                          DRIVE_GYRO_ID = 0;
   public static final double DRIVE_ENCODER_DISTANCE_PER_PULSE  = (15.24 * Math.PI) / 256; // diameter * pi = circumference. circumference / 256 = distance per pulse
+
+  public static final int VISION_LIGHT_ID = 0;
 
   // Robot direction
   private static boolean robotDirectionIsForward = true;
@@ -124,7 +125,7 @@ public class RobotMap {
                                             CLIMBER_BACK_ENCODER_CHANNELB_ID,DRIVE_RIGHT_A_TALON_SRX_ID,
                                             DRIVE_RIGHT_B_TALON_SRX_ID,HATCH_ARM_JOINT_ENCODER_CHANNELA_ID,HATCH_ARM_JOINT_ENCODER_CHANNELB_ID};
   public static int expectedGyro = DRIVE_GYRO_ID;
-  public static int[] expectedDIOUltrasonic = {DRIVE_FRONT_DISTANCE_PING_ID,DRIVE_FRONT_DISTANCE_ECHO_ID,DRIVE_BACK_DISTANCE_PING_ID,
-                                               DRIVE_BACK_DISTANCE_ECHO_ID};
+  public static int[] expectedDIOUltrasonic = {0};//DRIVE_FRONT_DISTANCE_PING_ID,DRIVE_FRONT_DISTANCE_ECHO_ID,DRIVE_BACK_DISTANCE_PING_ID,
+                                               //DRIVE_BACK_DISTANCE_ECHO_ID};
 
 }

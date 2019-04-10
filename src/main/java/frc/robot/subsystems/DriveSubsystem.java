@@ -44,8 +44,8 @@ public class DriveSubsystem extends Subsystem {
   
   private BuiltInAccelerometer driveAccel;
   
-  private Ultrasonic frontDriveDistance;
-  private Ultrasonic backDriveDistance;
+  //private Ultrasonic frontDriveDistance;
+  //private Ultrasonic backDriveDistance;
 
   private boolean arcadeDrive = false;
 
@@ -65,8 +65,8 @@ public class DriveSubsystem extends Subsystem {
     rightDriveEncoder = new Encoder(RobotMap.DRIVE_RIGHT_ENCODER_CHANNELA_ID, RobotMap.DRIVE_RIGHT_ENCODER_CHANNELB_ID);
     driveGyro = new AnalogGyro(RobotMap.DRIVE_GYRO_ID);
     driveAccel = new BuiltInAccelerometer();
-    frontDriveDistance = new Ultrasonic(RobotMap.DRIVE_FRONT_DISTANCE_PING_ID, RobotMap.DRIVE_FRONT_DISTANCE_ECHO_ID);
-    backDriveDistance = new Ultrasonic(RobotMap.DRIVE_BACK_DISTANCE_PING_ID, RobotMap.DRIVE_BACK_DISTANCE_ECHO_ID);
+    //frontDriveDistance = new Ultrasonic(RobotMap.DRIVE_FRONT_DISTANCE_PING_ID, RobotMap.DRIVE_FRONT_DISTANCE_ECHO_ID);
+    //backDriveDistance = new Ultrasonic(RobotMap.DRIVE_BACK_DISTANCE_PING_ID, RobotMap.DRIVE_BACK_DISTANCE_ECHO_ID);
 
     leftDriveMotor2.follow(leftDriveMotor1);
     rightDriveMotor2.follow(rightDriveMotor1);
@@ -82,8 +82,8 @@ public class DriveSubsystem extends Subsystem {
     leftDriveEncoder.reset();
     rightDriveEncoder.reset();
 
-    frontDriveDistance.setEnabled(true);
-    backDriveDistance.setEnabled(true);
+    //frontDriveDistance.setEnabled(true);
+    //backDriveDistance.setEnabled(true);
   }
 
 
@@ -178,9 +178,9 @@ public class DriveSubsystem extends Subsystem {
   // standard arcade drive with directional toggle
   public void arcadeDrive(double forwardValue, double angleValue) {
     if(RobotMap.isRobotDirectionForward()) {
-      robotDrive.arcadeDrive(forwardValue, -angleValue);
-    } else {
       robotDrive.arcadeDrive(-forwardValue, -angleValue);
+    } else {
+      robotDrive.arcadeDrive(forwardValue, -angleValue);
     }
   }
 
@@ -265,12 +265,12 @@ public class DriveSubsystem extends Subsystem {
 
   //read left encoder
   public double getLeftDriveEncoder(){
-    return leftDriveEncoder.getDistance();
+    return -leftDriveEncoder.getDistance();
   }
 
   //read right encoder
   public double getRightDriveEncoder(){
-    return -rightDriveEncoder.getDistance();
+    return rightDriveEncoder.getDistance();
   }
 
   public double getDistance(){
@@ -321,7 +321,7 @@ public class DriveSubsystem extends Subsystem {
 
 
   // Range finder
-
+/*
   // read front distance
   public double getFrontDriveDistance(){
     return frontDriveDistance.getRangeMM() / 10.0;
@@ -341,7 +341,7 @@ public class DriveSubsystem extends Subsystem {
   public void setBackDriveDistanceEnable(boolean enable){
     backDriveDistance.setEnabled(enable);
   }
-
+*/
 
 
 
