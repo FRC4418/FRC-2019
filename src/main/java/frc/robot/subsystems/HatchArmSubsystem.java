@@ -21,9 +21,11 @@ import frc.robot.commands.HatchArmCommand;
 public class HatchArmSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+//objects
 private TalonSRX hatchArmJointMotor;
 private Encoder hatchArmJointEncoder;
 
+//constructor
 public HatchArmSubsystem() {
   hatchArmJointMotor = new TalonSRX(RobotMap.HATCHE_ARM_JOINT_TALON_SRX_ID);
   hatchArmJointMotor.setNeutralMode(NeutralMode.Brake);
@@ -32,12 +34,19 @@ public HatchArmSubsystem() {
   hatchArmJointEncoder.setDistancePerPulse(RobotMap.HATCH_ARM_ENCODER_DISTANCE_PER_PULSE);
 }
 
+  @Override
+  public void initDefaultCommand() {
+    setDefaultCommand(new HatchArmCommand());
+    // Set the default command for a subsystem here.
+    // setDefaultCommand(new MySpecialCommand());
+  }
 
+//motor
 public void setHatchMotorValue(double motorValue){
   //sets motor to axis input
   hatchArmJointMotor.set(ControlMode.PercentOutput, motorValue);
 }
-
+//encoders
 public double getHatchEncoderValue(){
   return hatchArmJointEncoder.getDistance();
 }
@@ -48,10 +57,5 @@ public void resetHatchEncoderValue(){
 
   
 
-  @Override
-  public void initDefaultCommand() {
-    setDefaultCommand(new HatchArmCommand());
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-  }
+  
 }

@@ -50,36 +50,12 @@ public class ClimbSubsystem extends Subsystem {
     setClimbLegsFront(0);
     //resetBothClimbEncoders();
   }
-  
+ 
   @Override
   public void initDefaultCommand() {
    setDefaultCommand(new ClimbControlCommand());
-}
-
-  // The following methods are getters.
-  // public double getFrontEncoderDistanceValue() {
-  //   double distance = frontClimbEncoder.getDistance();
-  //   return distance;
-  // }
-
-  // public double getBackEncoderDistanceValue() {
-  //   double distance = backClimbEncoder.getDistance();
-  //   return distance;
-  // }
-
-  // // The following methods are mutators.
-  // public void resetBothClimbEncoders() {
-  //     frontClimbEncoder.reset();
-  //     backClimbEncoder.reset();
-  // }
-
-  // public void resetFrontClimbEncoder() {
-  //   frontClimbEncoder.reset();
-  // }
-
-  // public void resetBackClimbEncoder() {
-  //   backClimbEncoder.reset();
-  // }
+  }
+//limit switches
   public boolean getFrontLimitSwitchAValue(){
     return frontLimitSwitchA.get();
   }
@@ -95,7 +71,7 @@ public class ClimbSubsystem extends Subsystem {
   public boolean getBackLimitSwitchBValue(){
     return backLimitSwitchB.get();
   }
-
+//front climb legs
   public void setClimbLegsFront(double motorValue) {
     if ((getFrontLimitSwitchAValue() || getFrontLimitSwitchBValue()) && motorValue > 0){
       frontClimbMotor.set(ControlMode.PercentOutput, 0);
@@ -105,7 +81,7 @@ public class ClimbSubsystem extends Subsystem {
     }
       
   }
-
+//back climb legs
   public void setClimbLegsBack(double motorValue) {
     if ((getBackLimitSwitchAValue() || getBackLimitSwitchBValue()) && motorValue > 0){
       backClimbMotor.set(ControlMode.PercentOutput, 0);
