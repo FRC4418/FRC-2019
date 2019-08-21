@@ -50,6 +50,7 @@ public class OI {
   // Create and assign default buttons
   public static JoystickButton swapFrontButton = new JoystickButton(X3D_RIGHT, RobotMap.SWAP_DRIVE_DIRECTION_BUTTON_ID);
   public static JoystickButton hatchManipulatorButton = new JoystickButton(X3D_RIGHT, 3);
+  public static JoystickButton solenoidButton = new JoystickButton(X3D_RIGHT, 5);
   public static JoystickButton setDirectionForwardButton = new JoystickButton(GAMEPAD, RobotMap.SET_DIRECTION_FORWARD_BUTTON_ID);
   public static JoystickButton setDirectionBackwardButton = new JoystickButton(GAMEPAD, RobotMap.SET_DIRECTION_BACKWARD_BUTTON_ID);
 
@@ -57,6 +58,8 @@ public class OI {
     swapFrontButton.whenPressed(new SwitchDirectionCommand());
     hatchManipulatorButton.whileHeld(new GrabCommand());
     //hatchManipulatorButton.whenReleased(new GrabCommand());
+    solenoidButton.whileHeld(new SolenoidOnCommand());
+    solenoidButton.whenReleased(new SolenoidOffCommand());
     setDirectionForwardButton.whenPressed(new SwitchDirectionCommand(true));
     setDirectionBackwardButton.whenPressed(new SwitchDirectionCommand(false));
   }
