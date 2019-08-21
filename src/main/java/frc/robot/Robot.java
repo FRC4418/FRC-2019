@@ -41,6 +41,8 @@ public class Robot extends TimedRobot {
   public static AutonomousCommandGroup autoGroup = new AutonomousCommandGroup();
   // Create data command
   public static OutputAllDataCommand dataComm = new OutputAllDataCommand();
+  //Creates Solenoid Subsystem
+  public static SolenoidSubsystem solenoidSubsystem = new SolenoidSubsystem();
   
   public static String gameData;
   public static int robotPos;

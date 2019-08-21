@@ -84,8 +84,12 @@ public class RobotMap {
   public static final double HATCH_ARM_ENCODER_DISTANCE_PER_PULSE = 360d/256;
 
   // Hatch Manipulator Subsystem IDs
-  public static int hatchManipulatorMotorAID = 45,
-                    hatchManipulatorMotorBID = 46;
+  public static final int hatchManipulatorMotorAID = 45,
+                          hatchManipulatorMotorBID = 46;
+  
+  //Solenoid Subsystem IDs
+  public static final int solenoidOneID = 41 /* tbd */,
+                          solenoidTwoID = 42 /* tbd */;
 
   // Drive Subsystem IDs
   public static final int DRIVE_LEFT_A_TALON_SRX_ID = 10, 
@@ -126,5 +130,8 @@ public class RobotMap {
   public static int expectedGyro = DRIVE_GYRO_ID;
   public static int[] expectedDIOUltrasonic = {DRIVE_FRONT_DISTANCE_PING_ID,DRIVE_FRONT_DISTANCE_ECHO_ID,DRIVE_BACK_DISTANCE_PING_ID,
                                                DRIVE_BACK_DISTANCE_ECHO_ID};
+
+
+
 
 }
